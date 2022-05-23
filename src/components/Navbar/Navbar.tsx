@@ -3,8 +3,12 @@ import {NavLink} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
 
 const Navbar = () => {
+    const style = {
+        display:'block',
+        marginBlock:'25px'
+    }
     return (
-        <ul>
+        <ul style={style}>
             <li><NavLink to={PATH.PROFILE_PAGE}>
                 Profile
             </NavLink></li>
