@@ -17,14 +17,14 @@ const Test = () => {
     }
     return (
         <div style={{
-            display:'grid'
+
 
         }}>
             <SuperInputText placeholder="Enter name" value={name} onChangeText={setName} />
             <SuperButton onClick={onClickAlert}>
                 CLICK
             </SuperButton>
-            <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked} />
+            <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked} >Hello</SuperCheckbox>
 
         </div>
     );

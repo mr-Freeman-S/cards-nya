@@ -38,8 +38,7 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
             />
             <svg
                 className={`${s.checkbox} ${restProps.checked ? s.checkboxActive : ""}`}
-                // This element is purely decorative so
-                // we hide it for screen readers
+
                 aria-hidden="true"
                 viewBox="0 0 15 11"
                 fill="none"
