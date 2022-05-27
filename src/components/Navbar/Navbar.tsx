@@ -7,6 +7,7 @@ const Navbar = () => {
         display:'block',
         marginBlock:'25px'
     }
+
     return (
         <ul style={style}>
             <li><NavLink to={PATH.PROFILE_PAGE}>
