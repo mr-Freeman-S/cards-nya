@@ -12,6 +12,9 @@ const Navbar = () => {
             <li><NavLink to={PATH.PROFILE_PAGE}>
                 Profile
             </NavLink></li>
+            <li><NavLink to={PATH.EDIT_PROFILE_PAGE}>
+                Edit Profile
+            </NavLink></li>
             <li><NavLink to={PATH.LOGIN_PAGE}>
                 Login
             </NavLink></li>
