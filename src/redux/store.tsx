@@ -2,9 +2,10 @@ import {applyMiddleware, combineReducers, createStore } from "redux";
 import thunk from "redux-thunk";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {testReducer} from "./reducers/testReducer";
+import {restorePasswordReducer} from "./reducers/restorePasswordReducer";
 
 const rootReducer = combineReducers({
-    test:testReducer,
+    test:testReducer,restorePasswordReducer,
 })
 
 export const store = createStore(rootReducer,applyMiddleware(thunk))
