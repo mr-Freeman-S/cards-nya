@@ -3,16 +3,17 @@ import {Route, Routes} from "react-router-dom";
 import ProfilePage from "../../views/profile/ProfilePage";
 import NewPasswordPage from "../../views/login/NewPasswordPage";
 import {PATH} from "../../utils/routingPath";
-import RecoverPasswordPage from "../../views/login/RecoverPasswordPage";
 import LoginPage from "../../views/login/LoginPage";
 import Test from "../../views/test/Test";
 import Page404 from "../../views/error/Page404";
 import RegistrationPage from "../../views/login/RegistrationPage";
+import {RecoverPasswordPage} from "../../views/login/RecoverPasswordPage";
 
 
 const PrivateRoute = () => {
     return (
         <Routes>
+            <Route path={'/'} element={<LoginPage/>}/>
             <Route path={PATH.PROFILE_PAGE} element={<ProfilePage/>}/>
             <Route path={PATH.LOGIN_PAGE} element={<LoginPage/>}/>
             <Route path={PATH.RECOVER_PASSWORD_PAGE} element={<RecoverPasswordPage/>}/>
