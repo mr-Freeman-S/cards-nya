@@ -1,16 +1,15 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { ProfilePage } from '../../views/profile/ProfilePage'
-import NewPasswordPage from '../../views/login/NewPasswordPage'
-import { PATH } from '../../utils/routingPath'
-import RecoverPasswordPage from '../../views/login/RecoverPasswordPage'
-import LoginPage from '../../views/login/LoginPage'
-import Test from '../../views/test/Test'
-import Page404 from '../../views/error/Page404'
-import RegistrationPage from '../../views/login/RegistrationPage'
-import { EditProfilePage } from '../../views/profile/EditProfile/EditProfilePage'
+import {Route, Routes} from "react-router-dom";
+import {ProfilePage} from "../../views/profile/ProfilePage";
+import {EditProfilePage} from "../../views/profile/EditProfile/EditProfilePage";
+import LoginPage from "../../views/login/LoginPage";
+import {RecoverPasswordPage} from "../../views/login/RecoverPasswordPage";
+import NewPasswordPage from "../../views/login/NewPasswordPage";
+import RegistrationPage from "../../views/login/RegistrationPage";
+import Test from "../../views/test/Test";
+import Page404 from "../../views/error/Page404";
+import {PATH} from "../../utils/routingPath";
 
-const PrivateRoute = () => {
+export const PrivateRoute = () => {
 	return (
 		<Routes>
 			<Route path={PATH.PROFILE_PAGE} element={<ProfilePage />} />
@@ -28,4 +27,3 @@ const PrivateRoute = () => {
 	)
 }
 
-export default PrivateRoute
