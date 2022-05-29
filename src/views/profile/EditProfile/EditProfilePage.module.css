@@ -31,13 +31,14 @@
 	margin: 0 auto;
 	width: 130px;
 	height: 130px;
-	border-radius: 100%;
+
 	position: relative;
 }
 
 .photoBlock img {
 	width: 130px;
 	height: 130px;
+	border-radius: 100%;
 }
 
 .addPhoto {
@@ -129,10 +130,11 @@
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 19px;
-	padding: 15px 45px;
+	padding: 15px 70px;
 	border-radius: 30px;
 	border: none;
 	cursor: pointer;
+	transition: all 0.1s;
 }
 
 .btnBlock .cancelBtn {
@@ -143,4 +145,14 @@
 .btnBlock .saveBtn {
 	color: #ececf9;
 	background-color: #21268f;
+}
+
+.saveBtn:active,
+.cancelBtn:active {
+	transform: translate(0px, 1.2px);
+}
+
+.saveBtn:hover,
+.cancelBtn:hover {
+	box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 8px 25px 0 rgba(0, 0, 0, 0.25);
 }
