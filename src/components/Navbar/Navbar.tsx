@@ -7,10 +7,14 @@ const Navbar = () => {
         display:'block',
         marginBlock:'25px'
     }
+
     return (
         <ul style={style}>
             <li><NavLink to={PATH.PROFILE_PAGE}>
                 Profile
+            </NavLink></li>
+            <li><NavLink to={PATH.EDIT_PROFILE_PAGE}>
+                Edit Profile
             </NavLink></li>
             <li><NavLink to={PATH.LOGIN_PAGE}>
                 Login
