@@ -1,7 +1,8 @@
 //  properties type for action creators
-import {Dispatch} from "redux";
+import {AnyAction} from "redux";
 import {AppStateType} from "../store";
 import {restorePasswordAPI} from "../../api/restorePasswordAPI";
+import {ThunkAction} from "redux-thunk";
 
 const SET_EMAIL = 'restorePassword/SET-EMAIL'
 const SET_NEW_PASSWORD = 'restorePassword/SET-NEW-PASSWORD'
@@ -58,15 +59,28 @@ type setErrorMessageType = ReturnType<typeof setErrorMessageRP>
 type rootActionTypes = setEmailType | setNewPasswordType | setStatusType | setErrorMessageType
 
 //thunks
-export const sendMailRestorePassword = (email: string) => (dispatch: Dispatch, getState: () => AppStateType) => {
-    dispatch(setStatusRP("loading"))
-    dispatch(setEmailRP(email))
-    restorePasswordAPI.sendRestorePasswordEmail(email)
-        .then(response => {
-            dispatch(setStatusRP("succeeded"))
-        })
-        .catch(error => {
-            dispatch(setErrorMessageRP(error.error))
-            dispatch(setStatusRP("error"))
-        })
-}
+export const sendMailRestorePassword = (email: string): ThunkAction<void, AppStateType, unknown, AnyAction> =>
+    (dispatch) => {
+        dispatch(setStatusRP("loading"))
+        dispatch(setEmailRP(email))
+        restorePasswordAPI.sendRestorePasswordEmail(email)
+            .then(() => {
+                dispatch(setStatusRP("succeeded"))
+            })
+            .catch(error => {
+                dispatch(setErrorMessageRP(error.response.data.error))
+                dispatch(setStatusRP("error"))
+            });
+    };
+export const resetPassword = (password: string, resetPasswordToken: string): ThunkAction<void, AppStateType, unknown, AnyAction> =>
+    (dispatch) => {
+        dispatch(setStatusRP("loading"))
+        restorePasswordAPI.createNewPassword(password, resetPasswordToken)
+            .then(() => {
+                dispatch(setStatusRP("succeeded"))
+            })
+            .catch(error => {
+                dispatch(setErrorMessageRP(error.response.data.error))
+                dispatch(setStatusRP("error"))
+            })
+    }

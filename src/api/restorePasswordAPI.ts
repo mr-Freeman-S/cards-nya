@@ -15,6 +15,6 @@ link</a></div>` //!!! need write reset-password new link
         })
     },
     createNewPassword(password:string,resetPasswordToken:string){
-        return instance.post('/post/set-new-password', {password,resetPasswordToken},)
+        return instance.post('/auth/set-new-password', {password,resetPasswordToken},)
     }
 }
