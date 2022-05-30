@@ -3,10 +3,12 @@ import thunk, { ThunkDispatch } from 'redux-thunk'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { testReducer } from './reducers/testReducer'
 import { authReducer } from './reducers/authReducer'
+import {registrationReducer} from "./reducers/registrationReducer";
 
 const rootReducer = combineReducers({
 	test: testReducer,
 	auth: authReducer,
+	registration: registrationReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
