@@ -4,10 +4,10 @@ import { ProfilePage } from '../../views/profile/ProfilePage'
 import NewPasswordPage from '../../views/login/NewPasswordPage'
 import { PATH } from '../../utils/routingPath'
 import RecoverPasswordPage from '../../views/login/RecoverPasswordPage'
-import LoginPage from '../../views/login/LoginPage'
+import {LoginPage} from '../../views/login/LoginPage'
 import Test from '../../views/test/Test'
 import Page404 from '../../views/error/Page404'
-import RegistrationPage from '../../views/login/RegistrationPage'
+import {RegistrationPage} from '../../views/login/RegistrationPage'
 import { EditProfilePage } from '../../views/profile/EditProfile/EditProfilePage'
 
 const PrivateRoute = () => {
