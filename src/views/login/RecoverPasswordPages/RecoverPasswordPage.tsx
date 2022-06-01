@@ -12,7 +12,7 @@ type Values = {
 }
 
 export const RecoverPasswordPage = () => {
-    const {status,error} = useAppSelector(state => state.restorePasswordReducer)
+    const {status,error} = useAppSelector(state => state.resPassword)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const initialState: Values = {email: ''}
@@ -37,7 +37,7 @@ export const RecoverPasswordPage = () => {
                         <h3>Forgot your password</h3>
                         <Field  name="email" type='email' placeholder="Email"/>
                         <p>Enter your email address and we will send you further instruction</p>
-                        <SuperButton type="submit" disabled={(isSubmitting)}>Send Instructions</SuperButton>
+                        <SuperButton type="submit" disabled={status === "loading"}>Send Instructions</SuperButton>
                         <span>{error}</span>
                         <p>Did you remember your password?</p>
                         <NavLink to={`/${PATH.LOGIN_PAGE}`}>Try logging in</NavLink>

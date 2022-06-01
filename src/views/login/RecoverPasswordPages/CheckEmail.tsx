@@ -3,7 +3,7 @@ import sentMail from "../../../assets/icons/sentMail.svg";
 import React from "react";
 
 export const CheckEmail = () => {
-    const email = useAppSelector(state => state.restorePasswordReducer.email)
+    const email = useAppSelector(state => state.resPassword.email)
     return (
         <div>
             <h1>It - incubator</h1>

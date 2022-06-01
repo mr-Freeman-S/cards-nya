@@ -72,7 +72,7 @@ export const sendMailRestorePassword = (email: string): ThunkAction<void, AppSta
                 dispatch(setStatusRP("error"))
             });
     };
-export const resetPassword = (password: string, resetPasswordToken: string): ThunkAction<void, AppStateType, unknown, AnyAction> =>
+export const resetPassword = (password: string, resetPasswordToken: string,resetForm:()=>void): ThunkAction<void, AppStateType, unknown, AnyAction> =>
     (dispatch) => {
         dispatch(setStatusRP("loading"))
         restorePasswordAPI.createNewPassword(password, resetPasswordToken)
@@ -83,4 +83,5 @@ export const resetPassword = (password: string, resetPasswordToken: string): Thu
                 dispatch(setErrorMessageRP(error.response.data.error))
                 dispatch(setStatusRP("error"))
             })
+        resetForm()
     }

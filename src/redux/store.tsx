@@ -8,7 +8,7 @@ import {restorePasswordReducer} from "./reducers/restorePasswordReducer";
 const rootReducer = combineReducers({
 	test: testReducer,
 	auth: authReducer,
-	restorePasswordReducer
+	resPassword:restorePasswordReducer
 
 })
 
