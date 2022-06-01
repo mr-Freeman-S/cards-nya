@@ -10,7 +10,8 @@ const rootReducer = combineReducers({
 	test: testReducer,
 	auth: authReducer,
     app: appReducer,
-    login: loginReducer
+    login: loginReducer,
+	registration: registrationReducer
 })
 
 export const store = createStore(rootReducer,applyMiddleware(thunk))
