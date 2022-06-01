@@ -12,7 +12,7 @@ import axios from 'axios'
 export const EditProfilePage = () => {
 	const { name, email, avatar } = useAppSelector(state => state.auth)
 	const [userName, setUserName] = useState(name)
-	const [userEmail, setUserEmail] = useState(email)
+	const [userEmail, setUserEmail] = useState('111')
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
 
@@ -91,8 +91,8 @@ export const EditProfilePage = () => {
 						/> */}
 						<SuperInputText
 							value={userEmail}
-							onChangeText={setUserEmail}
 							className={'f'}
+							onChangeText={() => 'x'}
 						/>
 					</div>
 					<div className={style.btnBlock}>
