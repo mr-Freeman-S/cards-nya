@@ -1,10 +1,44 @@
-import {initialTestStateType} from "./testReducer";
+import {loginAPI, LoginPayloadType} from "../../api/loginAPI";
+import {ThunkType} from "../store";
+import {setErrorMessageAC} from "./appReducer";
 
-export const loginReducer = (state: initialTestStateType, action: any) => {
+const initialState = {
+    isLogged: false
+}
+
+
+export const loginReducer = (state: InitialStateType = initialState, action: LoginReducerActionType): InitialStateType => {
     switch (action.type) {
-        case 'SET-CHECK':
-            return {...state, isChecked: action.isChecked};
+        case "LOGIN/SET-IS-LOGGED-STATUS":
+            return {...state, isLogged: action.isLogged}
         default:
-            return state;
+            return state
     }
 }
+
+//AC
+export const setIsLoggedAC = (isLogged: boolean) => {
+    return {type: 'LOGIN/SET-IS-LOGGED-STATUS', isLogged} as const
+}
+
+//Thunks
+export const loginTC = (email: string, password: string, rememberMe: boolean, resetForm: () => void): ThunkType => (dispatch) => {
+    loginAPI.login({email, password, rememberMe})
+        .then(res => {
+            dispatch(setIsLoggedAC(true))
+        })
+        .catch(e => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console');
+            dispatch(setErrorMessageAC(error))
+        }).finally(()=> {
+        resetForm()
+    })
+}
+
+
+//Types
+type InitialStateType = typeof initialState
+
+export type LoginReducerActionType = ReturnType<typeof setIsLoggedAC>
