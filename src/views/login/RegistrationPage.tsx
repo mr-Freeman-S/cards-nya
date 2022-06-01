@@ -3,7 +3,7 @@ import {useFormik} from "formik";
 import { Navigate } from 'react-router-dom';
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "../../redux/store";
-import {registerTC} from "../../redux/reducers/registrationReducer";
+import {ErrorType, registerTC} from "../../redux/reducers/registrationReducer";
 
 type FormikErrorType = {
     email?: string
@@ -14,6 +14,8 @@ type FormikErrorType = {
 export const RegistrationPage = () => {
 
     const isRegisteredIn = useSelector<AppStateType, boolean>(state => state.registration.isRegisteredIn)
+    const error = useSelector<AppStateType, ErrorType>(state => state.registration.error)
+    const isLoading = useSelector<AppStateType, boolean>(state => state.registration.isLoading)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -32,8 +34,8 @@ export const RegistrationPage = () => {
 
             if (!values.password) {
                 errors.password = 'Required';
-            } else if (values.password.length < 3) {
-                errors.password = 'Must be more than 3';
+            } else if (values.password.length < 7) {
+                errors.password = 'Must be more than 7';
             }
 
           /*  if (!values.confirmPassword) {
@@ -96,6 +98,8 @@ export const RegistrationPage = () => {
                   {/*  {formik.touched.confirmPassword && formik.errors.confirmPassword &&
                         <div style={{color: "red"}}>{formik.errors.confirmPassword}</div>}*/}
                 </div>
+                {isLoading && "LOADING..."}
+                {error ? error : ''}
                 <div>
                     <p>
                         <button type="submit">Register</button>
