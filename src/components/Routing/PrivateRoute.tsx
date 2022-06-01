@@ -16,10 +16,7 @@ const PrivateRoute = () => {
 			<Route path={PATH.PROFILE_PAGE} element={<ProfilePage />} />
 			<Route path={PATH.EDIT_PROFILE_PAGE} element={<EditProfilePage />} />
 			<Route path={PATH.LOGIN_PAGE} element={<LoginPage />} />
-			<Route
-				path={PATH.RECOVER_PASSWORD_PAGE}
-				element={<RecoverPasswordPage />}
-			/>
+			<Route path={PATH.RECOVER_PASSWORD_PAGE} element={<RecoverPasswordPage />} />
 			<Route path={PATH.NEW_PASSWORD_PAGE} element={<NewPasswordPage />} />
 			<Route path={PATH.REGISTRATION_PAGE} element={<RegistrationPage />} />
 			<Route path={PATH.TEST} element={<Test />} />
