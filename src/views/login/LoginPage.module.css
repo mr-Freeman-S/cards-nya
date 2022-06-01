@@ -33,9 +33,9 @@
     outline: none;
     background: transparent;
 }
-input::-webkit-input-placeholder { color: #03e9f4; }
+.loginBox  input::-webkit-input-placeholder { color: #03e9f4; }
 
-button {
+.loginBox button {
     position: relative;
     display: inline-block;
     padding: 10px 20px;
@@ -58,7 +58,7 @@ button {
     font-size: 20px;
     min-height: 35px;
 }
-button:hover {
+.loginBox button:hover {
     background: #03e9f4;
     color: #fff;
     border-radius: 5px;
@@ -68,7 +68,7 @@ button:hover {
     0 0 100px #03e9f4;
 }
 
-button span {
+.loginBox button span {
     position: absolute;
     display: block;
 
@@ -80,7 +80,7 @@ button span {
     font-size: 20px;
 }
 
-button span:nth-child(1) {
+.loginBox button span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -98,7 +98,7 @@ button span:nth-child(1) {
     }
 }
 
-button span:nth-child(2) {
+.loginBox button span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 2px;
@@ -117,7 +117,7 @@ button span:nth-child(2) {
     }
 }
 
-button span:nth-child(3) {
+.loginBox button span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -136,7 +136,7 @@ button span:nth-child(3) {
     }
 }
 
-button span:nth-child(4) {
+.loginBox button span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 2px;
@@ -153,4 +153,14 @@ button span:nth-child(4) {
     50%,100% {
         bottom: 100%;
     }
+}
+
+
+.loginBox input:-webkit-autofill,
+.loginBox input:-webkit-autofill:hover,
+.loginBox input:-webkit-autofill:focus,
+.loginBox input:-webkit-autofill {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0 1000px transparent inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
