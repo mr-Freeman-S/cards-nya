@@ -1,18 +1,17 @@
-import { ChangeEvent, useState } from 'react'
+import {ChangeEvent, useEffect, useState} from 'react'
 import style from './EditProfilePage.module.css'
 import profile_photo from '../../../assets/images/profile-photo.png'
-import { AiOutlineCamera } from 'react-icons/ai'
-import { useNavigate } from 'react-router-dom'
+import {AiOutlineCamera} from 'react-icons/ai'
+import {useNavigate} from 'react-router-dom'
 import SuperInputText from '../../../components/SuperInputText/SuperInputText'
-import { useAppDispatch, useAppSelector } from '../../../redux/store'
-import { editProfileTC } from '../../../redux/reducers/authReducer'
-import { useEffect } from 'react'
+import {useAppDispatch, useAppSelector} from '../../../redux/store'
+import {editProfileTC} from '../../../redux/reducers/authReducer'
 import axios from 'axios'
 
 export const EditProfilePage = () => {
-	const { name, email, avatar } = useAppSelector(state => state.auth)
+	const { name, avatar } = useAppSelector(state => state.auth)
 	const [userName, setUserName] = useState(name)
-	const [userEmail, setUserEmail] = useState('111')
+	const [userEmail] = useState('111')
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
 

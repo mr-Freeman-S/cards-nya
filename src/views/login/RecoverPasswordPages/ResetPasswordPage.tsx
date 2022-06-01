@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import * as Yup from 'yup'
 import {useNavigate, useParams} from "react-router-dom";
-import SuperInputText from "../../../components/SuperInputText/SuperInputText";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import {resetPassword, setErrorMessageRP, setStatusRP} from "../../../redux/reducers/restorePasswordReducer";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {PATH} from "../../../utils/routingPath";
-import {Field, Form, Formik, FormikHelpers} from "formik";
+import {Field, Form, Formik} from "formik";
 import style from './RecoveryPassword.module.css'
 
 type setSubmitting = (isSubmitting: boolean) => void
@@ -39,7 +38,8 @@ export const ResetPasswordPage = () => {
     }
     useEffect(() => {
         setTimeout(() => dispatch(setErrorMessageRP('')), 5000)
-    }, [error])
+    }, [error,dispatch])
+
     if (status === "succeeded") {
         navigate(`/${PATH.LOGIN_PAGE}`)
         dispatch(setStatusRP("idle"))

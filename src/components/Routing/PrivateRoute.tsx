@@ -18,7 +18,9 @@ export const PrivateRoute = () => {
             <Route path={PATH.PROFILE_PAGE} element={<ProfilePage/>}/>
             <Route path={PATH.LOGIN_PAGE} element={<LoginPage/>}/>
             <Route path={PATH.RECOVER_PASSWORD_PAGE} element={<RecoverPasswordPage/>}/>
-            <Route path={PATH.NEW_PASSWORD_PAGE} element={<ResetPasswordPage/>}/>
+            <Route path={PATH.NEW_PASSWORD_PAGE} element={<ResetPasswordPage/>}>
+                <Route path=':token' element={<ResetPasswordPage/>}/>
+            </Route>
             <Route path={PATH.REGISTRATION_PAGE} element={<RegistrationPage/>}/>
             <Route path={PATH.TEST} element={<Test/>}/>
             <Route path={PATH.EDIT_PROFILE_PAGE} element={<EditProfilePage />} />
