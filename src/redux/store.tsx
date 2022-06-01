@@ -12,7 +12,8 @@ const rootReducer = combineReducers({
 	auth: authReducer,
     app: appReducer,
     login: loginReducer,
-	registration: registrationReducer
+	registration: registrationReducer,
+	resPassword:restorePasswordReducer
 })
 
 export const store = createStore(rootReducer,applyMiddleware(thunk))
