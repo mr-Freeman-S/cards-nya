@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
 import {useFormik} from "formik";
-import { Navigate } from 'react-router-dom';
+import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "../../redux/store";
 import {ErrorType, registerTC} from "../../redux/reducers/registrationReducer";
+import SuperButton from "../../components/SuperButton/SuperButton";
+import SuperInputText from "../../components/SuperInputText/SuperInputText";
+import style from "./RegistrationPage.module.css"
 
 type FormikErrorType = {
     email?: string
@@ -13,7 +16,7 @@ type FormikErrorType = {
 
 export const RegistrationPage = () => {
 
-    const isRegisteredIn = useSelector<AppStateType, boolean>(state => state.registration.isRegisteredIn)
+    const isRegistered = useSelector<AppStateType, boolean>(state => state.registration.isRegistered)
     const error = useSelector<AppStateType, ErrorType>(state => state.registration.error)
     const isLoading = useSelector<AppStateType, boolean>(state => state.registration.isLoading)
     const dispatch = useAppDispatch()
@@ -22,7 +25,7 @@ export const RegistrationPage = () => {
         initialValues: {
             email: '',
             password: '',
-           /* confirmPassword: ''*/
+            /* confirmPassword: ''*/
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
@@ -38,11 +41,11 @@ export const RegistrationPage = () => {
                 errors.password = 'Must be more than 7';
             }
 
-          /*  if (!values.confirmPassword) {
-                errors.confirmPassword = 'Required';
-            } else if (values.confirmPassword.length < 3) {
-                errors.confirmPassword = 'Must be more than 3';
-            }*/
+            /*  if (!values.confirmPassword) {
+                  errors.confirmPassword = 'Required';
+              } else if (values.confirmPassword.length < 3) {
+                  errors.confirmPassword = 'Must be more than 3';
+              }*/
 
             return errors;
         },
@@ -52,21 +55,21 @@ export const RegistrationPage = () => {
         },
     });
 
-    if(isRegisteredIn) {
-        return <Navigate to={"/login"} />
+    if (isRegistered) {
+        return <Navigate to={"/login"}/>
     }
 
     return (
-        <div>
-            <h2>
+        <div className={style.signUpBlock}>
+            <h1 className={style.title}>
                 Sign Up
-            </h2>
-            <form onSubmit={formik.handleSubmit}>
+            </h1>
+            <form className={style.form} onSubmit={formik.handleSubmit}>
                 <div>
                     <p>
                         <label htmlFor="email">Email Address</label>
                     </p>
-                    <input
+                    <SuperInputText
                         id="email"
                         type="email"
                         {...formik.getFieldProps('email')}
@@ -78,7 +81,7 @@ export const RegistrationPage = () => {
                     <p>
                         <label htmlFor="password">Password</label>
                     </p>
-                    <input
+                    <SuperInputText
                         id="password"
                         type="password"
                         {...formik.getFieldProps('password')}
@@ -90,19 +93,19 @@ export const RegistrationPage = () => {
                     <p>
                         <label htmlFor="password">Confirm Password</label>
                     </p>
-                    <input
+                    <SuperInputText
                         id="confirmPassword"
                         type="password"
                         {...formik.getFieldProps('confirmPassword')}
                     />
-                  {/*  {formik.touched.confirmPassword && formik.errors.confirmPassword &&
+                    {/*  {formik.touched.confirmPassword && formik.errors.confirmPassword &&
                         <div style={{color: "red"}}>{formik.errors.confirmPassword}</div>}*/}
                 </div>
                 {isLoading && "LOADING..."}
-                {error ? error : ''}
-                <div>
+                {error ? <div style={{color: "red"}}>{error}</div> : ''}
+                <div className={style.button}>
                     <p>
-                        <button type="submit">Register</button>
+                        <SuperButton type="submit">Register</SuperButton>
                     </p>
                 </div>
             </form>
