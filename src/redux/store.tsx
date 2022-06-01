@@ -5,6 +5,7 @@ import {testReducer} from './reducers/testReducer'
 import {authReducer, GeneralType} from './reducers/authReducer'
 import {appReducer, AppReducerActionType} from "./reducers/appReducer";
 import {loginReducer, LoginReducerActionType} from "./reducers/loginReducer";
+import {registrationReducer} from "./reducers/registrationReducer";
 
 const rootReducer = combineReducers({
 	test: testReducer,
