@@ -1,6 +1,6 @@
 import React from "react";
 import {Route, Routes} from "react-router-dom";
-import ProfilePage from "../../views/profile/ProfilePage";
+import {ProfilePage} from "../../views/profile/ProfilePage";
 import NewPasswordPage from "../../views/login/NewPasswordPage";
 import {PATH} from "../../utils/routingPath";
 import RecoverPasswordPage from "../../views/login/RecoverPasswordPage";
@@ -8,6 +8,7 @@ import {LoginPage} from "../../views/login/LoginPage";
 import Test from "../../views/test/Test";
 import Page404 from "../../views/error/Page404";
 import RegistrationPage from "../../views/login/RegistrationPage";
+import {EditProfilePage} from "../../views/profile/EditProfile/EditProfilePage";
 
 
 const PrivateRoute = () => {
@@ -19,6 +20,8 @@ const PrivateRoute = () => {
             <Route path={PATH.NEW_PASSWORD_PAGE} element={<NewPasswordPage/>}/>
             <Route path={PATH.REGISTRATION_PAGE} element={<RegistrationPage/>}/>
             <Route path={PATH.TEST} element={<Test/>}/>
+            <Route path={PATH.EDIT_PROFILE_PAGE} element={<EditProfilePage />} />
+
             <Route path="*" element={<Page404/>}/>
         </Routes>
     );
