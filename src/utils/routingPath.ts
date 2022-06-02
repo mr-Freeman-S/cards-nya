@@ -5,5 +5,7 @@ export const PATH = {
     RECOVER_PASSWORD_PAGE: "recover-password",
     REGISTRATION_PAGE: "registration",
     PAGE_404: "404",
-    TEST: "test"
+    TEST: "test",
+    EDIT_PROFILE_PAGE: "edit-profile",
+    CHECK_EMAIL: "check-email"
 }

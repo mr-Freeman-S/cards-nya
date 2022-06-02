@@ -1,4 +1,4 @@
-import {loginAPI, LoginPayloadType} from "../../api/loginAPI";
+import {loginAPI} from "../../api/loginAPI";
 import {ThunkType} from "../store";
 import {setErrorMessageAC} from "./appReducer";
 
