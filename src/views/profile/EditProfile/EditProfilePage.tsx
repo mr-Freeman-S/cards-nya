@@ -1,39 +1,18 @@
 import { ChangeEvent, useState } from 'react'
 import style from './EditProfilePage.module.css'
-import profile_photo from '../../../assets/images/profile-photo.png'
+import userNotFound from '../../../assets/images/user-not-found.png'
 import { AiOutlineCamera } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import SuperInputText from '../../../components/SuperInputText/SuperInputText'
 import { useAppDispatch, useAppSelector } from '../../../redux/store'
 import { editProfileTC } from '../../../redux/reducers/authReducer'
-import { useEffect } from 'react'
-import axios from 'axios'
 
 export const EditProfilePage = () => {
-	const { name, email, avatar } = useAppSelector(state => state.auth)
+	const { name, avatar, email } = useAppSelector(state => state.auth)
 	const [userName, setUserName] = useState(name)
-	const [userEmail, setUserEmail] = useState('111')
+	const [userEmail] = useState(email)
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
-
-	useEffect(() => {
-		//email: 'nya-admin5252@nya.nya', password: '11qazxcvBG'
-		axios
-			.post(
-				'auth/login',
-				{
-					email: 'nya-admin5252@nya.nya',
-					password: '11qazxcvBG',
-					rememberMe: false,
-				},
-				{
-					baseURL:
-						process.env.REACT_APP_BACK_URL || 'http://localhost:7542/2.0/',
-					withCredentials: true,
-				}
-			)
-			.then(res => console.log(res.data))
-	}, [])
 
 	const photoSelected = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files
@@ -48,7 +27,9 @@ export const EditProfilePage = () => {
 		}
 	}
 
-	const userNameChange = () => {}
+	const userNameChange = () => {
+		dispatch(editProfileTC(userName, avatar!))
+	}
 
 	return (
 		<div className={style.bcg}>
@@ -56,7 +37,7 @@ export const EditProfilePage = () => {
 				<div className={style.block}>
 					<h3 className={style.title}>Personal Information</h3>
 					<div className={style.photoBlock}>
-						<img src={avatar ? avatar : profile_photo} alt='profilePhoto' />
+						<img src={avatar ? avatar : userNotFound} alt='profilePhoto' />
 						<div className={style.addPhoto}>
 							<input
 								id='addPhoto'
