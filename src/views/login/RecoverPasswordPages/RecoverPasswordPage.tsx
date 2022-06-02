@@ -1,11 +1,13 @@
 import React from 'react';
-import SuperButton from "../../../components/SuperButton/SuperButton";
 import {NavLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup"
 import {PATH} from "../../../utils/routingPath";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {sendMailRestorePassword, setStatusRP} from "../../../redux/reducers/restorePasswordReducer";
 import {Field, Form, Formik, FormikHelpers} from "formik";
+import SuperButton from "../../../components/SuperButton/SuperButton";
+import style from './RecoveryPassword.module.css'
+
 
 type Values = {
     email: string
@@ -29,19 +31,20 @@ export const RecoverPasswordPage = () => {
         dispatch(setStatusRP("idle"))
     }
     return (
-        <div>
+        <div className={style.container}>
             <Formik initialValues={initialState} onSubmit={onSubmit} validationSchema={validationSchema}>
-                {({isSubmitting}) => (
-                    <Form>
-                        <h1>It - incubator</h1>
-                        <h3>Forgot your password</h3>
-                        <Field  name="email" type='email' placeholder="Email"/>
-                        <p>Enter your email address and we will send you further instruction</p>
+                {({}) => (
+                    <Form className={ `${style.block}`}>
+                        <h1 className={style.titleText}>It - incubator</h1>
+                        <h3 className={style.mainText}>Forgot your password</h3>
+                        <Field className={style.inputField}  name="email" type='email' placeholder="Email"/>
+                        <p className={style.pText}>Enter your email address and we will send you further instruction</p>
                         <SuperButton type="submit" disabled={status === "loading"}>Send Instructions</SuperButton>
                         <span>{error}</span>
-                        <p>Did you remember your password?</p>
-                        <NavLink to={`/${PATH.LOGIN_PAGE}`}>Try logging in</NavLink>
+                        <p className={style.pText}>Did you remember your password?</p>
+                        <NavLink  to={`/${PATH.LOGIN_PAGE}`}>Try logging in</NavLink>
                     </Form>)}
-            </Formik></div>
+            </Formik>
+        </div>
     )
 }
