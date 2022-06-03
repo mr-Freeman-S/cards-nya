@@ -35,7 +35,7 @@ export const LoginPage = () => {
         console.log(values)
     }
 
-    if (isLogged) return <Navigate to={PATH.PROFILE_PAGE}/>
+    if (isLogged) return <Navigate to={PATH.LOGIN_PAGE}/>
 
     return <Formik
         initialValues={initialState}

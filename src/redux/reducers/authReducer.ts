@@ -27,12 +27,18 @@ export const authReducer = (state = initialState, action: GeneralType) => {
 				name: action.payload.name,
 				avatar: action.payload.avatar,
 			}
+		case 'SET_PROFILE_DATA':
+			let newState = { ...state }
+			newState = { ...action.payload.userData }
+			return newState
 		default:
 			return state
 	}
 }
 
-export type GeneralType = ReturnType<typeof editProfileAR>
+export type GeneralType =
+	| ReturnType<typeof editProfileAR>
+	| ReturnType<typeof setProfileData>
 
 export const editProfileAR = (name: string, avatar: string) => {
 	return {
@@ -43,6 +49,14 @@ export const editProfileAR = (name: string, avatar: string) => {
 		},
 	} as const
 }
+
+export const setProfileData = (userData: authReducerType) =>
+	({
+		type: 'SET_PROFILE_DATA',
+		payload: {
+			userData,
+		},
+	} as const)
 
 export const editProfileTC =
 	(

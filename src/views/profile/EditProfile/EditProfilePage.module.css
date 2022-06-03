@@ -39,6 +39,7 @@
 	width: 130px;
 	height: 130px;
 	border-radius: 100%;
+	opacity: 0.3;
 }
 
 .addPhoto {
