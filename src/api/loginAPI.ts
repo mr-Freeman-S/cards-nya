@@ -1,13 +1,11 @@
-import {instance} from "./index";
+import {instanceHeroku} from "./index";
 
 export const loginAPI = {
     login({email, password, rememberMe}: LoginPayloadType) {
-        return instance.post("auth/login", {email, password, rememberMe})
+        return instanceHeroku.post("auth/login", {email, password, rememberMe})
     },
 
 }
-
-
 
 //Types
 export type LoginPayloadType = {

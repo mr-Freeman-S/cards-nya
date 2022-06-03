@@ -1,11 +1,11 @@
 import {AxiosResponse} from "axios";
-import {instance} from "./index";
+import {instanceHeroku} from "./index";
 
 
 //api
 export const registrationAPI = {
     registration(data: RegistrationParamsType) {
-        return instance.post<{data: RegistrationParamsType}, AxiosResponse<RegisterUserType>>('auth/register', data)
+        return instanceHeroku.post<{ data: RegistrationParamsType }, AxiosResponse<RegisterUserType>>('auth/register', data)
     }
 }
 
