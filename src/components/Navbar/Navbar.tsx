@@ -4,8 +4,8 @@ import {PATH} from "../../utils/routingPath";
 
 const Navbar = () => {
     const style = {
-        display:'block',
-        marginBlock:'25px'
+        display: 'block',
+        marginBlock: '25px'
     }
 
     return (
@@ -25,7 +25,8 @@ const Navbar = () => {
             <li><NavLink to={PATH.RECOVER_PASSWORD_PAGE}>
                 Recover password
             </NavLink>
-            </li><li><NavLink to={PATH.NEW_PASSWORD_PAGE}>
+            </li>
+            <li><NavLink to={PATH.NEW_PASSWORD_PAGE}>
                 New password
             </NavLink></li>
             <li><NavLink to={PATH.PAGE_404}>
