@@ -1,7 +1,7 @@
 import { loginAPI } from '../../api/loginAPI'
 import { ThunkType } from '../store'
 import { setErrorMessageAC } from './appReducer'
-import { setProfileData } from './authReducer'
+import {authReducerType, setProfileData} from './authReducer'
 
 const initialState = {
 	isLogged: false,
@@ -49,6 +49,27 @@ export const loginTC =
 			.finally(() => {
 				resetForm()
 			})
+	}
+	export const authMe = ():ThunkType => dispatch => {
+	loginAPI
+		.auth()
+		.then(res => {
+			dispatch(setIsLoggedAC(true))
+			dispatch(setProfileData(res.data))
+		})
+		.catch(e =>{const error = e.response
+			? e.response.data.error
+			: e.message + ', more details in the console'
+			dispatch(setErrorMessageAC(error))
+		})
+	}
+	export const logout = ():ThunkType => dispatch => {
+	loginAPI
+		.logout()
+		.then(res => {
+			dispatch(setIsLoggedAC(false))
+			dispatch(setProfileData({} as authReducerType))
+		})
 	}
 
 //Types

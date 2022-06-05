@@ -36,10 +36,10 @@ export const LoginPage = () => {
     }
     useEffect(() => {
         setTimeout(() => dispatch(setErrorMessageAC('')), 2000)
-    }, [error])
+    }, [error,dispatch])
 
     if (isLogged) {
-        navigate(`/${PATH.PROFILE_PAGE}`)
+        navigate(PATH.PROFILE_PAGE)
     }
 
     return <Formik

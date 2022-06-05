@@ -42,7 +42,7 @@ export const RegistrationPage = () => {
         dispatch(registerTC(values, resetForm))
     }
 
-    if (isRegistered) return <Navigate to={`/${PATH.LOGIN_PAGE}`}/>
+    if (isRegistered) return <Navigate to={PATH.LOGIN_PAGE}/>
 
     return <Formik
         initialValues={initialValues}

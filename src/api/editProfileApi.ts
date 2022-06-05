@@ -1,4 +1,3 @@
-import axios from 'axios'
 import {instanceHeroku} from "./index";
 
 export const editProfileApi = {
