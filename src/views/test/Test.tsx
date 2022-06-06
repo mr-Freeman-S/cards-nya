@@ -4,6 +4,7 @@ import SuperCheckbox from "../../components/SuperCheckbox/SuperCheckbox";
 import SuperInputText from "../../components/SuperInputText/SuperInputText";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {setCheck} from "../../redux/reducers/testReducer";
+import {Tables} from "../../components/Table/Table";
 
 const Test = () => {
     const checked = useAppSelector(state => state.test.isChecked)
@@ -25,7 +26,7 @@ const Test = () => {
                 CLICK
             </SuperButton>
             <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked} >Hello</SuperCheckbox>
-
+            <Tables />
         </div>
     );
 };
