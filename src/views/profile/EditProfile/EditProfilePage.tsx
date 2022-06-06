@@ -73,7 +73,6 @@ export const EditProfilePage = () => {
 						<SuperInputText
 							value={userEmail}
 							className={'f'}
-							onChangeText={() => 'x'}
 						/>
 					</div>
 					<div className={style.btnBlock}>

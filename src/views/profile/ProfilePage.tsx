@@ -8,5 +8,9 @@ export const ProfilePage = () => {
 		return <Navigate to={'/login'} />
 	}
 
-	return <div>Profile page</div>
+	return (
+		<>
+			<div>Profile page</div>
+		</>
+	)
 }
