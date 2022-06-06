@@ -36,13 +36,13 @@ export const RegistrationPage = () => {
             .oneOf([Yup.ref("password"), null], "Passwords must match")
 
     })
-    const oSubmit = (values: ValuesRegistrationFormikType, {setSubmitting, resetForm}: {
+    const oSubmit = (values: ValuesRegistrationFormikType, {resetForm}: {
         setSubmitting: setSubmitting, resetForm: () => void
     }) => {
         dispatch(registerTC(values, resetForm))
     }
 
-    if (isRegistered) return <Navigate to={`/${PATH.LOGIN_PAGE}`}/>
+    if (isRegistered) return <Navigate to={PATH.LOGIN_PAGE}/>
 
     return <Formik
         initialValues={initialValues}

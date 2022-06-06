@@ -38,21 +38,22 @@ export const ResetPasswordPage = () => {
     }
     useEffect(() => {
         setTimeout(() => dispatch(setErrorMessageRP('')), 5000)
-    }, [error,dispatch])
+    }, [error, dispatch])
 
     if (status === "succeeded") {
-        navigate(`/${PATH.LOGIN_PAGE}`)
+        navigate(PATH.LOGIN_PAGE)
         dispatch(setStatusRP("idle"))
     }
 
     return (
         <div className={`${style.container}`}>
             <Formik validationSchema={validationSchema} initialValues={initialState} onSubmit={onSubmit}>
-                {({isSubmitting}) => <Form className={ `${style.block}`}>
+                {({isSubmitting}) => <Form className={`${style.block}`}>
                     <span className={style.titleText}>It-incubator</span>
                     <span className={style.mainText}>Create new password</span>
                     <Field className={style.inputField} placeholder='Password' type='password' name='password'/>
-                    <p className={style.pText}>Create new password and we will send you further instructions to email</p>
+                    <p className={style.pText}>Create new password and we will send you further instructions to
+                        email</p>
                     <SuperButton type='submit' disabled={isSubmitting}>Create new password</SuperButton>
                     {error && <span>{error}</span>}
                 </Form>}

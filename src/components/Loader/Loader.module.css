@@ -1,0 +1,33 @@
+.loaderWrapper {
+    width: 60px;
+    height: 60px;
+}
+
+.loader {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    border: 10px solid #e3e2e2;
+    border-top-color: #4bc8eb;
+    border-bottom-color: #d9d700;
+    border-radius: 50%;
+    animation: rotate 5s linear infinite;
+}
+
+.loaderInner {
+    border-top-color: #93ff26;
+    border-bottom-color: #ee0404;
+    animation-duration: 2.5s;
+}
+
+@keyframes rotate {
+    0% {
+        transform: scale(1) rotate(360deg);
+    }
+    50% {
+        transform: scale(.8) rotate(-360deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+}

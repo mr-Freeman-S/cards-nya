@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {PATH} from "../../utils/routingPath";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {loginTC} from "../../redux/reducers/loginReducer";
 import style from "./LoginPage.module.css"
+import {setErrorMessageAC} from "../../redux/reducers/appReducer";
 
 export type setSubmitting = (isSubmitting: boolean) => void
 export type valuesFromFormikType = {
@@ -22,20 +23,24 @@ export const LoginPage = () => {
     const isLogged = useAppSelector(state => state.login.isLogged)
     const error = useAppSelector(state => state.app.errorMessage)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const validationSchema = Yup.object({
         email: Yup.string().required('Required').email('Invalid email format'),
-        password: Yup.string().required('Required').min(5, 'Minimum 5 symbols'),
+        password: Yup.string().required('Required').min(7, 'Minimum 7 symbols'),
     })
     const submit = (values: valuesFromFormikType, {setSubmitting, resetForm}: {
         setSubmitting: setSubmitting, resetForm: () => void
     }) => {
-
         dispatch(loginTC(values.email, values.password, values.rememberMe, resetForm))
-        console.log(values)
     }
+    useEffect(() => {
+        setTimeout(() => dispatch(setErrorMessageAC('')), 2000)
+    }, [error,dispatch])
 
-    if (isLogged) return <Navigate to={PATH.LOGIN_PAGE}/>
+    if (isLogged) {
+        navigate(PATH.PROFILE_PAGE)
+    }
 
     return <Formik
         initialValues={initialState}
