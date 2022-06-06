@@ -4,9 +4,9 @@ import {PATH} from "../../utils/routingPath";
 
 const Navbar = () => {
     const style = {
-        display:'grid',
-        justifyItems:'center',
-        gridTemplateColumns:'repeat(8,1fr)'
+        display: 'grid',
+        justifyItems: 'center',
+        gridTemplateColumns: 'repeat(8,1fr)'
 
     }
 

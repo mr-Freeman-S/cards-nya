@@ -36,7 +36,7 @@ export const RegistrationPage = () => {
             .oneOf([Yup.ref("password"), null], "Passwords must match")
 
     })
-    const oSubmit = (values: ValuesRegistrationFormikType, {setSubmitting, resetForm}: {
+    const oSubmit = (values: ValuesRegistrationFormikType, {resetForm}: {
         setSubmitting: setSubmitting, resetForm: () => void
     }) => {
         dispatch(registerTC(values, resetForm))
