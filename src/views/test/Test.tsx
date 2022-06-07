@@ -23,7 +23,9 @@ const Test = () => {
                 CLICK
             </SuperButton>
             <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked}>Hello</SuperCheckbox>
-            <MultiRangeSlider min={0} max={1000} onChange={({min, max}) => console.log(`min -- ${min} max-- ${max}`)}/>
+            <MultiRangeSlider min={0} max={1000} onChangeSlider={({min, max}) => {
+                console.log(min)}} onMouseUp={()=> {
+                console.log('click')}}/>
 
         </div>
     );

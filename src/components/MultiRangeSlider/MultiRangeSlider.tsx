@@ -1,14 +1,24 @@
-import React, {ChangeEvent, useCallback, useEffect, useRef, useState} from 'react';
+import React, {
+    ChangeEvent,
+    DetailedHTMLProps,
+    InputHTMLAttributes,
+    useCallback,
+    useEffect,
+    useRef,
+    useState
+} from 'react';
 import style from './multiRangeSlider.module.css'
 
-
-type MultiRangeSliderType = {
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type MultiRangeSliderType = DefaultInputPropsType & {
     min: number
     max: number
-    onChange: ({min, max}: { min: number, max: number }) => void
+    onChangeSlider: ({min, max}: { min: number, max: number }) => void
+
+
 }
 
-export const MultiRangeSlider = ({min, max, onChange}: MultiRangeSliderType) => {
+export const MultiRangeSlider = React.memo(({min, max, onChangeSlider, ...restProps}: MultiRangeSliderType) => {
     const [minVal, setMinVal] = useState(min)
     const [maxVal, setMaxVal] = useState(max)
 
@@ -49,8 +59,8 @@ export const MultiRangeSlider = ({min, max, onChange}: MultiRangeSliderType) => 
 
     // Get min and max values when their state changes
     useEffect(() => {
-        onChange({min: minVal, max: maxVal});
-    }, [minVal, maxVal, onChange]);
+        onChangeSlider({min: minVal, max: maxVal});
+    }, [minVal, maxVal, onChangeSlider]);
 
 
     const minOnchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -65,8 +75,8 @@ export const MultiRangeSlider = ({min, max, onChange}: MultiRangeSliderType) => 
     }
     // Get min and max values when their state changes
     useEffect(() => {
-        onChange({min: minVal, max: maxVal});
-    }, [minVal, maxVal, onChange]);
+        onChangeSlider({min: minVal, max: maxVal});
+    }, [minVal, maxVal, onChangeSlider]);
 
     return (
         <div className={style.container}>
@@ -78,6 +88,7 @@ export const MultiRangeSlider = ({min, max, onChange}: MultiRangeSliderType) => 
                 ref={minValRef}
                 onChange={minOnchangeHandler}
                 className={`${style.thumb} ${style.thumbZIndex3}`}
+                onMouseUp={restProps.onMouseUp}
             />
             <input
                 type="range"
@@ -86,7 +97,10 @@ export const MultiRangeSlider = ({min, max, onChange}: MultiRangeSliderType) => 
                 value={maxVal}
                 ref={maxValRef}
                 onChange={maxOnchangeHandler}
-                className={`${style.thumb} ${style.thumbZIndex4}`}/>
+                className={`${style.thumb} ${style.thumbZIndex4}`}
+                onMouseUp={restProps.onMouseUp}
+            />
+
             <div className={style.slider}>
                 <div className={style.slider__track}/>
                 <div ref={range} className={style.slider__range}/>
@@ -95,5 +109,5 @@ export const MultiRangeSlider = ({min, max, onChange}: MultiRangeSliderType) => 
             </div>
         </div>
     );
-};
+});
 
