@@ -25,31 +25,25 @@ export const setIsLoggedAC = (isLogged: boolean) => {
 }
 
 //Thunks
-export const loginTC =
-    (
-        email: string,
-        password: string,
-        rememberMe: boolean,
-        resetForm: () => void
-    ): ThunkType =>
-        dispatch => {
-            loginAPI
-                .login({email, password, rememberMe})
-                .then(res => {
-                    dispatch(setIsLoggedAC(true))
-                    console.log(res.data)
-                    dispatch(setProfileData(res.data))
-                })
-                .catch(e => {
-                    const error = e.response
-                        ? e.response.data.error
-                        : e.message + ', more details in the console'
-                    dispatch(setErrorMessageAC(error))
-                })
-                .finally(() => {
-                    resetForm()
-                })
-        }
+export const loginTC = (email: string, password: string, rememberMe: boolean, resetForm: () => void): ThunkType =>
+    dispatch => {
+        loginAPI
+            .login({email, password, rememberMe})
+            .then(res => {
+                dispatch(setIsLoggedAC(true))
+                console.log(res.data)
+                dispatch(setProfileData(res.data))
+            })
+            .catch(e => {
+                const error = e.response
+                    ? e.response.data.error
+                    : e.message + ', more details in the console'
+                dispatch(setErrorMessageAC(error))
+            })
+            .finally(() => {
+                resetForm()
+            })
+    }
 export const authMe = (): ThunkType => dispatch => {
     loginAPI
         .auth()

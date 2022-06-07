@@ -7,5 +7,6 @@ export const PATH = {
     PAGE_404: "404",
     TEST: "/test",
     EDIT_PROFILE_PAGE: "/edit-profile",
-    CHECK_EMAIL: "/check-email"
+    CHECK_EMAIL: "/check-email",
+    PACK_LIST: "/pack-list"
 }

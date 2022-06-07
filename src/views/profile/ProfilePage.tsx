@@ -5,6 +5,7 @@ export const ProfilePage = () => {
 	const { isLogged } = useAppSelector(state => state.login)
 
 	if (!isLogged) {
+		debugger
 		return <Navigate to={'/login'} />
 	}
 

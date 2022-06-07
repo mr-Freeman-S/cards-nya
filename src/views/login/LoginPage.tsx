@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {PATH} from "../../utils/routingPath";
-import {useNavigate} from "react-router-dom";
 import {loginTC} from "../../redux/reducers/loginReducer";
 import style from "./LoginPage.module.css"
 import {setErrorMessageAC} from "../../redux/reducers/appReducer";
+import {Navigate, useNavigate} from 'react-router-dom';
 
 export type setSubmitting = (isSubmitting: boolean) => void
 export type valuesFromFormikType = {
@@ -23,7 +23,7 @@ export const LoginPage = () => {
     const isLogged = useAppSelector(state => state.login.isLogged)
     const error = useAppSelector(state => state.app.errorMessage)
     const dispatch = useAppDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const validationSchema = Yup.object({
         email: Yup.string().required('Required').email('Invalid email format'),
@@ -39,7 +39,7 @@ export const LoginPage = () => {
     }, [error])
 
     if (isLogged) {
-        navigate(PATH.PROFILE_PAGE)
+        return <Navigate to={PATH.PROFILE_PAGE}/>
     }
 
     return <Formik
