@@ -38,6 +38,10 @@ export const LoginPage = () => {
         setTimeout(() => dispatch(setErrorMessageAC('')), 2000)
     }, [error])
 
+    if (isLogged) {
+        navigate(PATH.PROFILE_PAGE)
+    }
+
     return <Formik
         initialValues={initialState}
         validationSchema={validationSchema}
