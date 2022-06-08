@@ -47,7 +47,7 @@ export const changeSortCards = (cards: CardPacksType[]) => ({
 // Thunks
 
 export const fetchCardsTC = (): ThunkAction<void, AppStateType, unknown, AnyAction> => (dispatch) => {
-    packsAPI.getPacks().then(res => dispatch(fetchCards(res.data.cardPacks)))
+    // packsAPI.getPacks().then(res => dispatch(fetchCards(res.data.cardPacks)))
 }
 
 export const changeSortCardsTC = (sortBy: 'desc' | 'asc'): ThunkAction<void, AppStateType, unknown, AnyAction> => (dispatch) => {
