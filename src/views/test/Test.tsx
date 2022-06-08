@@ -4,6 +4,7 @@ import SuperCheckbox from "../../components/SuperCheckbox/SuperCheckbox";
 import SuperInputText from "../../components/SuperInputText/SuperInputText";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {setCheck} from "../../redux/reducers/testReducer";
+import {Tables} from "../../components/Table/Table";
 import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlider";
 
 const Test = () => {
@@ -11,7 +12,7 @@ const Test = () => {
     const dispatch = useAppDispatch()
     const [name, setName] = useState<string>('')
     const onClickAlert = () => {
-        alert(`Hello ${name}. I glad to see you my friend!`)
+        alert(`Hello ${name}. I am glad to see you my friend!`)
     }
     const onChangeChecked = () => {
         dispatch(setCheck(!checked))
@@ -22,6 +23,8 @@ const Test = () => {
             <SuperButton onClick={onClickAlert}>
                 CLICK
             </SuperButton>
+            <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked} >Hello</SuperCheckbox>
+            <Tables />
             <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked}>Hello</SuperCheckbox>
             <MultiRangeSlider min={0} max={1000} onChangeSlider={({min, max}) => {
                 console.log(min)}} onMouseUp={()=> {

@@ -1,0 +1,8 @@
+
+.click {
+    cursor: pointer;
+}
+
+.click:active {
+    transform: translate(0px, 1.2px);
+}
