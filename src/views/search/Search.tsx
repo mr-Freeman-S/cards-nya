@@ -4,11 +4,12 @@ import {useAppDispatch} from "../../redux/store";
 
 export const Search = () => {
 
-    const dispatch = useAppDispatch()
+    //const dispatch = useAppDispatch()
 
     const [packName, setPackName] = useState<string>("")
 
     const searchPacksHandler = () => {
+        console.log(packName)
         //dispatch(setSearchPackAC(packName))
         //dispatch(getPacksTC())
     }
