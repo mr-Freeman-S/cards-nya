@@ -29,6 +29,8 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
             return {...state, user_id: action.user_id}
         case "PACKS/UPDATE-CARD-PACKS-TOTAL-COUNT":
             return {...state, cardPacksTotalCount: action.CardPacksTotalCount}
+        case "PACKS/CHANGE-SORT-CARDS":
+            return {...state, sortPacks: action.sortPacks}
         default:
             return state
     }
@@ -53,6 +55,9 @@ export const changePageCountAC = (pageCount: number) => {
 }
 export const setUserIdPacksAC = (user_id: string) => {
     return {type: 'PACKS/SET-USER-ID-PACKS', user_id} as const
+}
+export const changeSortCards = (sortPacks: string) => {
+    return {type: 'PACKS/CHANGE-SORT-CARDS', sortPacks} as const
 }
 
 
@@ -92,5 +97,6 @@ export type PacksReducerActionType =
     | ReturnType<typeof changePageCountAC>
     | ReturnType<typeof updateCardPacksTotalCountAC>
     | ReturnType<typeof setUserIdPacksAC>
+    | ReturnType<typeof changeSortCards>
 
 export type PacksStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
