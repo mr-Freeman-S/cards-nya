@@ -1,26 +1,27 @@
 import {AxiosResponse} from 'axios'
 import {instanceHeroku} from "./index";
+import {ResponseCardsType} from "../utils/types";
 
 
 //api
 export const cardsAPI = {
-    getCards(data: CardsType) {
-        return instanceHeroku.get<{data: CardsType}, AxiosResponse<ResponseCardsType>>("cards/card", {data})
+    getCards(params?: CardsType) {
+        return instanceHeroku.get<{ data: CardsType }, AxiosResponse<ResponseCardsType>>(`cards/card`)
     },
     createCard(card: CreateCardType) {
-        return instanceHeroku.post<{card: CreateCardType}, AxiosResponse<ResponseType>>("cards/card", {card})
+        return instanceHeroku.post<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
     },
     updateCard(card: UpdateCardType) {
-        return instanceHeroku.put<{card: CreateCardType}, AxiosResponse<ResponseType>>("cards/card", {card})
+        return instanceHeroku.put<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
     },
     deleteCard(id: string) {
-        return instanceHeroku.delete<{id: string}, AxiosResponse<ResponseType>>(`cards/card/${id}`) //не уверен, что будет именно так,
-                                                                                                        // надо будет еще перепроверить правильный ли путь
+        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/card/${id}`) //не уверен, что будет именно так,
+        // надо будет еще перепроверить правильный ли путь
     }
 }
 
 //types
-type CardsType = {
+export type CardsType = {
     cardAnswer?: string
     cardQuestion?: string
     cardsPack_id?: string
@@ -50,24 +51,3 @@ type UpdateCardType = {
     comments: string
 }
 
-type CardType = {
-    answer: string
-    question: string
-    cardsPack_id: string
-    grade: number
-    shots: number
-    user_id: string
-    created: string
-    updated: string
-    _id: string
-}
-
-type ResponseCardsType = {
-    cardPacks: CardType[]
-    cardsTotalCount: number
-    maxGrade: number
-    minGrade: number
-    page: number
-    pageCount: number
-    packUserId: string
-}
