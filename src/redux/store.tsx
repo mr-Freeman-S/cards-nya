@@ -31,7 +31,7 @@ export type AppDispatch = typeof store.dispatch
 export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector;
 //export const useAppDispatch =()=> useDispatch<ThunkType>()
 export const useAppDispatch = () =>
-    useDispatch<ThunkDispatch<AppStateType, unknown, AnyAction>>()
+    useDispatch<ThunkDispatch<AppStateType, unknown, AppActionsType>>()
 
 
 export type AppActionsType = LoginReducerActionType | AppReducerActionType | GeneralType | PacksReducerActionType
