@@ -1,7 +1,10 @@
 import React, {ChangeEvent, useState} from "react";
 import {DebounceInput} from "react-debounce-input";
+import {useAppDispatch} from "../../redux/store";
 
 export const Search = () => {
+
+    const dispatch = useAppDispatch()
 
     const [packName, setPackName] = useState<string>("")
 

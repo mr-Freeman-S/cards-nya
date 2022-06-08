@@ -1,6 +1,7 @@
 import {Navigate} from 'react-router-dom'
 import {useAppSelector} from '../../redux/store'
 import {Search} from "../search/Search";
+import {AddPack} from "../addPack/AddPack";
 
 export const ProfilePage = () => {
     const {isLogged} = useAppSelector(state => state.login)
@@ -13,6 +14,7 @@ export const ProfilePage = () => {
         <>
             <div>Profile page</div>
             <Search/>
+            <AddPack/>
         </>
     )
 }
