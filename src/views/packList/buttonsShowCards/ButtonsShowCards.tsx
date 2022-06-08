@@ -1,6 +1,6 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
-import {setUserIdPacksAC} from "../../../redux/reducers/packsReducer";
+import {setUserIdPacksAC} from "../../../redux/reducers/packsCardReducer";
 
 
 export const ButtonsShowCards = () => {

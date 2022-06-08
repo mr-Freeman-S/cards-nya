@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {getCardPackTC} from "../../redux/reducers/packsReducer";
+import {getCardPackTC} from "../../redux/reducers/packsCardReducer";
 import {Preloader} from "../../components/Preloader/Preloader";
 import {PacksList} from "./PacksList";
 import {Navigate} from "react-router-dom";

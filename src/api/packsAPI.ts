@@ -5,7 +5,7 @@ import {instanceHeroku} from "./index";
 //api
 export const packsAPI = {
     getPacks(data: PacksType) {
-        return instanceHeroku.get<{data: PacksType}, AxiosResponse<ResponsePacksType>>("cards/pack", { params: data})
+        return instanceHeroku.get<{data: PacksType}, AxiosResponse<ResponsePacksType>>("cards/pack", {data})
     },
     createPack(cardsPack: CreatePackType) {
         return instanceHeroku.post<{cardsPack: CreatePackType}, AxiosResponse<ResponseType>>("cards/pack", {cardsPack})
@@ -27,7 +27,7 @@ type PacksType = {
     sortPacks?: string
     page?: number
     pageCount?: number
-    user_id?: string
+    user_id?: number
 }
 
 type CreatePackType = {

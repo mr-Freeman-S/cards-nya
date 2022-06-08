@@ -7,7 +7,7 @@ import {appReducer, AppReducerActionType} from "./reducers/appReducer";
 import {loginReducer, LoginReducerActionType} from "./reducers/loginReducer";
 import {registrationReducer} from "./reducers/registrationReducer";
 import {restorePasswordReducer} from "./reducers/restorePasswordReducer";
-import {PacksReducerActionType, packsReducerReducer} from "./reducers/packsReducer";
+import {PacksReducerActionType, packsCardReducer} from "./reducers/packsCardReducer";
 
 const rootReducer = combineReducers({
     test: testReducer,
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
     login: loginReducer,
     registration: registrationReducer,
     resPassword: restorePasswordReducer,
-    packsCard: packsReducerReducer
+    packsCard: packsCardReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))

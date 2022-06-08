@@ -15,7 +15,7 @@ const initialState = {
 }
 
 //Reducer
-export const packsReducerReducer = (state: InitialStateType = initialState, action: PacksReducerActionType): InitialStateType => {
+export const packsCardReducer = (state: InitialStateType = initialState, action: PacksReducerActionType): InitialStateType => {
     switch (action.type) {
         case "PACKS/SET-CARD-PACKS":
             return {...state, cardPacks: action.cardPacks}

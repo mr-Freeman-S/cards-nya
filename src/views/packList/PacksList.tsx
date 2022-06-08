@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardPacksType} from "../../redux/reducers/packsReducer";
+import {CardPacksType} from "../../redux/reducers/packsCardReducer";
 
 type PacksListPropsType = {
     packs: CardPacksType[]
