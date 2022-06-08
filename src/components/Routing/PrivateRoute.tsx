@@ -10,6 +10,7 @@ import {RecoverPasswordPage} from '../../views/login/RecoverPasswordPages/Recove
 import {ResetPasswordPage} from '../../views/login/RecoverPasswordPages/ResetPasswordPage'
 import {CheckEmail} from '../../views/login/RecoverPasswordPages/CheckEmail'
 import {Page404} from "../../views/error/Page404";
+import {PackListContainer} from "../../views/packList/PackListContainer";
 
 export const PrivateRoute = () => {
     return (
@@ -28,6 +29,7 @@ export const PrivateRoute = () => {
             <Route path={PATH.TEST} element={<Test/>}/>
             <Route path={PATH.EDIT_PROFILE_PAGE} element={<EditProfilePage/>}/>
             <Route path={PATH.CHECK_EMAIL} element={<CheckEmail/>}/>
+            <Route path={PATH.PACK_LIST} element={<PackListContainer/>}/>
             <Route path='*' element={<Page404/>}/>
         </Routes>
     )
