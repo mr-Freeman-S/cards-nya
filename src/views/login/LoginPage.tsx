@@ -23,7 +23,7 @@ export const LoginPage = () => {
     const isLogged = useAppSelector(state => state.login.isLogged)
     const error = useAppSelector(state => state.app.errorMessage)
     const dispatch = useAppDispatch()
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const validationSchema = Yup.object({
         email: Yup.string().required('Required').email('Invalid email format'),
@@ -68,15 +68,31 @@ export const LoginPage = () => {
                         <Field placeholder="Remember me" type="checkbox" name="remember Me"/>
                         <span>Remember me</span>
                     </div>
-                    <button type="submit" disabled={isSubmitting}>
-                        Login
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+
+                    <div className={style.forgotPass}>
+                        <span onClick={() => navigate(PATH.RECOVER_PASSWORD_PAGE)}>Forgot Password</span>
+                    </div>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
+                        <button type="submit" disabled={isSubmitting}>
+                            Login
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
                     <div className={style.error}>
                         {error}
+                    </div>
+                    <div style={{ display: "flex",
+                        justifyContent: "center"}}>
+                        <span className={style.spanTextAcc}>Don't have an account?</span>
+                    </div>
+                    <div className={style.singUp}>
+                        <span onClick={() => navigate(PATH.REGISTRATION_PAGE)}>Sign Up</span>
                     </div>
                 </div>
             </Form>
