@@ -7,6 +7,7 @@ import {appReducer, AppReducerActionType} from "./reducers/appReducer";
 import {loginReducer, LoginReducerActionType} from "./reducers/loginReducer";
 import {registrationReducer} from "./reducers/registrationReducer";
 import {restorePasswordReducer} from "./reducers/restorePasswordReducer";
+import {PacksReducerActionType, packsReducerReducer} from "./reducers/packsReducer";
 
 const rootReducer = combineReducers({
     test: testReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     app: appReducer,
     login: loginReducer,
     registration: registrationReducer,
-    resPassword: restorePasswordReducer
+    resPassword: restorePasswordReducer,
+    packsCard: packsReducerReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
@@ -30,5 +32,5 @@ export const useAppDispatch = () =>
     useDispatch<ThunkDispatch<AppStateType, unknown, AnyAction>>()
 
 
-export type AppActionsType = LoginReducerActionType | AppReducerActionType | GeneralType
+export type AppActionsType = LoginReducerActionType | AppReducerActionType | GeneralType | PacksReducerActionType
 export type ThunkType = ThunkAction<void, AppStateType, unknown, AppActionsType>

@@ -21,7 +21,6 @@ export const EditProfilePage = () => {
         if (file) {
             reader.readAsDataURL(file[0])
             reader.onload = e => {
-                console.log(e.target?.result)
                 const avatar = e.target?.result as string
                 dispatch(editProfileTC(userName, avatar))
             }
