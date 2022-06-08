@@ -31,7 +31,6 @@ export const loginTC = (email: string, password: string, rememberMe: boolean, re
             .login({email, password, rememberMe})
             .then(res => {
                 dispatch(setIsLoggedAC(true))
-                console.log(res.data)
                 dispatch(setProfileData(res.data))
             })
             .catch(e => {
