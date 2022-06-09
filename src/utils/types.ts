@@ -42,7 +42,7 @@ export type CardType = {
 }
 
 export type ResponseCardsType = {
-    cardPacks: CardsType[]
+    cards: CardsType[]
     cardsTotalCount: number
     maxGrade: number
     minGrade: number
