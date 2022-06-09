@@ -1,5 +1,5 @@
 import {AppStateType, ThunkType} from "../store";
-import {packsAPI} from "../../api/packsAPI";
+import {CreatePackType, packsAPI} from "../../api/packsAPI";
 
 const initialState = {
     cardPacks: [] as Array<CardPacksType>,
@@ -33,6 +33,8 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
             return {...state, sortPacks: action.sortPacks}
         case "PACKS/SEARCH-PACKS":
             return {...state, packName: action.packName}
+        case "PACKS/CREATE-PACK":
+            return {...state, ...action.cardPacks}
         default:
             return state
     }
@@ -64,6 +66,10 @@ export const changeSortCards = (sortPacks: string) => {
 export const searchPackAC = (packName: string) => {
     return {type: 'PACKS/SEARCH-PACKS', packName} as const
 }
+export const createPackAC = (cardPacks: CreatePackType) => {
+    return {type: "PACKS/CREATE-PACK", cardPacks} as const
+}
+
 
 
 //Thunks
@@ -74,6 +80,20 @@ export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStat
         .then(res => {
             dispatch(setCardPacksAC(res.data.cardPacks))
             dispatch(updateCardPacksTotalCountAC(res.data.cardPacksTotalCount))
+        })
+        .catch(e => {
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
+        })
+}
+
+export const createCardPackTC = (name?:string, deckCover?: string): ThunkType => (dispatch) => {
+    dispatch(updatePacksStatusAC("loading"))
+    packsAPI.createPack({name, deckCover, private:false})
+        .then(res => {
+            dispatch(createPackAC(res.data.newCardsPack))
+            dispatch(getCardPackTC())
         })
         .catch(e => {
         })
@@ -104,5 +124,6 @@ export type PacksReducerActionType =
     | ReturnType<typeof setUserIdPacksAC>
     | ReturnType<typeof changeSortCards>
     | ReturnType<typeof searchPackAC>
+    | ReturnType<typeof createPackAC>
 
 export type PacksStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

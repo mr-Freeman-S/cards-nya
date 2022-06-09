@@ -1,16 +1,20 @@
 import React from "react"
+import {useAppDispatch} from "../../redux/store";
+import {createCardPackTC} from "../../redux/reducers/packsCardReducer";
 
 export const AddPack = () => {
 
-    const packName: string = "packName"
+    const dispatch = useAppDispatch()
+    const packName: string = "Pack by DreamTeam"
 
-    const onclickHandler = () => {
-        //dispatch(createNewPackTC(packName))
+    const onclickHandler = (title: string) => {
+        console.log(title)
+        dispatch(createCardPackTC(title))
     }
 
     return (
         <div>
-            <button onClick={onclickHandler}>Add Pack</button>
+            <button onClick={() => {onclickHandler(packName)}}>Add Pack</button>
         </div>
     )
 }

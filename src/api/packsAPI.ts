@@ -5,17 +5,17 @@ import {instanceHeroku} from "./index";
 //api
 export const packsAPI = {
     getPacks(data: PacksType) {
-        return instanceHeroku.get<{data: PacksType}, AxiosResponse<ResponsePacksType>>("cards/pack", {params: data})
+        return instanceHeroku.get<{ data: PacksType }, AxiosResponse<ResponsePacksType>>("cards/pack", {params: data})
     },
     createPack(cardsPack: CreatePackType) {
-        return instanceHeroku.post<{cardsPack: CreatePackType}, AxiosResponse<ResponseType>>("cards/pack", {cardsPack})
+        return instanceHeroku.post<{ cardsPack: CreatePackType }, AxiosResponse<ResponseCreatePackType>>("cards/pack", {cardsPack})
     },
     updatePack(cardsPack: UpdatePackType) {
-        return instanceHeroku.put<{cardsPack: UpdatePackType}, AxiosResponse<ResponseType>>("cards/pack", {cardsPack})
+        return instanceHeroku.put<{ cardsPack: UpdatePackType }, AxiosResponse<ResponseType>>("cards/pack", {cardsPack})
     },
     deletePack(id: string) {
-        return instanceHeroku.delete<{id: string}, AxiosResponse<ResponseType>>(`cards/pack/${id}`) //не уверен, что будет именно так,
-                                                                                                        // надо будет еще перепроверить правильный ли путь
+        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/pack/${id}`) //не уверен, что будет именно так,
+        // надо будет еще перепроверить правильный ли путь
     }
 }
 
@@ -30,10 +30,10 @@ type PacksType = {
     user_id?: string
 }
 
-type CreatePackType = {
+export type CreatePackType = {
     name?: string
     deckCover?: string
-    private?: boolean
+    private: boolean
 }
 
 type UpdatePackType = {
@@ -67,6 +67,12 @@ type ResponsePacksType = {
     cardPacksTotalCount: number
     minCardsCount: number
     maxCardsCount: number
+    token: string
+    tokenDeathTime: number
+}
+
+type ResponseCreatePackType = {
+    newCardsPack: CardPacksType
     token: string
     tokenDeathTime: number
 }
