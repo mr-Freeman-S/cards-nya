@@ -9,8 +9,8 @@ import Paper from '@mui/material/Paper'
 import {AiOutlineArrowUp} from 'react-icons/ai'
 import {cardsAPI} from "../../api/cardsAPI";
 import style from './Table.module.css'
-import {changeSortCardsTC, fetchCardsTC} from "../../redux/reducers/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {changeSortPackCardsAC, getCardPackTC} from "../../redux/reducers/packsCardReducer";
 
 
 const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
@@ -19,22 +19,22 @@ type sortType = 'asc' | 'desc';
 
 export function Tables() {
     // const [rows, setRows] = useState<any>([])
-    const rows = useAppSelector(state => state.cards.cardPacks)
+    const rows = useAppSelector(state => state.packsCard.cardPacks)
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
 
+
+    const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
+
     useEffect(() => {
-        // cardsAPI.getCards({}).then(res => {
-        //     setRows(res.data.cardPacks)
-        //})
-        dispatch(fetchCardsTC())
-    }, []);
+        dispatch(getCardPackTC())
+    }, [sortByUpdatePacks]);
 
     const changeSortHandler = () => {
         sortBy === 'asc' ? setSortBy('desc') : setSortBy('asc')
-        dispatch(changeSortCardsTC(sortBy))
+        console.log(sortByUpdatePacks)
+        dispatch(changeSortPackCardsAC(sortByUpdatePacks === '0updated' ? '1updated' : '0updated'))
     }
-
 
     return (
         <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
@@ -44,8 +44,10 @@ export function Tables() {
                         {
                             colums && colums.map((el, i) => {
                                 return (el === 'Last Updated' ?
-                                    <TableCell className={style.click} key={`${el}_${i}`} onClick={() => changeSortHandler()} align={"center"}>
-                                        {el}<AiOutlineArrowUp style={sortBy === 'asc' ? {transform: 'rotate(180deg)'} : {}}/>
+                                    <TableCell className={style.click} key={`${el}_${i}`} onClick={changeSortHandler}
+                                               align={"center"}>
+                                        {el}<AiOutlineArrowUp
+                                        style={sortBy === 'asc' ? {transform: 'rotate(180deg)'} : {}}/>
                                     </TableCell> : <TableCell key={`${el}_${i}`} align={"center"}>{el}</TableCell>)
                             })
                         }

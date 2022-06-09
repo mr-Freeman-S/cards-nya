@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {PATH} from "../../utils/routingPath";
-import {useNavigate} from "react-router-dom";
 import {loginTC} from "../../redux/reducers/loginReducer";
 import style from "./LoginPage.module.css"
 import {setErrorMessageAC} from "../../redux/reducers/appReducer";
+import {Navigate, useNavigate} from 'react-router-dom';
 
 export type setSubmitting = (isSubmitting: boolean) => void
 export type valuesFromFormikType = {
@@ -36,10 +36,10 @@ export const LoginPage = () => {
     }
     useEffect(() => {
         setTimeout(() => dispatch(setErrorMessageAC('')), 2000)
-    }, [error,dispatch])
+    }, [error])
 
     if (isLogged) {
-        navigate(PATH.PROFILE_PAGE)
+        return <Navigate to={PATH.PROFILE_PAGE}/>
     }
 
     return <Formik
@@ -68,15 +68,31 @@ export const LoginPage = () => {
                         <Field placeholder="Remember me" type="checkbox" name="remember Me"/>
                         <span>Remember me</span>
                     </div>
-                    <button type="submit" disabled={isSubmitting}>
-                        Login
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+
+                    <div className={style.forgotPass}>
+                        <span onClick={() => navigate(PATH.RECOVER_PASSWORD_PAGE)}>Forgot Password</span>
+                    </div>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
+                        <button type="submit" disabled={isSubmitting}>
+                            Login
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
                     <div className={style.error}>
                         {error}
+                    </div>
+                    <div style={{ display: "flex",
+                        justifyContent: "center"}}>
+                        <span className={style.spanTextAcc}>Don't have an account?</span>
+                    </div>
+                    <div className={style.singUp}>
+                        <span onClick={() => navigate(PATH.REGISTRATION_PAGE)}>Sign Up</span>
                     </div>
                 </div>
             </Form>
