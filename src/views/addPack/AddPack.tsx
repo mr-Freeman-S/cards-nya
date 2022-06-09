@@ -8,7 +8,6 @@ export const AddPack = () => {
     const packName: string = "Pack by DreamTeam"
 
     const onclickHandler = (title: string) => {
-        console.log(title)
         dispatch(createCardPackTC(title))
     }
 
