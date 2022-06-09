@@ -14,7 +14,7 @@ const Test = () => {
         alert(`Hello ${name}. I am glad to see you my friend!`)
     }
     const onChangeChecked = () => {
-      dispatch(setCheck(!checked))
+      //dispatch(setCheck(!checked))
     }
     return (
         <div style={{
