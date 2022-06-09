@@ -21,7 +21,7 @@ export const cardsAPI = {
 }
 
 //types
-export type CardsType = {
+type CardsType = {
     cardAnswer?: string
     cardQuestion?: string
     cardsPack_id?: string

@@ -9,7 +9,6 @@ import Paper from '@mui/material/Paper'
 import {AiOutlineArrowUp} from 'react-icons/ai'
 import {cardsAPI} from "../../api/cardsAPI";
 import style from './Table.module.css'
-import {changeSortCardsTC, fetchCardsTC} from "../../redux/reducers/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {getCardPackTC} from "../../redux/reducers/packsCardReducer";
 
@@ -25,15 +24,12 @@ export function Tables() {
     const [sortBy, setSortBy] = useState<sortType>('desc')
 
     useEffect(() => {
-        // cardsAPI.getCards({}).then(res => {
-        //     setRows(res.data.cardPacks)
-        //})
         dispatch(getCardPackTC())
     }, []);
 
     const changeSortHandler = () => {
         sortBy === 'asc' ? setSortBy('desc') : setSortBy('asc')
-        dispatch(changeSortCardsTC(sortBy))
+
     }
 
 
