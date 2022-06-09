@@ -1,20 +1,17 @@
-import {Navigate} from 'react-router-dom'
-import {useAppSelector} from '../../redux/store'
-import {Search} from "../search/Search";
-import {AddPack} from "../addPack/AddPack";
+import { Navigate } from 'react-router-dom'
+import { useAppSelector } from '../../redux/store'
 
 export const ProfilePage = () => {
-    const {isLogged} = useAppSelector(state => state.login)
+	const { isLogged } = useAppSelector(state => state.login)
 
-    if (!isLogged) {
-        return <Navigate to={'/login'}/>
-    }
+	if (!isLogged) {
+		debugger
+		return <Navigate to={'/login'} />
+	}
 
-    return (
-        <>
-            <div>Profile page</div>
-            <Search/>
-            <AddPack/>
-        </>
-    )
+	return (
+		<>
+			<div>Profile page</div>
+		</>
+	)
 }
