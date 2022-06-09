@@ -18,8 +18,6 @@ const Test = () => {
     }
     return (
         <div style={{
-
-
         }}>
             <SuperInputText placeholder="Enter name" value={name} onChangeText={setName} />
             <SuperButton onClick={onClickAlert}>
