@@ -1,26 +1,21 @@
-import React, {
-    ChangeEvent,
-    DetailedHTMLProps,
-    InputHTMLAttributes,
-    useCallback,
-    useEffect,
-    useRef,
-    useState
-} from 'react';
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useCallback, useEffect, useRef} from 'react';
 import style from './multiRangeSlider.module.css'
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 type MultiRangeSliderType = DefaultInputPropsType & {
     min: number
     max: number
-    onChangeSlider: ({min, max}: { min: number, max: number }) => void
+    minVal:number
+    maxVal:number
+    setMinVal: (n:number) => void
+    setMaxVal: (n:number) => void
+    //onChangeSlider: ({min, max}: { min: number, max: number }) => void
 
 
 }
 
-export const MultiRangeSlider = React.memo(({min, max, onChangeSlider, ...restProps}: MultiRangeSliderType) => {
-    const [minVal, setMinVal] = useState(min)
-    const [maxVal, setMaxVal] = useState(max)
+export const MultiRangeSlider = React.memo(({min, max,minVal,maxVal,setMinVal,setMaxVal, /*onChangeSlider*/ ...restProps}: MultiRangeSliderType) => {
+
 
     const minValRef = useRef<HTMLInputElement>(null)
     const maxValRef = useRef<HTMLInputElement>(null)
@@ -59,8 +54,8 @@ export const MultiRangeSlider = React.memo(({min, max, onChangeSlider, ...restPr
 
     // Get min and max values when their state changes
     useEffect(() => {
-        onChangeSlider({min: minVal, max: maxVal});
-    }, [minVal, maxVal, onChangeSlider]);
+        //onChangeSlider({min: minVal, max: maxVal});
+    }, [minVal, maxVal, /*onChangeSlider*/]);
 
 
     const minOnchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -75,8 +70,8 @@ export const MultiRangeSlider = React.memo(({min, max, onChangeSlider, ...restPr
     }
     // Get min and max values when their state changes
     useEffect(() => {
-        onChangeSlider({min: minVal, max: maxVal});
-    }, [minVal, maxVal, onChangeSlider]);
+       // onChangeSlider({min: minVal, max: maxVal});
+    }, [minVal, maxVal, /*onChangeSlider*/]);
 
     return (
         <div className={style.container}>

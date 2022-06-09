@@ -4,14 +4,16 @@ import {packsAPI} from "../../api/packsAPI";
 const initialState = {
     cardPacks: [] as Array<CardPacksType>,
     packName: '',
-    min: 0,
-    max: 0,
+    min: 2,
+    max: 12,
     sortPacks: '0updated',
     page: 1,
     pageCount: 10,
     user_id: '',
     cardPacksTotalCount: 0,
-    packsStatus: 'idle' as PacksStatusType
+    packsStatus: 'idle' as PacksStatusType,
+    minCardsCount: 0,
+    maxCardsCount: 0
 }
 
 //Reducer
@@ -31,6 +33,10 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
             return {...state, cardPacksTotalCount: action.CardPacksTotalCount}
         case "PACKS/CHANGE-SORT-PACKS-CARDS":
             return {...state, sortPacks: action.sortPacks}
+        case "PACKS/FETCH-MINMAX-COUNT-CARDS":
+            return {...state, minCardsCount: action.minCardsCount, maxCardsCount: action.maxCardsCount}
+        case 'PACKS/SET-MINMAX-SEARCH-CARDS':
+            return {...state, min: action.min, max: action.max}
         default:
             return state
     }
@@ -59,6 +65,12 @@ export const setUserIdPacksAC = (user_id: string) => {
 export const changeSortPackCardsAC = (sortPacks: string) => {
     return {type: 'PACKS/CHANGE-SORT-PACKS-CARDS', sortPacks} as const
 }
+export const fetchMinMaxCardCountAC = (minCardsCount: number, maxCardsCount: number) => {
+    return {type: 'PACKS/FETCH-MINMAX-COUNT-CARDS', minCardsCount, maxCardsCount} as const
+}
+export const setMinMaxSearchCardAC = (min: number, max: number) => {
+    return {type: 'PACKS/SET-MINMAX-SEARCH-CARDS', min, max} as const
+}
 
 
 //Thunks
@@ -69,6 +81,7 @@ export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStat
         .then(res => {
             dispatch(setCardPacksAC(res.data.cardPacks))
             dispatch(updateCardPacksTotalCountAC(res.data.cardPacksTotalCount))
+            dispatch(fetchMinMaxCardCountAC(res.data.minCardsCount, res.data.maxCardsCount))
         })
         .catch(e => {
         })
@@ -88,6 +101,7 @@ export type CardPacksType = {
     cardsCount: number
     created: string
     updated: string
+
 }
 
 export type PacksReducerActionType =
@@ -98,5 +112,8 @@ export type PacksReducerActionType =
     | ReturnType<typeof updateCardPacksTotalCountAC>
     | ReturnType<typeof setUserIdPacksAC>
     | ReturnType<typeof changeSortPackCardsAC>
+    | ReturnType<typeof fetchMinMaxCardCountAC>
+    | ReturnType<typeof setMinMaxSearchCardAC>
+
 
 export type PacksStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
