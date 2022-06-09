@@ -18,6 +18,7 @@ export const SearchPack = (/*props: SearchPropsType*/) => {
     const searchPacksHandler = () => {
         dispatch(searchPackAC(packName))
         dispatch(getCardPackTC())
+        setPackName("")
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
