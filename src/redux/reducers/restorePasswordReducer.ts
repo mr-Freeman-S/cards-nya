@@ -24,7 +24,7 @@ const initialStateRP: initialStateType = {
 }
 
 // reducer
-export const restorePasswordReducer = (state = initialStateRP, action: rootActionTypes) => {
+export const restorePasswordReducer = (state = initialStateRP, action: RestorePasswordReducerActionTypes) => {
     switch (action.type) {
         case SET_EMAIL:
             return {...state, email: action.email}
@@ -56,7 +56,7 @@ type setEmailType = ReturnType<typeof setEmailRP>
 type setNewPasswordType = ReturnType<typeof setNewPasswordRP>
 type setStatusType = ReturnType<typeof setStatusRP>
 type setErrorMessageType = ReturnType<typeof setErrorMessageRP>
-type rootActionTypes = setEmailType | setNewPasswordType | setStatusType | setErrorMessageType
+export type RestorePasswordReducerActionTypes = setEmailType | setNewPasswordType | setStatusType | setErrorMessageType
 
 //thunks
 export const sendMailRestorePassword = (email: string): ThunkAction<void, AppStateType, unknown, AnyAction> =>

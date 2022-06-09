@@ -1,12 +1,12 @@
 import {AnyAction, applyMiddleware, combineReducers, createStore} from 'redux'
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
-import {testReducer} from './reducers/testReducer'
+import {setCheckType, testReducer} from './reducers/testReducer'
 import {authReducer, GeneralType} from './reducers/authReducer'
 import {appReducer, AppReducerActionType} from "./reducers/appReducer";
 import {loginReducer, LoginReducerActionType} from "./reducers/loginReducer";
 import {registrationReducer} from "./reducers/registrationReducer";
-import {restorePasswordReducer} from "./reducers/restorePasswordReducer";
+import {restorePasswordReducer, RestorePasswordReducerActionTypes} from "./reducers/restorePasswordReducer";
 import {PacksReducerActionType, packsCardReducer} from "./reducers/packsCardReducer";
 import {cardsReducer} from "./reducers/cardsReducer";
 
@@ -34,5 +34,5 @@ export const useAppDispatch = () =>
     useDispatch<ThunkDispatch<AppStateType, unknown, AppActionsType>>()
 
 
-export type AppActionsType = LoginReducerActionType | AppReducerActionType | GeneralType | PacksReducerActionType
+export type AppActionsType = LoginReducerActionType | AppReducerActionType | GeneralType | PacksReducerActionType | setCheckType | RestorePasswordReducerActionTypes
 export type ThunkType = ThunkAction<void, AppStateType, unknown, AppActionsType>

@@ -21,4 +21,4 @@ export const setCheck = (isChecked: boolean) => {
     } as const
 }
 //types AC
-type setCheckType = ReturnType<typeof setCheck>
+export type setCheckType = ReturnType<typeof setCheck>
