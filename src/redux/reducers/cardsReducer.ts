@@ -1,5 +1,4 @@
 import {AppStateType, ThunkType} from "../store";
-import {packsAPI} from "../../api/packsAPI";
 import {updatePacksStatusAC} from "./packsCardReducer";
 import {cardsAPI} from "../../api/cardsAPI";
 

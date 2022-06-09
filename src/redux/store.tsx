@@ -34,5 +34,12 @@ export const useAppDispatch = () =>
     useDispatch<ThunkDispatch<AppStateType, unknown, AppActionsType>>()
 
 
-export type AppActionsType = LoginReducerActionType | AppReducerActionType | GeneralType | PacksReducerActionType | setCheckType | RestorePasswordReducerActionTypes | CardsReducerActionType
+export type AppActionsType =
+    LoginReducerActionType
+    | AppReducerActionType
+    | GeneralType
+    | PacksReducerActionType
+    | setCheckType
+    | RestorePasswordReducerActionTypes
+    | CardsReducerActionType
 export type ThunkType = ThunkAction<void, AppStateType, unknown, AppActionsType>
