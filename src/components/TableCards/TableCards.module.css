@@ -1,0 +1,17 @@
+.click {
+    cursor: pointer;
+}
+
+.click:active {
+    transform: translate(0px, 1.2px);
+}
+
+.back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back button {
+    padding: 15px
+}

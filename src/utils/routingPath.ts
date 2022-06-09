@@ -8,5 +8,6 @@ export const PATH = {
     TEST: "/test",
     EDIT_PROFILE_PAGE: "/edit-profile",
     CHECK_EMAIL: "/check-email",
-    PACK_LIST: "/pack-list"
+    PACK_LIST: "/pack-list",
+    CARDS_LIST: "/cards",
 }

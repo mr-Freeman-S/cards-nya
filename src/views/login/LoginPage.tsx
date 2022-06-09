@@ -36,7 +36,7 @@ export const LoginPage = () => {
     }
     useEffect(() => {
         setTimeout(() => dispatch(setErrorMessageAC('')), 2000)
-    }, [error])
+    }, [dispatch, error])
 
     if (isLogged) {
         return <Navigate to={PATH.PROFILE_PAGE}/>
