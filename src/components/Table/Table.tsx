@@ -28,7 +28,7 @@ export function Tables() {
 
     useEffect(() => {
         dispatch(getCardPackTC())
-    }, [sortByUpdatePacks]);
+    }, [sortByUpdatePacks,dispatch]);
 
     const changeSortHandler = () => {
         sortBy === 'asc' ? setSortBy('desc') : setSortBy('asc')

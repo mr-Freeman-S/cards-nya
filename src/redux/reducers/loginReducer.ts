@@ -58,7 +58,7 @@ export const authMe = (): ThunkType => dispatch => {
         })
         .finally(() => dispatch(setInitializedAC(true)))
 }
-export const logout = (): ThunkType => dispatch => {
+export const logoutTC = (): ThunkType => dispatch => {
     loginAPI
         .logout()
         .then(() => {

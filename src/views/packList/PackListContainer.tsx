@@ -21,7 +21,7 @@ export const PackListContainer = () => {
 
     useEffect(() => {
         dispatch(getCardPackTC())
-    }, [page, pageCount, user_id])
+    }, [page, pageCount, user_id,dispatch])
 
     if (!isLogged) {
         return <Navigate to={PATH.LOGIN_PAGE}/>
