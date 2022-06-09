@@ -31,6 +31,8 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
             return {...state, cardPacksTotalCount: action.CardPacksTotalCount}
         case "PACKS/CHANGE-SORT-CARDS":
             return {...state, sortPacks: action.sortPacks}
+        case "PACKS/SEARCH-PACKS":
+            return {...state, packName: action.packName}
         default:
             return state
     }
@@ -58,6 +60,9 @@ export const setUserIdPacksAC = (user_id: string) => {
 }
 export const changeSortCards = (sortPacks: string) => {
     return {type: 'PACKS/CHANGE-SORT-CARDS', sortPacks} as const
+}
+export const searchPackAC = (packName: string) => {
+    return {type: 'PACKS/SEARCH-PACKS', packName} as const
 }
 
 
@@ -98,5 +103,6 @@ export type PacksReducerActionType =
     | ReturnType<typeof updateCardPacksTotalCountAC>
     | ReturnType<typeof setUserIdPacksAC>
     | ReturnType<typeof changeSortCards>
+    | ReturnType<typeof searchPackAC>
 
 export type PacksStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
