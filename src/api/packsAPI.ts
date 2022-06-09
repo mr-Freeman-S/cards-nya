@@ -33,7 +33,7 @@ type PacksType = {
 export type CreatePackType = {
     name?: string
     deckCover?: string
-    private: boolean
+    private?: boolean
 }
 
 type UpdatePackType = {

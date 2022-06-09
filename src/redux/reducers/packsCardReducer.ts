@@ -71,7 +71,6 @@ export const createPackAC = (cardPacks: CreatePackType) => {
 }
 
 
-
 //Thunks
 export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
     dispatch(updatePacksStatusAC("loading"))
@@ -88,9 +87,9 @@ export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStat
         })
 }
 
-export const createCardPackTC = (name?:string, deckCover?: string): ThunkType => (dispatch) => {
+export const createCardPackTC = (name?: string, deckCover?: string): ThunkType => (dispatch) => {
     dispatch(updatePacksStatusAC("loading"))
-    packsAPI.createPack({name, deckCover, private:false})
+    packsAPI.createPack({name, deckCover, private: false})
         .then(res => {
             dispatch(createPackAC(res.data.newCardsPack))
             dispatch(getCardPackTC())
