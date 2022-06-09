@@ -56,7 +56,7 @@ export const changePacksPageCountAC = (pageCount: number) => {
 export const setUserIdPacksAC = (user_id: string) => {
     return {type: 'PACKS/SET-USER-ID-PACKS', user_id} as const
 }
-export const changeSortPackCards = (sortPacks: string) => {
+export const changeSortPackCardsAC = (sortPacks: string) => {
     return {type: 'PACKS/CHANGE-SORT-CARDS', sortPacks} as const
 }
 
@@ -97,6 +97,6 @@ export type PacksReducerActionType =
     | ReturnType<typeof changePacksPageCountAC>
     | ReturnType<typeof updateCardPacksTotalCountAC>
     | ReturnType<typeof setUserIdPacksAC>
-    | ReturnType<typeof changeSortPackCards>
+    | ReturnType<typeof changeSortPackCardsAC>
 
 export type PacksStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
