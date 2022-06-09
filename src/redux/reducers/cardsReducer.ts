@@ -28,6 +28,8 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Car
             return {...state, pageCount: action.pageCount}
         case "CARDS/CHANGE-SORT-CARDS":
             return {...state, sortCards: action.sortPacks}
+        case "CARDS/SET-ID-PACKS":
+            return {...state, cardsPack_id: action.id}
         default:
             return state
     }
@@ -50,6 +52,9 @@ export const changeCardsPageCountAC = (pageCount: number) => {
 export const changeSortCardsAC = (sortPacks: string) => {
     return {type: 'CARDS/CHANGE-SORT-CARDS', sortPacks} as const
 }
+export const setIdPacksAC = (id: string) => {
+    return {type: 'CARDS/SET-ID-PACKS', id} as const
+}
 
 
 //Thunks
@@ -58,7 +63,7 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
     const {cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount} = getState().cards
     cardsAPI.getCards({cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount})
         .then(res => {
-            dispatch(setCardsAC(res.data.cardPacks))
+            dispatch(setCardsAC(res.data.cards))
         })
         .catch(e => {
 
@@ -89,6 +94,7 @@ export type CardsReducerActionType =
     | ReturnType<typeof changeCardsPageAC>
     | ReturnType<typeof changeCardsPageCountAC>
     | ReturnType<typeof changeSortCardsAC>
+    | ReturnType<typeof setIdPacksAC>
 
 
 // export type CardsStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
