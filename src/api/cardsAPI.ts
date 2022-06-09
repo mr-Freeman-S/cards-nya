@@ -6,7 +6,7 @@ import {ResponseCardsType} from "../utils/types";
 //api
 export const cardsAPI = {
     getCards(params?: CardsType) {
-        return instanceHeroku.get<{ data: CardsType }, AxiosResponse<ResponseCardsType>>(`cards/card`)
+        return instanceHeroku.get<{ params: { data: CardsType }}, AxiosResponse<ResponseCardsType>>(`cards/card`)
     },
     createCard(card: CreateCardType) {
         return instanceHeroku.post<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
