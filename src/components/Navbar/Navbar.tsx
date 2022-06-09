@@ -37,6 +37,9 @@ const Navbar = () => {
             <span><NavLink to={PATH.TEST}>
                 Test super elements
             </NavLink></span>
+            <span><NavLink to={PATH.PACK_LIST}>
+                Pack List
+            </NavLink></span>
         </div>
     );
 };

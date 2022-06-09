@@ -13,7 +13,6 @@ function App() {
     const dispatch = useAppDispatch()
     const logoutButtonHandler = () => {
         dispatch(logout())
-
     }
     useEffect(() => {
         dispatch(authMe())
