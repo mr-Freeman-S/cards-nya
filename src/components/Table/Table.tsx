@@ -36,7 +36,6 @@ export function Tables() {
         dispatch(changeSortPackCardsAC(sortByUpdatePacks === '0updated' ? '1updated' : '0updated'))
     }
 
-
     return (
         <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
             <Table sx={{width: 850}} aria-label='simple table'>

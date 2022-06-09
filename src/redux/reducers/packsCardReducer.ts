@@ -29,7 +29,7 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
             return {...state, user_id: action.user_id}
         case "PACKS/UPDATE-CARD-PACKS-TOTAL-COUNT":
             return {...state, cardPacksTotalCount: action.CardPacksTotalCount}
-        case "PACKS/CHANGE-SORT-CARDS":
+        case "PACKS/CHANGE-SORT-PACKS-CARDS":
             return {...state, sortPacks: action.sortPacks}
         default:
             return state
@@ -41,7 +41,7 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
 export const setCardPacksAC = (cardPacks: CardPacksType[]) => {
     return {type: 'PACKS/SET-CARD-PACKS', cardPacks} as const
 }
-export const setPacksPageAC = (page: number) => {
+export const changePacksPageAC = (page: number) => {
     return {type: 'PACKS/CHANGE-PACKS-PAGE', page} as const
 }
 export const updatePacksStatusAC = (packsStatus: PacksStatusType) => {
@@ -57,7 +57,7 @@ export const setUserIdPacksAC = (user_id: string) => {
     return {type: 'PACKS/SET-USER-ID-PACKS', user_id} as const
 }
 export const changeSortPackCardsAC = (sortPacks: string) => {
-    return {type: 'PACKS/CHANGE-SORT-CARDS', sortPacks} as const
+    return {type: 'PACKS/CHANGE-SORT-PACKS-CARDS', sortPacks} as const
 }
 
 
@@ -92,7 +92,7 @@ export type CardPacksType = {
 
 export type PacksReducerActionType =
     ReturnType<typeof setCardPacksAC>
-    | ReturnType<typeof setPacksPageAC>
+    | ReturnType<typeof changePacksPageAC>
     | ReturnType<typeof updatePacksStatusAC>
     | ReturnType<typeof changePacksPageCountAC>
     | ReturnType<typeof updateCardPacksTotalCountAC>

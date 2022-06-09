@@ -23,6 +23,12 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Car
             return {...state, cardPacks: action.cards}
         case "CARDS/UPDATE-CARDS-TOTAL-COUNT":
             return {...state, cardsTotalCount: action.cardsTotalCount}
+        case "CARDS/CHANGE-CARDS-PAGE":
+            return {...state, page: action.page}
+        case "CARDS/CHANGE-CARDS-PAGE-COUNT":
+            return {...state, pageCount: action.pageCount}
+        case "CARDS/CHANGE-SORT-CARDS":
+            return {...state, sortCards: action.sortPacks}
         default:
             return state
     }
@@ -33,11 +39,17 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Car
 export const setCardsAC = (cards: CardsType[]) => {
     return {type: 'CARDS/SET-CARDS', cards} as const
 }
+export const changeCardsPageAC = (page: number) => {
+    return {type: 'CARDS/CHANGE-CARDS-PAGE', page} as const
+}
 export const updateCardsTotalCountAC = (cardsTotalCount: number) => {
     return {type: 'CARDS/UPDATE-CARDS-TOTAL-COUNT', cardsTotalCount} as const
 }
-export const setCardsPageAC = (page: number) => {
-    return {type: 'CARDS/CHANGE-CARDS-PAGE', page} as const
+export const changeCardsPageCountAC = (pageCount: number) => {
+    return {type: 'CARDS/CHANGE-CARDS-PAGE-COUNT', pageCount} as const
+}
+export const changeSortCardsAC = (sortPacks: string) => {
+    return {type: 'CARDS/CHANGE-SORT-CARDS', sortPacks} as const
 }
 
 
@@ -52,10 +64,9 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
         .catch(e => {
 
         })
-        .finally(()=> {
+        .finally(() => {
             dispatch(updatePacksStatusAC("idle"))
         })
-
 }
 
 //Types
@@ -76,6 +87,9 @@ export type CardsType = {
 export type CardsReducerActionType =
     ReturnType<typeof setCardsAC>
     | ReturnType<typeof updateCardsTotalCountAC>
+    | ReturnType<typeof changeCardsPageAC>
+    | ReturnType<typeof changeCardsPageCountAC>
+    | ReturnType<typeof changeSortCardsAC>
 
 
 // export type CardsStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
