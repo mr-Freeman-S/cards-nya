@@ -4,8 +4,8 @@ import {CreatePackType, packsAPI} from "../../api/packsAPI";
 const initialState = {
     cardPacks: [] as Array<CardPacksType>,
     packName: '',
-    min: 2,
-    max: 12,
+    min: 0,
+    max: 110,
     sortPacks: '0updated',
     page: 1,
     pageCount: 10,
