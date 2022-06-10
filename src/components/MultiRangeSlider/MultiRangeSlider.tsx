@@ -47,7 +47,8 @@ export const MultiRangeSlider = React.memo(({min, max,minVal,maxVal,setMinVal,se
             const maxPercent = getPercent(maxVal);
 
             if (range.current) {
-                range.current.style.width = `${maxPercent - minPercent}%`;
+                // тут нужно подправить стиль
+                range.current.style.width = '100%'
             }
         }
     }, [maxVal, getPercent]);
