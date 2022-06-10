@@ -8,8 +8,8 @@ import {PaginationCards} from "./pagination/Pagination";
 import {ButtonsShowCards} from "./buttonsShowCards/ButtonsShowCards";
 import {TablePacks} from "../../components/TablePacks/TablePacks";
 import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlider";
-import {SearchPack} from "../search/SearchPack";
-import {AddPack} from "../addPack/AddPack";
+import {SearchPack} from "../../components/Search/SearchPack";
+import {AddPack} from "../../components/AddPack/AddPack";
 
 export const PackListContainer = () => {
     const packs = useAppSelector(state => state.packsCard.cardPacks)
