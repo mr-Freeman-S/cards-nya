@@ -20,7 +20,7 @@ function App() {
     }, [dispatch])
     return (
         <div>
-            <Navbar/>
+            {/*<Navbar/>*/}
             <Header isAuth={isAuth}/>
             {!isInit ? <Loader/> : <PrivateRoute/>}
         </div>
