@@ -25,8 +25,6 @@ export function TablePacks({rows}: TablePropsType) {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
-
-
     const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
 
     const changeSortHandler = () => {
