@@ -4,29 +4,41 @@ import SuperCheckbox from "../../components/SuperCheckbox/SuperCheckbox";
 import SuperInputText from "../../components/SuperInputText/SuperInputText";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {setCheck} from "../../redux/reducers/testReducer";
-import {Tables} from "../../components/Table/Table";
+import {TablePacks} from "../../components/TablePacks/TablePacks";
+import {TableCards} from "../../components/TableCards/TableCards";
+import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlider";
 
 const Test = () => {
     const checked = useAppSelector(state => state.test.isChecked)
     const dispatch = useAppDispatch()
     const [name,setName] = useState<string>('')
+    const [{min,max},setMinMax] = useState<{min:number,max:number}>({min:0,max:0})
     const onClickAlert = () => {
         alert(`Hello ${name}. I am glad to see you my friend!`)
     }
+
     const onChangeChecked = () => {
       dispatch(setCheck(!checked))
     }
+
+    const onMouse = ()=> {
+        console.log(min, max)
+    }
+
+    const onChangeS = ({min,max}:{min:number,max:number}) => {
+        //setMinMax({min,max})
+    }
     return (
         <div style={{
-
-
         }}>
             <SuperInputText placeholder="Enter name" value={name} onChangeText={setName} />
             <SuperButton onClick={onClickAlert}>
                 CLICK
             </SuperButton>
             <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked} >Hello</SuperCheckbox>
-            <Tables />
+            {/*<TablePacks />*/}
+            {/*<TableCards />*/}
+
         </div>
     );
 };

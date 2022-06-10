@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {changePageCountAC, setPageAC} from "../../../redux/reducers/packsCardReducer";
+import {changePacksPageCountAC, changePacksPageAC} from "../../../redux/reducers/packsCardReducer";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {Pagination} from "@mui/material";
 
@@ -13,10 +13,10 @@ export const PaginationCards = () => {
     const dispatch = useAppDispatch()
 
     const changePageHandler = (event: ChangeEvent<unknown>, page: number) => {
-        dispatch(setPageAC(page))
+        dispatch(changePacksPageAC(page))
     }
     const changePageCountHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-        dispatch(changePageCountAC(+event.currentTarget.value))
+        dispatch(changePacksPageCountAC(+event.currentTarget.value))
     }
 
     return <div style={{

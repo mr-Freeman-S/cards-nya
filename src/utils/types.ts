@@ -1,4 +1,4 @@
-import {CardsType} from "../api/cardsAPI";
+import {CardsType} from "../redux/reducers/cardsReducer";
 
 export type CardPacksType = {
     _id: string
@@ -19,7 +19,7 @@ export type CardPacksType = {
 }
 
 export type ResponsePacksType = {
-    cardPacks: CardPacksType[]
+    cardPacks: CardsType[]
     page: number
     pageCount: number
     cardPacksTotalCount: number
@@ -42,7 +42,7 @@ export type CardType = {
 }
 
 export type ResponseCardsType = {
-    cardPacks: CardsType[]
+    cards: CardsType[]
     cardsTotalCount: number
     maxGrade: number
     minGrade: number

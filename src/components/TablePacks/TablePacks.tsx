@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -7,37 +7,36 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import {AiOutlineArrowUp} from 'react-icons/ai'
-import style from './Table.module.css'
-import {changeSortCardsTC} from "../../redux/reducers/cardsReducer";
+import style from './TablePacks.module.css'
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {getCardPackTC} from "../../redux/reducers/packsCardReducer";
-import {SearchPack} from "../../views/search/SearchPack";
-import {AddPack} from "../../views/addPack/AddPack";
+import {changeSortPackCardsAC} from "../../redux/reducers/packsCardReducer";
+import {useNavigate} from 'react-router-dom'
 
 
 const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
 
-type sortType = 'asc' | 'desc';
+export type sortType = 'asc' | 'desc';
+type TablePropsType = {
+    rows: any
+}
 
 
-export function Tables() {
-    // const [rows, setRows] = useState<any>([])
-    const rows = useAppSelector(state => state.packsCard.cardPacks)
+export function TablePacks({rows}: TablePropsType) {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
 
-    useEffect(() => {
-        // cardsAPI.getCards({}).then(res => {
-        //     setRows(res.data.cardPacks)
-        //})
-        dispatch(getCardPackTC())
-    }, []);
+
+    const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
 
     const changeSortHandler = () => {
         sortBy === 'asc' ? setSortBy('desc') : setSortBy('asc')
-        dispatch(changeSortCardsTC(sortBy))
+        dispatch(changeSortPackCardsAC(sortByUpdatePacks === '0updated' ? '1updated' : '0updated'))
     }
 
+    const clickHandler = (id: string) => {
+        navigate(`/cards/${id}`)
+    }
 
     return (
         <div>
@@ -50,8 +49,8 @@ export function Tables() {
                             {
                                 colums && colums.map((el, i) => {
                                     return (el === 'Last Updated' ?
-                                        <TableCell className={style.click} key={`${el}_${i}`}
-                                                   onClick={() => changeSortHandler()} align={"center"}>
+                                        <TableCell className={style.click} key={`${el}_${i}`} onClick={changeSortHandler}
+                                                   align={"center"}>
                                             {el}<AiOutlineArrowUp
                                             style={sortBy === 'asc' ? {transform: 'rotate(180deg)'} : {}}/>
                                         </TableCell> : <TableCell key={`${el}_${i}`} align={"center"}>{el}</TableCell>)
@@ -62,7 +61,7 @@ export function Tables() {
                     <TableBody>
                         {rows && rows.map((row: any) => (
                             <TableRow
-                                key={row.name}
+                                key={row._id}
                                 sx={{
                                     '&:last-child td, &:last-child th': {border: ''},
                                     '&:nth-of-type(2)': {backgroundColor: '#F8F7FD'}
@@ -74,7 +73,8 @@ export function Tables() {
                                 <TableCell align='center'>{row.cardsCount}</TableCell>
                                 <TableCell align='center'>{row.updated}</TableCell>
                                 <TableCell align='center'>{row.user_name}</TableCell>
-                                <TableCell align='center'>{111}</TableCell>
+                                <TableCell align='center'>{<button
+                                    onClick={() => clickHandler(row._id)}>Learn</button>}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -83,4 +83,5 @@ export function Tables() {
         </div>
     )
 }
+
 

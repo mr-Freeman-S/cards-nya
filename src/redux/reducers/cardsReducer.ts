@@ -1,55 +1,100 @@
-import {ThunkAction} from "redux-thunk";
-import {AppStateType} from "../store";
-import {AnyAction} from "redux";
-import {packsAPI} from "../../api/packsAPI";
-import {CardPacksType, ResponsePacksType} from "../../utils/types";
+import {AppStateType, ThunkType} from "../store";
+import {updatePacksStatusAC} from "./packsCardReducer";
+import {cardsAPI} from "../../api/cardsAPI";
 
-enum actions {
-    FETCH_CARDS = "FETCH_CARDS",
-    CHANGE_SORT_CARDS = "CHANGE_SORT_CARDS"
+const initialState = {
+    cardPacks: [] as Array<CardsType>,
+    cardAnswer: '',
+    cardQuestion: '',
+    cardsPack_id: '',
+    min: 0,
+    max: 0,
+    sortCards: '0updated',
+    page: 1,
+    pageCount: 10,
+    cardsTotalCount: 0,
 }
 
-const initialState: ResponsePacksType = {} as ResponsePacksType
-
-export const cardsReducer = (state = initialState, action: generalType): ResponsePacksType => {
+//Reducer
+export const cardsReducer = (state: InitialStateType = initialState, action: CardsReducerActionType): InitialStateType => {
     switch (action.type) {
-        case actions.FETCH_CARDS:
-        case actions.CHANGE_SORT_CARDS:
-            let copyState = {...state}
-            copyState.cardPacks = action.payload.cards
-            return copyState
+        case "CARDS/SET-CARDS":
+            return {...state, cardPacks: action.cards}
+        case "CARDS/UPDATE-CARDS-TOTAL-COUNT":
+            return {...state, cardsTotalCount: action.cardsTotalCount}
+        case "CARDS/CHANGE-CARDS-PAGE":
+            return {...state, page: action.page}
+        case "CARDS/CHANGE-CARDS-PAGE-COUNT":
+            return {...state, pageCount: action.pageCount}
+        case "CARDS/CHANGE-SORT-CARDS":
+            return {...state, sortCards: action.sortPacks}
+        case "CARDS/SET-ID-PACKS":
+            return {...state, cardsPack_id: action.id}
         default:
-            return state;
+            return state
     }
 }
 
 
-type generalType = fetchCards | changeSortCardsType
-
-
-type fetchCards = ReturnType<typeof fetchCards>
-export const fetchCards = (cards: CardPacksType[]) => ({
-    type: actions.FETCH_CARDS,
-    payload: {
-        cards
-    }
-} as const)
-
-type changeSortCardsType = ReturnType<typeof changeSortCards>
-export const changeSortCards = (cards: CardPacksType[]) => ({
-    type: actions.CHANGE_SORT_CARDS,
-    payload: {
-        cards
-    }
-} as const)
-
-
-// Thunks
-
-export const fetchCardsTC = (): ThunkAction<void, AppStateType, unknown, AnyAction> => (dispatch) => {
-    // packsAPI.getPacks().then(res => dispatch(fetchCards(res.data.cardPacks)))
+//AC
+export const setCardsAC = (cards: CardsType[]) => {
+    return {type: 'CARDS/SET-CARDS', cards} as const
+}
+export const changeCardsPageAC = (page: number) => {
+    return {type: 'CARDS/CHANGE-CARDS-PAGE', page} as const
+}
+export const updateCardsTotalCountAC = (cardsTotalCount: number) => {
+    return {type: 'CARDS/UPDATE-CARDS-TOTAL-COUNT', cardsTotalCount} as const
+}
+export const changeCardsPageCountAC = (pageCount: number) => {
+    return {type: 'CARDS/CHANGE-CARDS-PAGE-COUNT', pageCount} as const
+}
+export const changeSortCardsAC = (sortPacks: string) => {
+    return {type: 'CARDS/CHANGE-SORT-CARDS', sortPacks} as const
+}
+export const setIdPacksAC = (id: string) => {
+    return {type: 'CARDS/SET-ID-PACKS', id} as const
 }
 
-export const changeSortCardsTC = (sortBy: 'desc' | 'asc'): ThunkAction<void, AppStateType, unknown, AnyAction> => (dispatch) => {
-    packsAPI.getPacks({sortPacks: sortBy === 'desc' ? 'sortPacks=1updated' : 'sortPacks=0updated'}).then(res => dispatch(changeSortCards(res.data.cardPacks)))
+
+//Thunks
+export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
+    dispatch(updatePacksStatusAC("loading"))
+    const {cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount} = getState().cards
+    cardsAPI.getCards({cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount})
+        .then(res => {
+            dispatch(setCardsAC(res.data.cards))
+        })
+        .catch(e => {
+
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
+        })
 }
+
+//Types
+type InitialStateType = typeof initialState
+
+export type CardsType = {
+    answer: string
+    question: string
+    cardsPack_id: string
+    grade: number
+    shots: number
+    user_id: string
+    created: string
+    updated: string
+    _id: string
+}
+
+export type CardsReducerActionType =
+    ReturnType<typeof setCardsAC>
+    | ReturnType<typeof updateCardsTotalCountAC>
+    | ReturnType<typeof changeCardsPageAC>
+    | ReturnType<typeof changeCardsPageCountAC>
+    | ReturnType<typeof changeSortCardsAC>
+    | ReturnType<typeof setIdPacksAC>
+
+
+// export type CardsStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
