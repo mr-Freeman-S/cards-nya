@@ -49,7 +49,7 @@ export const PackListContainer = () => {
         }}>
             <div style={{
                 display: 'flex',
-                alignItems: 'space-between'
+                justifyContent: 'space-between'
             }}>
                 <SearchPack/>
                 <AddPack/>
