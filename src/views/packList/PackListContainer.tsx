@@ -10,6 +10,7 @@ import {TablePacks} from "../../components/TablePacks/TablePacks";
 import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlider";
 import {SearchPack} from "../../components/Search/SearchPack";
 import {AddPack} from "../../components/AddPack/AddPack";
+import {ClearSearch} from "../../components/ClearSearch/ClearSearch";
 
 export const PackListContainer = () => {
     const packs = useAppSelector(state => state.packsCard.cardPacks)
@@ -52,6 +53,7 @@ export const PackListContainer = () => {
                 justifyContent: 'space-between'
             }}>
                 <SearchPack/>
+                <ClearSearch/>
                 <AddPack/>
             </div>
             <div style={{
