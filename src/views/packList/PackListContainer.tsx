@@ -8,6 +8,8 @@ import {PaginationCards} from "./pagination/Pagination";
 import {ButtonsShowCards} from "./buttonsShowCards/ButtonsShowCards";
 import {TablePacks} from "../../components/TablePacks/TablePacks";
 import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlider";
+import {SearchPack} from "../search/SearchPack";
+import {AddPack} from "../addPack/AddPack";
 
 export const PackListContainer = () => {
     const packs = useAppSelector(state => state.packsCard.cardPacks)
@@ -15,7 +17,7 @@ export const PackListContainer = () => {
     const pageCount = useAppSelector(state => state.packsCard.pageCount)
     const packsStatus = useAppSelector(state => state.packsCard.packsStatus)
     const user_id = useAppSelector(state => state.packsCard.user_id)
-    const {min, max} =useAppSelector(state => state.packsCard)
+    const {min, max} = useAppSelector(state => state.packsCard)
     const {minCardsCount, maxCardsCount} = useAppSelector(state => state.packsCard)
     const isLogged = useAppSelector(state => state.login.isLogged)
 
@@ -23,13 +25,13 @@ export const PackListContainer = () => {
     const [maxVal, setMaxVal] = useState(110)
 
     const onMouseUpHandler = () => {
-        dispatch(setMinMaxSearchCardAC(minVal,maxVal))
+        dispatch(setMinMaxSearchCardAC(minVal, maxVal))
     }
     const dispatch = useAppDispatch()
 
     useEffect(() => {
         dispatch(getCardPackTC())
-    }, [dispatch, page, pageCount, user_id,min,max])
+    }, [dispatch, page, pageCount, user_id, min, max])
 
     if (!isLogged) {
         return <Navigate to={PATH.LOGIN_PAGE}/>
@@ -45,9 +47,13 @@ export const PackListContainer = () => {
             border: '1px solid',
             minHeight: '100%'
         }}>
-
-
-
+            <div style={{
+                display: 'flex',
+                alignItems: 'space-between'
+            }}>
+                <SearchPack/>
+                <AddPack/>
+            </div>
             <div style={{
                 minHeight: '250px',
                 display: 'flex',
