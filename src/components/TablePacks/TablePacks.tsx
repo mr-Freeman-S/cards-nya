@@ -11,6 +11,8 @@ import style from './TablePacks.module.css'
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {changeSortPackCardsAC} from "../../redux/reducers/packsCardReducer";
 import {useNavigate} from 'react-router-dom'
+import {SearchPack} from '../../views/search/SearchPack'
+import {AddPack} from "../../views/addPack/AddPack";
 
 
 const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
@@ -40,8 +42,10 @@ export function TablePacks({rows}: TablePropsType) {
 
     return (
         <div>
-            <SearchPack/>
-            <AddPack/>
+            <div className={style.headerBlock}>
+                <SearchPack/>
+                <AddPack/>
+            </div>
             <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
                 <Table sx={{width: 850}} aria-label='simple table'>
                     <TableHead>

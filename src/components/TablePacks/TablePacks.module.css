@@ -6,3 +6,8 @@
 .click:active {
     transform: translate(0px, 1.2px);
 }
+
+.headerBlock {
+    display: flex;
+    justify-content: space-between;
+}
