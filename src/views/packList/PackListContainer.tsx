@@ -11,7 +11,6 @@ import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlid
 import {SearchPack} from "../../components/Search/SearchPack";
 import {AddPack} from "../../components/AddPack/AddPack";
 import style from './PackListContainer.module.css'
-import {ClearSearch} from "../../components/ClearSearch/ClearSearch";
 
 export const PackListContainer = () => {
     const packs = useAppSelector(state => state.packsCard.cardPacks)
@@ -42,12 +41,13 @@ export const PackListContainer = () => {
     return (
         <div className={style.parentEl}>
             <div>
-                {packsStatus !== 'loading' ? <div className={style.search}><SearchPack/> <ClearSearch/> <AddPack/></div> : <Preloader />}
+                {packsStatus !== 'loading' ? <div className={style.search}><SearchPack/> <AddPack/></div> :
+                    <Preloader/>}
             </div>
             <div className={style.tablePacks}>
                 {/*{packsStatus === 'loading' && <Preloader/>}*/}
                 {/*{packsStatus !== 'loading' && (<TablePacks rows={packs}/>)}*/}
-                <TablePacks rows={packs} />
+                <TablePacks rows={packs}/>
             </div>
             <MultiRangeSlider
                 min={minCardsCount}
