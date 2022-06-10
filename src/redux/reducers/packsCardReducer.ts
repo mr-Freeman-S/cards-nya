@@ -135,10 +135,8 @@ export type PacksReducerActionType =
     | ReturnType<typeof changePacksPageCountAC>
     | ReturnType<typeof updateCardPacksTotalCountAC>
     | ReturnType<typeof setUserIdPacksAC>
-    | ReturnType<typeof changeSortCards>
     | ReturnType<typeof searchPackAC>
     | ReturnType<typeof createPackAC>
-
     | ReturnType<typeof changeSortPackCardsAC>
     | ReturnType<typeof fetchMinMaxCardCountAC>
     | ReturnType<typeof setMinMaxSearchCardAC>
