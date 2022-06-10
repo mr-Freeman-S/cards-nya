@@ -1,0 +1,27 @@
+.parentEl {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 1000px;
+    align-items: center;
+    margin: 0 auto;
+    border: 1px solid;
+    min-height: 100%;
+    margin-top: 20px;
+}
+
+.search {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tablePacks {
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    flex: 1 1 auto;
+}

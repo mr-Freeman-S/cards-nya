@@ -10,7 +10,7 @@ import {TablePacks} from "../../components/TablePacks/TablePacks";
 import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlider";
 import {SearchPack} from "../../components/Search/SearchPack";
 import {AddPack} from "../../components/AddPack/AddPack";
-import {ClearSearch} from "../../components/ClearSearch/ClearSearch";
+import style from './PackListContainer.module.css'
 
 export const PackListContainer = () => {
     const packs = useAppSelector(state => state.packsCard.cardPacks)
@@ -39,32 +39,12 @@ export const PackListContainer = () => {
         return <Navigate to={PATH.LOGIN_PAGE}/>
     }
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            maxWidth: '1000px',
-            alignItems: 'center',
-            margin: '0 auto',
-            border: '1px solid',
-            minHeight: '100%',
-            marginTop: '20px'
-        }}>
+        <div className={style.parentEl}>
             <div>
-                {packsStatus !== 'loading' ? <div style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                }}><SearchPack/> <ClearSearch/> <AddPack/></div> : <Preloader />}
+                {packsStatus !== 'loading' ? <div className={style.search}><SearchPack/> <AddPack/></div> : <Preloader />}
             </div>
-            <div style={{
-                minHeight: '250px',
-                display: 'flex',
-                alignItems: 'center',
-                marginTop: '20px'
-            }}>
-
+            <div className={style.tablePacks}>
                 {/*{packsStatus === 'loading' && <Preloader/>}*/}
-
                 {/*{packsStatus !== 'loading' && (<TablePacks rows={packs}/>)}*/}
                 <TablePacks rows={packs} />
             </div>
@@ -78,8 +58,7 @@ export const PackListContainer = () => {
                 onMouseUp={onMouseUpHandler}
             />
             <ButtonsShowCards/>
-            <div style={{flex: '1 1 auto'}}>
-
+            <div className={style.pagination}>
                 <PaginationCards/>
             </div>
         </div>
