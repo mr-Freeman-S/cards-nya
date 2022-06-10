@@ -15,6 +15,7 @@ import {Rating} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
 import style from './TableCards.module.css'
+import {AddCard} from "../AddCard/AddCard";
 
 
 const colums = ['Question', 'Answer', 'Last Update', 'Grade']
@@ -52,6 +53,7 @@ export const TableCards = () => {
         <div>
             <div className={style.back}>
                 <button onClick={() => navigate(PATH.PACK_LIST)}>Back</button>
+                <AddCard/>
             </div>
             <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
                 <Table sx={{width: 850}} aria-label='simple table'>

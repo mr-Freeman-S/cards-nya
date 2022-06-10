@@ -73,6 +73,22 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
         })
 }
 
+export const createCardTC = ( newTitleQuestion: string, newTitleAnswer: string): ThunkType => (
+    dispatch, getState: () => AppStateType) => {
+    dispatch(updatePacksStatusAC("loading"))
+    let cardsPack_id = getState().cards.cardsPack_id
+    cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 3})
+        .then(res => {
+            dispatch(getCardsTC())
+        })
+        .catch(e => {
+
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
+        })
+}
+
 //Types
 type InitialStateType = typeof initialState
 
