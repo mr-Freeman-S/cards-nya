@@ -19,10 +19,11 @@ export const PackListContainer = () => {
     const user_id = useAppSelector(state => state.packsCard.user_id)
     const {min, max} = useAppSelector(state => state.packsCard)
     const {minCardsCount, maxCardsCount} = useAppSelector(state => state.packsCard)
+    const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
     const isLogged = useAppSelector(state => state.login.isLogged)
 
-    const [minVal, setMinVal] = useState(minCardsCount)
-    const [maxVal, setMaxVal] = useState(110)
+    const [minVal, setMinVal] = useState(min)
+    const [maxVal, setMaxVal] = useState(max)
 
     const onMouseUpHandler = () => {
         dispatch(setMinMaxSearchCardAC(minVal, maxVal))
@@ -31,7 +32,7 @@ export const PackListContainer = () => {
 
     useEffect(() => {
         dispatch(getCardPackTC())
-    }, [dispatch, page, pageCount, user_id, min, max])
+    }, [dispatch, page, pageCount, user_id, min, max, sortByUpdatePacks])
 
     if (!isLogged) {
         return <Navigate to={PATH.LOGIN_PAGE}/>
@@ -45,24 +46,26 @@ export const PackListContainer = () => {
             alignItems: 'center',
             margin: '0 auto',
             border: '1px solid',
-            minHeight: '100%'
+            minHeight: '100%',
+            marginTop: '20px'
         }}>
-            <div style={{
-                display: 'flex',
-                justifyContent: 'space-between'
-            }}>
-                <SearchPack/>
-                <AddPack/>
+            <div>
+                {packsStatus !== 'loading' ? <div style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                }}><SearchPack/> <AddPack/></div> : <Preloader />}
             </div>
             <div style={{
                 minHeight: '250px',
                 display: 'flex',
                 alignItems: 'center',
+                marginTop: '20px'
             }}>
 
-                {packsStatus === 'loading' && <Preloader/>}
+                {/*{packsStatus === 'loading' && <Preloader/>}*/}
 
-                {packsStatus !== 'loading' && (<TablePacks rows={packs}/>)}
+                {/*{packsStatus !== 'loading' && (<TablePacks rows={packs}/>)}*/}
+                <TablePacks rows={packs} />
             </div>
             <MultiRangeSlider
                 min={minCardsCount}
