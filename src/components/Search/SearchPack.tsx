@@ -4,36 +4,27 @@ import {useAppDispatch} from "../../redux/store";
 import {getCardPackTC, searchPackAC} from "../../redux/reducers/packsCardReducer";
 
 
-/*type SearchPropsType = {
-    placeholderTitle: string
-    value: string
-}*/
-
-export const SearchPack = (/*props: SearchPropsType*/) => {
+export const SearchPack = () => {
 
     const dispatch = useAppDispatch()
 
     const [packName, setPackName] = useState<string>("")
 
-    const searchPacksHandler = () => {
-        dispatch(searchPackAC(packName))
+    const searchPacksHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(searchPackAC(e.target.value))
         dispatch(getCardPackTC())
-        setPackName("")
-    }
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setPackName(e.target.value)
+        setPackName(packName)
     }
 
     return (
         <div>
             <DebounceInput
-                debounceTimeout={1000}
+                minLength={2}
+                debounceTimeout={2000}
                 placeholder={"Search Pack"}
                 value={packName}
-                onChange={onChangeHandler}
+                onChange={searchPacksHandler}
             />
-            <button onClick={searchPacksHandler}>Search</button>
         </div>
     )
 }
