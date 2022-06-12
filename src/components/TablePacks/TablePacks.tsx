@@ -94,11 +94,11 @@ export function TablePacks({rows}: TablePropsType) {
                                     isActive={activeDeleteModal}
                                     setActive={setActiveDeleteModal}
                                     children={
-                                        <div style={{marginTop: 130}}>
+                                        <div style={{marginTop: 40}}>
                                             <div>
                                                 {`Are you really want to delete "${row.name}" ?`}
                                             </div>
-                                            <div style={{marginTop: 40}}>
+                                            <div style={{marginBottom: 40, marginTop: 40}}>
                                                 <button onClick={() => onClickYesDeleteHandler(row._id)}>Yes</button>
                                                 <button style={{marginLeft: 40}} onClick={onClickNoDeleteHandler}>No</button>
                                             </div>
