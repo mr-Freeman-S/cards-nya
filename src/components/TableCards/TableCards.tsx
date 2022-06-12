@@ -59,7 +59,7 @@ export const TableCards = () => {
                         <button onClick={() => navigate(PATH.PACK_LIST)}>Back</button>
                         <AddCard/>
                     </div>
-                    : <Preloader/>}
+                    : <Preloader isActive={packsStatus === 'loading'} />}
             </div>
             <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
                 <Table sx={{width: 850}} aria-label='simple table'>
