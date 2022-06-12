@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -11,6 +11,7 @@ import style from './TablePacks.module.css'
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {changeSortPackCardsAC} from "../../redux/reducers/packsCardReducer";
 import {useNavigate} from 'react-router-dom'
+import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 
 
 const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
@@ -25,15 +26,25 @@ export function TablePacks({rows}: TablePropsType) {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
+    const [activeDeleteModal, setActiveDeleteModal] = useState<boolean>(false)
+    const [activeUpdateModal, setActiveUpdateModal] = useState<boolean>(false)
     const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
+    const myId = useAppSelector<string>(state => state.auth._id)
+
 
     const changeSortHandler = () => {
         sortBy === 'asc' ? setSortBy('desc') : setSortBy('asc')
         dispatch(changeSortPackCardsAC(sortByUpdatePacks === '0updated' ? '1updated' : '0updated'))
     }
 
-    const clickHandler = (id: string) => {
+    const onClickLearnHandler = (id: string) => {
         navigate(`/cards/${id}`)
+    }
+    const onClickUpdateHandler = () => {
+
+    }
+    const onClickDeleteHandler = () => {
+
     }
 
     return (
@@ -68,13 +79,21 @@ export function TablePacks({rows}: TablePropsType) {
                             <TableCell align='center'>{row.cardsCount}</TableCell>
                             <TableCell align='center'>{row.updated}</TableCell>
                             <TableCell align='center'>{row.user_name}</TableCell>
-                            <TableCell align='center'>{<button
-                                onClick={() => clickHandler(row._id)}>Learn</button>}</TableCell>
+                            <TableCell align='center'>
+                                {myId === row.user_id &&
+                                    <button onClick={() => setActiveUpdateModal(!activeUpdateModal)}>Edit</button>}
+                                {myId === row.user_id &&
+                                    <button onClick={() => setActiveDeleteModal(!activeDeleteModal)}>Delete</button>}
+                                <button onClick={() => onClickLearnHandler(row._id)}>Learn</button>
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
+            <UniverseModalWindow isActive={activeUpdateModal} setActive={setActiveUpdateModal}/>
+            <UniverseModalWindow isActive={activeDeleteModal} setActive={setActiveDeleteModal}/>
         </TableContainer>
+
     )
 }
 
