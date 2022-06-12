@@ -5,7 +5,7 @@ const initialState = {
     cardPacks: [] as Array<CardPacksType>,
     packName: '',
     min: 0,
-    max: 110,
+    max: 0,
     sortPacks: '0updated',
     page: 1,
     pageCount: 10,
