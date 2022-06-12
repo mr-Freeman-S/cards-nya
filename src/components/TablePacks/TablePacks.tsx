@@ -114,7 +114,7 @@ export function TablePacks({rows}: TablePropsType) {
                                                onChange={(e) => setValue(e.currentTarget.value)}/>
                                         <div style={{marginBottom: 40, marginTop: 40}}>
                                             <button onClick={() => onClickYesUpdateHandler(value)}>Save</button>
-                                            <button style={{marginLeft: 40}} onClick={onClickNoUpdateHandler}>No
+                                            <button style={{marginLeft: 40}} onClick={onClickNoUpdateHandler}>Cancel
                                             </button>
                                         </div>
                                     </div>
