@@ -43,7 +43,7 @@ export const PackListContainer = () => {
         <div className={style.parentEl}>
             <div>
                 {packsStatus !== 'loading' ? <div className={style.search}><SearchPack/> <AddPack/></div> :
-                    <Preloader/>}
+                    <Preloader isActive={packsStatus === 'loading'}/>}
             </div>
             <div className={style.tablePacks}>
                 {/*{packsStatus === 'loading' && <Preloader/>}*/}
