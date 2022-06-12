@@ -82,7 +82,6 @@ export const createPackAC = (cardPacks: CreatePackType) => {
     return {type: "PACKS/CREATE-PACK", cardPacks} as const
 }
 
-
 //Thunks
 export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
     dispatch(updatePacksStatusAC("loading"))
@@ -105,6 +104,19 @@ export const createCardPackTC = (name?: string, deckCover?: string): ThunkType =
     packsAPI.createPack({name, deckCover, private: false})
         .then(res => {
             dispatch(createPackAC(res.data.newCardsPack))
+            dispatch(getCardPackTC())
+        })
+        .catch(e => {
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
+        })
+}
+
+export const deleteCardPackTC = (id: string): ThunkType => (dispatch) => {
+    dispatch(updatePacksStatusAC("loading"))
+    packsAPI.deletePack(id)
+        .then(() => {
             dispatch(getCardPackTC())
         })
         .catch(e => {
@@ -140,6 +152,5 @@ export type PacksReducerActionType =
     | ReturnType<typeof changeSortPackCardsAC>
     | ReturnType<typeof fetchMinMaxCardCountAC>
     | ReturnType<typeof setMinMaxSearchCardAC>
-
 
 export type PacksStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
