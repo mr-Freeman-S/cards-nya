@@ -14,7 +14,7 @@ export const packsAPI = {
         return instanceHeroku.put<{ cardsPack: UpdatePackType }, AxiosResponse<ResponseType>>("cards/pack", {cardsPack})
     },
     deletePack(_id: string) {
-        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseDeletePackType>>(`cards/pack/?id=${_id}`)
+        return instanceHeroku.delete<{ _id: string }, AxiosResponse<ResponseDeletePackType>>(`cards/pack/?id=${_id}`)
     }
 }
 
