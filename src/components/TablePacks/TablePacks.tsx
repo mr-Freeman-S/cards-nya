@@ -12,7 +12,6 @@ import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {CardPacksType, changeSortPackCardsAC, deleteCardPackTC} from "../../redux/reducers/packsCardReducer";
 import {useNavigate} from 'react-router-dom'
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
-import {UpdateModal} from '../Modals/UpdateModal'
 
 
 const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
@@ -29,6 +28,7 @@ export function TablePacks({rows}: TablePropsType) {
     const [sortBy, setSortBy] = useState<sortType>('desc')
     const [activeDeleteModal, setActiveDeleteModal] = useState<boolean>(false)
     const [activeUpdateModal, setActiveUpdateModal] = useState<boolean>(false)
+    const [value, setValue] = useState<string>("")
     const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
     const myId = useAppSelector<string>(state => state.auth._id)
 
@@ -43,15 +43,29 @@ export function TablePacks({rows}: TablePropsType) {
     }
 
     const onClickDeleteHandler = () => {
-        setActiveDeleteModal(!activeDeleteModal)
+        setActiveDeleteModal(true)
+    }
+    const onClickUpdateHandler = () => {
+        setActiveUpdateModal(true)
     }
 
     const onClickNoDeleteHandler = () => {
         setActiveDeleteModal(false)
     }
+
     const onClickYesDeleteHandler = (id: string) => {
         dispatch(deleteCardPackTC(id))
         setActiveDeleteModal(false)
+    }
+
+    const onClickNoUpdateHandler = () => {
+        setActiveUpdateModal(false)
+    }
+    const onClickYesUpdateHandler = (name: string) => {
+        /*dispatch(updateCardPackTC(name))*/
+        console.log(name)
+        setActiveUpdateModal(false)
+        setValue("")
     }
 
 
@@ -87,34 +101,47 @@ export function TablePacks({rows}: TablePropsType) {
                             <TableCell align='center'>{row.user_name}</TableCell>
                             <TableCell align='center'>
                                 {myId === row.user_id &&
-                                    <button onClick={() => setActiveUpdateModal(!activeUpdateModal)}>Edit</button>}
+                                    <button onClick={onClickUpdateHandler}>Edit</button>}
+                                <UniverseModalWindow
+                                    isActive={activeUpdateModal}
+                                    setActive={setActiveUpdateModal}
+                                >
+                                    <div style={{marginTop: 40}}>
+                                        <div>
+                                            {`Enter new Name`}
+                                        </div>
+                                        <input style={{marginTop: 40}} value={value}
+                                               onChange={(e) => setValue(e.currentTarget.value)}/>
+                                        <div style={{marginBottom: 40, marginTop: 40}}>
+                                            <button onClick={() => onClickYesUpdateHandler(value)}>Save</button>
+                                            <button style={{marginLeft: 40}} onClick={onClickNoUpdateHandler}>No
+                                            </button>
+                                        </div>
+                                    </div>
+                                </UniverseModalWindow>
                                 {myId === row.user_id &&
                                     <button onClick={onClickDeleteHandler}>Delete</button>}
                                 <UniverseModalWindow
                                     isActive={activeDeleteModal}
                                     setActive={setActiveDeleteModal}
-                                    children={
-                                        <div style={{marginTop: 40}}>
-                                            <div>
-                                                {`Are you really want to delete "${row.name}" ?`}
-                                            </div>
-                                            <div style={{marginBottom: 40, marginTop: 40}}>
-                                                <button onClick={() => onClickYesDeleteHandler(row._id)}>Yes</button>
-                                                <button style={{marginLeft: 40}} onClick={onClickNoDeleteHandler}>No</button>
-                                            </div>
-                                        </div>}
-                                />
+                                >
+                                    <div style={{marginTop: 40}}>
+                                        <div>
+                                            {`Are you really want to delete "${row.name}" ?`}
+                                        </div>
+                                        <div style={{marginBottom: 40, marginTop: 40}}>
+                                            <button onClick={() => onClickYesDeleteHandler(row._id)}>Yes</button>
+                                            <button style={{marginLeft: 40}} onClick={onClickNoDeleteHandler}>No
+                                            </button>
+                                        </div>
+                                    </div>
+                                </UniverseModalWindow>
                                 <button onClick={() => onClickLearnHandler(row._id)}>Learn</button>
                             </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
-            <UniverseModalWindow
-                isActive={activeUpdateModal}
-                setActive={setActiveUpdateModal}
-                children={<UpdateModal/>}
-            />
         </TableContainer>
     )
 }
