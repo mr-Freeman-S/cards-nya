@@ -13,9 +13,8 @@ export const packsAPI = {
     updatePack(cardsPack: UpdatePackType) {
         return instanceHeroku.put<{ cardsPack: UpdatePackType }, AxiosResponse<ResponseType>>("cards/pack", {cardsPack})
     },
-    deletePack(id: string) {
-        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/pack/${id}`) //не уверен, что будет именно так,
-        // надо будет еще перепроверить правильный ли путь
+    deletePack(_id: string) {
+        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseDeletePackType>>(`cards/pack/?id=${_id}`)
     }
 }
 
@@ -73,6 +72,12 @@ type ResponsePacksType = {
 
 type ResponseCreatePackType = {
     newCardsPack: CardPacksType
+    token: string
+    tokenDeathTime: number
+}
+
+type ResponseDeletePackType = {
+    deletedCardsPack: CardPacksType
     token: string
     tokenDeathTime: number
 }
