@@ -70,7 +70,7 @@ export function TablePacks({rows}: TablePropsType) {
                             key={row._id}
                             sx={{
                                 '&:last-child td, &:last-child th': {border: ''},
-                                '&:nth-of-type(2)': {backgroundColor: '#F8F7FD'}
+                                '&:nth-of-type(1)': {backgroundColor: '#F8F7FD'}
                             }}
                         >
                             <TableCell align={"center"} component='th' scope='row'>
