@@ -8,6 +8,7 @@ import {TablePacks} from "../../components/TablePacks/TablePacks";
 import {TableCards} from "../../components/TableCards/TableCards";
 import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlider";
 import {UniverseModalWindow} from "../../components/UniverseModal/UniverseModalWindow";
+import {Loader} from "../../components/Loader/Loader";
 
 const Test = () => {
     const checked = useAppSelector(state => state.test.isChecked)
@@ -40,7 +41,7 @@ const Test = () => {
             <SuperCheckbox checked={checked} onChangeChecked={onChangeChecked} >Hello</SuperCheckbox>
             {/*<TablePacks />*/}
             {/*<TableCards />*/}
-            <UniverseModalWindow isActive={activeModal} setActive={setActiveModal}/>
+            <UniverseModalWindow isActive={activeModal} setActive={setActiveModal}><Loader/></UniverseModalWindow>
         </div>
     );
 };

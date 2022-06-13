@@ -5,7 +5,7 @@ const initialState = {
     cardPacks: [] as Array<CardPacksType>,
     packName: '',
     min: 0,
-    max: 110,
+    max: 0,
     sortPacks: '0updated',
     page: 1,
     pageCount: 10,
@@ -41,6 +41,8 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
             return {...state, minCardsCount: action.minCardsCount, maxCardsCount: action.maxCardsCount}
         case 'PACKS/SET-MINMAX-SEARCH-CARDS':
             return {...state, min: action.min, max: action.max}
+        case "PACKS/EDIT-PACK-NAME":
+            return {...state, packName: action.packName}
         default:
             return state
     }
@@ -81,7 +83,9 @@ export const searchPackAC = (packName: string) => {
 export const createPackAC = (cardPacks: CreatePackType) => {
     return {type: "PACKS/CREATE-PACK", cardPacks} as const
 }
-
+export const editPackNameAC = (packName: string) => {
+    return {type: 'PACKS/EDIT-PACK-NAME', packName} as const
+}
 
 //Thunks
 export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
@@ -105,6 +109,33 @@ export const createCardPackTC = (name?: string, deckCover?: string): ThunkType =
     packsAPI.createPack({name, deckCover, private: false})
         .then(res => {
             dispatch(createPackAC(res.data.newCardsPack))
+            dispatch(getCardPackTC())
+        })
+        .catch(e => {
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
+        })
+}
+
+export const deleteCardPackTC = (_id: string): ThunkType => (dispatch) => {
+    dispatch(updatePacksStatusAC("loading"))
+    packsAPI.deletePack(_id)
+        .then(() => {
+            dispatch(getCardPackTC())
+        })
+        .catch(e => {
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
+        })
+}
+
+export const updateCardPackTC = (_id: string, name: string): ThunkType => (dispatch) => {
+    dispatch(updatePacksStatusAC("loading"))
+    packsAPI.updatePack({_id,name})
+        .then((res) => {
+            dispatch(editPackNameAC(res.data.updatedCardsPack.name))
             dispatch(getCardPackTC())
         })
         .catch(e => {
@@ -140,6 +171,6 @@ export type PacksReducerActionType =
     | ReturnType<typeof changeSortPackCardsAC>
     | ReturnType<typeof fetchMinMaxCardCountAC>
     | ReturnType<typeof setMinMaxSearchCardAC>
-
+    | ReturnType<typeof editPackNameAC>
 
 export type PacksStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

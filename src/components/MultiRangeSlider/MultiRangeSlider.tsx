@@ -14,8 +14,7 @@ type MultiRangeSliderType = DefaultInputPropsType & {
 
 }
 
-export const MultiRangeSlider = React.memo(({min, max,minVal,maxVal,setMinVal,setMaxVal, /*onChangeSlider*/ ...restProps}: MultiRangeSliderType) => {
-
+export const MultiRangeSlider = (({min, max,minVal,maxVal,setMinVal,setMaxVal, /*onChangeSlider*/ ...restProps}: MultiRangeSliderType) => {
 
     const minValRef = useRef<HTMLInputElement>(null)
     const maxValRef = useRef<HTMLInputElement>(null)
@@ -48,15 +47,18 @@ export const MultiRangeSlider = React.memo(({min, max,minVal,maxVal,setMinVal,se
 
             if (range.current) {
                 // тут нужно подправить стиль
-                range.current.style.width = '100%'
+
+                range.current.style.width = `${maxPercent - minPercent}%`
             }
         }
     }, [maxVal, getPercent]);
 
     // Get min and max values when their state changes
     useEffect(() => {
+        setMinVal(minVal)
+        setMaxVal(maxVal)
         //onChangeSlider({min: minVal, max: maxVal});
-    }, [minVal, maxVal, /*onChangeSlider*/]);
+    }, [minVal, maxVal,setMinVal, setMaxVal/*onChangeSlider*/]);
 
 
     const minOnchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -71,9 +73,12 @@ export const MultiRangeSlider = React.memo(({min, max,minVal,maxVal,setMinVal,se
     }
     // Get min and max values when their state changes
     useEffect(() => {
+        setMinVal(min)
+        setMaxVal(max)
        // onChangeSlider({min: minVal, max: maxVal});
-    }, [minVal, maxVal, /*onChangeSlider*/]);
+    }, [min, max,setMinVal,setMaxVal /*onChangeSlider*/]);
 
+    console.log(min,max)
     return (
         <div className={style.container}>
             <input

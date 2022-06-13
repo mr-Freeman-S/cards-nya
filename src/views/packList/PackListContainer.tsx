@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {getCardPackTC, setMinMaxSearchCardAC} from "../../redux/reducers/packsCardReducer";
 import {Preloader} from "../../components/Preloader/Preloader";
@@ -22,14 +22,15 @@ export const PackListContainer = () => {
     const {minCardsCount, maxCardsCount} = useAppSelector(state => state.packsCard)
     const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
     const isLogged = useAppSelector(state => state.login.isLogged)
-
-    const [minVal, setMinVal] = useState(min)
-    const [maxVal, setMaxVal] = useState(max)
-
-    const onMouseUpHandler = () => {
-        dispatch(setMinMaxSearchCardAC(minVal, maxVal))
-    }
     const dispatch = useAppDispatch()
+
+    const [minVal, setMinVal] = useState(minCardsCount)
+    const [maxVal, setMaxVal] = useState(maxCardsCount)
+
+    const onMouseUpHandler = useCallback(() => {
+        dispatch(setMinMaxSearchCardAC(minVal, maxVal))
+    },[minVal,maxVal])
+
 
     useEffect(() => {
         dispatch(getCardPackTC())
@@ -42,7 +43,7 @@ export const PackListContainer = () => {
         <div className={style.parentEl}>
             <div>
                 {packsStatus !== 'loading' ? <div className={style.search}><SearchPack/> <AddPack/></div> :
-                    <Preloader/>}
+                    <Preloader isActive={packsStatus === 'loading'}/>}
             </div>
             <div className={style.tablePacks}>
                 {/*{packsStatus === 'loading' && <Preloader/>}*/}

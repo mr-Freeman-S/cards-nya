@@ -11,11 +11,10 @@ export const packsAPI = {
         return instanceHeroku.post<{ cardsPack: CreatePackType }, AxiosResponse<ResponseCreatePackType>>("cards/pack", {cardsPack})
     },
     updatePack(cardsPack: UpdatePackType) {
-        return instanceHeroku.put<{ cardsPack: UpdatePackType }, AxiosResponse<ResponseType>>("cards/pack", {cardsPack})
+        return instanceHeroku.put<{ cardsPack: UpdatePackType }, AxiosResponse<ResponseUpdatePackType>>("cards/pack", {cardsPack})
     },
-    deletePack(id: string) {
-        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/pack/${id}`) //не уверен, что будет именно так,
-        // надо будет еще перепроверить правильный ли путь
+    deletePack(_id: string) {
+        return instanceHeroku.delete<{ _id: string }, AxiosResponse<ResponseDeletePackType>>(`cards/pack/?id=${_id}`)
     }
 }
 
@@ -38,8 +37,21 @@ export type CreatePackType = {
 
 type UpdatePackType = {
     _id: string
+    user_id?: string
+    user_name?: string
+    private?: boolean
     name?: string
-    // надо дополнить
+    path?: string
+    grade?: number
+    shots?: number
+    cardsCount?: number
+    type?: string
+    rating?: number
+    created?: string
+    updated?: string
+    more_id?: string
+    __v?: number
+    deckCover?: string
 }
 
 type CardPacksType = {
@@ -73,6 +85,18 @@ type ResponsePacksType = {
 
 type ResponseCreatePackType = {
     newCardsPack: CardPacksType
+    token: string
+    tokenDeathTime: number
+}
+
+type ResponseDeletePackType = {
+    deletedCardsPack: CardPacksType
+    token: string
+    tokenDeathTime: number
+}
+
+type ResponseUpdatePackType = {
+    updatedCardsPack: CardPacksType
     token: string
     tokenDeathTime: number
 }
