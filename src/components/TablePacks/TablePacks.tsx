@@ -9,7 +9,12 @@ import Paper from '@mui/material/Paper'
 import {AiOutlineArrowUp} from 'react-icons/ai'
 import style from './TablePacks.module.css'
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {CardPacksType, changeSortPackCardsAC, deleteCardPackTC} from "../../redux/reducers/packsCardReducer";
+import {
+    CardPacksType,
+    changeSortPackCardsAC,
+    deleteCardPackTC,
+    updateCardPackTC
+} from "../../redux/reducers/packsCardReducer";
 import {useNavigate} from 'react-router-dom'
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 
@@ -23,12 +28,13 @@ type TablePropsType = {
 
 
 export function TablePacks({rows}: TablePropsType) {
+
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
     const [activeDeleteModal, setActiveDeleteModal] = useState<boolean>(false)
     const [activeUpdateModal, setActiveUpdateModal] = useState<boolean>(false)
-    const [value, setValue] = useState<string>("")
+    const [title, setTitle] = useState<string>("")
     const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
     const myId = useAppSelector<string>(state => state.auth._id)
 
@@ -61,11 +67,10 @@ export function TablePacks({rows}: TablePropsType) {
     const onClickNoUpdateHandler = () => {
         setActiveUpdateModal(false)
     }
-    const onClickYesUpdateHandler = (name: string) => {
-        /*dispatch(updateCardPackTC(name))*/
-        console.log(name)
+    const onClickYesUpdateHandler = (id: string, name: string) => {
+        dispatch(updateCardPackTC(id, name))
         setActiveUpdateModal(false)
-        setValue("")
+        setTitle("")
     }
 
 
@@ -110,10 +115,10 @@ export function TablePacks({rows}: TablePropsType) {
                                         <div>
                                             {`Enter new Name`}
                                         </div>
-                                        <input style={{marginTop: 40}} value={value}
-                                               onChange={(e) => setValue(e.currentTarget.value)}/>
+                                        <input style={{marginTop: 40}} value={title}
+                                               onChange={(e) => setTitle(e.currentTarget.value)}/>
                                         <div style={{marginBottom: 40, marginTop: 40}}>
-                                            <button onClick={() => onClickYesUpdateHandler(value)}>Save</button>
+                                            <button onClick={() => onClickYesUpdateHandler(row._id, title)}>Save</button>
                                             <button style={{marginLeft: 40}} onClick={onClickNoUpdateHandler}>Cancel
                                             </button>
                                         </div>
