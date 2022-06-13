@@ -19,6 +19,7 @@ const initialState = {
 //Reducer
 export const packsCardReducer = (state: InitialStateType = initialState, action: PacksReducerActionType): InitialStateType => {
     switch (action.type) {
+
         case "PACKS/SET-CARD-PACKS":
             return {...state, cardPacks: action.cardPacks}
         case "PACKS/CHANGE-PACKS-PAGE":

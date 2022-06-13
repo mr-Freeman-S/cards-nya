@@ -5,6 +5,7 @@ type UniverseModalWindowPropsType = {
     isActive: boolean
     setActive: (active: boolean) => void
     children?:React.ReactNode
+
 }
 
 export const UniverseModalWindow = ({isActive, setActive,children}: UniverseModalWindowPropsType) => {

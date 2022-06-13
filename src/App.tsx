@@ -18,7 +18,6 @@ function App() {
     useEffect(() => {
         dispatch(authMe())
     }, [dispatch])
-    console.log(isInit)
     return (
         <div>
             {/*<Navbar/>*/}

@@ -6,7 +6,7 @@ import {ResponseCardsType} from "../utils/types";
 //api
 export const cardsAPI = {
     getCards(data: CardsType) {
-        return instanceHeroku.get<{data: CardsType}, AxiosResponse<ResponseCardsType>>(`cards/card`, {params: data})
+        return instanceHeroku.get<{ data: CardsType }, AxiosResponse<ResponseCardsType>>(`cards/card`, {params: data})
     },
     createCard(card: CreateCardType) {
         return instanceHeroku.post<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
@@ -17,6 +17,9 @@ export const cardsAPI = {
     deleteCard(id: string) {
         return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/card/${id}`) //не уверен, что будет именно так,
         // надо будет еще перепроверить правильный ли путь
+    },
+    updateCardGrade(card_id: string, grade: number) {
+        return instanceHeroku.put<AxiosResponse<ResponseType>>("/cards/grade", {grade, card_id })
     }
 }
 
@@ -49,5 +52,14 @@ type UpdateCardType = {
     question: string
     //... // не обязательно, надо добавить!
     comments: string
+}
+
+type updateGradeCardType = {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
 }
 

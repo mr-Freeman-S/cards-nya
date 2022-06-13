@@ -25,7 +25,7 @@ const Test = () => {
     }
 
     const onMouse = ()=> {
-        console.log(min, max)
+
     }
 
     const onChangeS = ({min,max}:{min:number,max:number}) => {
