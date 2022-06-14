@@ -126,8 +126,8 @@ export function TablePacks({rows}: TablePropsType) {
                 </Table>
             </TableContainer>
             <UniverseModalWindow isActive={activeModal} setActive={setActiveModal}>
-                {modalMod === "delete"
-                    ? <div style={{marginTop: 40}}>
+                {modalMod === "delete" &&
+                    <div style={{marginTop: 40}}>
                         <div>
                             {`Are you really want to delete "${title}" ?`}
                         </div>
@@ -135,8 +135,9 @@ export function TablePacks({rows}: TablePropsType) {
                             <button onClick={() => onClickYesDeleteHandler(packId)}>Yes</button>
                             <button style={{marginLeft: 40}} onClick={onClickNoDeleteHandler}>No</button>
                         </div>
-                    </div>
-                    : <div>
+                    </div>}
+                {modalMod === "edit" &&
+                    <div>
                         <div>
                             {`Edit new PackName`}
                         </div>
