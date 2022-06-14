@@ -1,19 +1,13 @@
-import React from "react"
-import {useAppDispatch} from "../../redux/store";
-import {createCardPackTC} from "../../redux/reducers/packsCardReducer";
+import React, {useState} from "react"
+import {FormAddPack} from "../FormAddPack/FormAddPack";
+import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 
 export const AddPack = () => {
-
-    const dispatch = useAppDispatch()
-    const packName: string = "Pack by DreamTeam"
-
-    const onclickHandler = (title: string) => {
-        dispatch(createCardPackTC(title))
-    }
-
+    const [isActive,setIsActive] = useState<boolean>(false)
     return (
         <div>
-            <button onClick={() => {onclickHandler(packName)}}>Add Pack</button>
+            <button onClick={()=>setIsActive(true)}>Add Pack</button>
+            <UniverseModalWindow isActive={isActive} setActive={setIsActive}><FormAddPack setIsActive={setIsActive}/></UniverseModalWindow>
         </div>
     )
 }
