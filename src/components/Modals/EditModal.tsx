@@ -1,18 +1,20 @@
 import React from 'react';
 
-type DeleteModalPropsType = {
+type EditModalPropsType = {
     title: string
     packId: string
-    onClickSaveHandler: (id:string, title:string) => void
+    onClickSaveHandler: (id: string, title: string) => void
     onClickCancelHandler: () => void
-    setTitle: (title:string) => void
+    setTitle: (title: string) => void
+
 }
 
-export const EditModal = (props: DeleteModalPropsType) => {
+export const EditModal = (props: EditModalPropsType) => {
+
     return (
         <div>
             <div>
-                {`Edit new PackName`}
+                {`Enter new PackName`}
             </div>
             <input style={{marginTop: 40}} value={props.title} onChange={(e) => {
                 props.setTitle(e.currentTarget.value)
@@ -22,5 +24,5 @@ export const EditModal = (props: DeleteModalPropsType) => {
                 <button style={{marginLeft: 40}} onClick={props.onClickCancelHandler}>Cancel</button>
             </div>
         </div>
-    );
+    )
 };
