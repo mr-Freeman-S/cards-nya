@@ -1,0 +1,24 @@
+.container {
+    display: grid;
+    grid-template-areas:
+            "title title"
+            "input input"
+            "cancel save";
+
+}
+
+.input {
+    grid-area: input;
+}
+.cancel {
+    grid-area: cancel;
+}
+.save {
+    grid-area: save;
+}
+.title {
+    grid-area: title;
+}
+.error {
+    color:red;
+}

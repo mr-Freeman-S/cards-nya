@@ -17,6 +17,9 @@ import {PATH} from "../../utils/routingPath";
 import style from './TableCards.module.css'
 import {AddCard} from "../AddCard/AddCard";
 import {Preloader} from "../Preloader/Preloader";
+import {DeleteModal} from "../Modals/DeleteModal";
+import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
+import {EditCardModal} from "../Modals/EditCardModal";
 
 
 const colums = ['Question', 'Answer', 'Last Update', 'Grade']
@@ -37,9 +40,15 @@ export const TableCards = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
+    const [activeModal, setActiveModal] = useState<boolean>(false)
+    const [modalMod, setModalMod] = useState<"delete" | "edit">("delete")
+    const [answer, setAnswer] = useState<string>("")
+    const [question, setQuestion] = useState<string>("")
+    const [packId, setPackId] = useState<string>("")
 
 
     const sortByUpdatePacks = useAppSelector(state => state.cards.sortCards)
+    const myId = useAppSelector<string>(state => state.auth._id)
 
     useEffect(() => {
         dispatch(setIdPacksAC(id!))
@@ -50,6 +59,35 @@ export const TableCards = () => {
         sortBy === 'asc' ? setSortBy('desc') : setSortBy('asc')
         dispatch(changeSortCardsAC(sortByUpdatePacks === '0updated' ? '1updated' : '0updated'))
     }
+    const onClickDeleteHandler = (id: string) => {
+        setPackId(id)
+        setModalMod("delete")
+        setActiveModal(true)
+    }
+
+    const onClickEditHandler = (id: string, question: string, answer: string) => {
+        setPackId(id)
+        setQuestion(question)
+        setAnswer(answer)
+        setModalMod("edit")
+        setActiveModal(true)
+    }
+
+    const onClickNoDeleteHandler = () => {
+        setActiveModal(false)
+    }
+
+    const onClickYesDeleteHandler = (id: string) => {
+        /* dispatch(deleteCardTC(id))*/
+        setActiveModal(false)
+    }
+    const onClickCancelUpdateHandler = () => {
+        setActiveModal(false)
+    }
+    const onClickSaveUpdateHandler = (id: string, question: string, answer: string) => {
+        /*dispatch(updateCardTC(id, question, answer))*/
+        setActiveModal(false)
+    }
 
     return (
         <div>
@@ -59,7 +97,7 @@ export const TableCards = () => {
                         <button onClick={() => navigate(PATH.PACK_LIST)}>Back</button>
                         <AddCard/>
                     </div>
-                    : <Preloader isActive={packsStatus === 'loading'} />}
+                    : <Preloader isActive={packsStatus === 'loading'}/>}
             </div>
             <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
                 <Table sx={{width: 850}} aria-label='simple table'>
@@ -93,11 +131,38 @@ export const TableCards = () => {
                                 <TableCell align='center'>{row.updated}</TableCell>
                                 <TableCell align='center'><Rating name="read-only" value={row.grade}
                                                                   readOnly/></TableCell>
+                                <TableCell align='center'>
+                                    {myId === row.user_id &&
+                                        <button
+                                            onClick={() => onClickEditHandler(row._id, row.question, row.answer)}>Edit</button>}
+                                    {myId === row.user_id &&
+                                        <button onClick={() => onClickDeleteHandler(row._id)}>Delete</button>}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            <UniverseModalWindow isActive={activeModal} setActive={setActiveModal}>
+                {modalMod === "delete" &&
+                    <DeleteModal
+                        packId={packId}
+                        onClickYesHandler={onClickYesDeleteHandler}
+                        onClickNoHandler={onClickNoDeleteHandler}
+                    />
+                }
+                {modalMod === "edit" &&
+                    <EditCardModal
+                        packId={packId}
+                        answer={answer}
+                        question={question}
+                        onClickSaveHandler={onClickSaveUpdateHandler}
+                        onClickCancelHandler={onClickCancelUpdateHandler}
+                        setAnswer={setAnswer}
+                        setQuestion={setQuestion}
+                    />
+                }
+            </UniverseModalWindow>
         </div>
     )
 }
