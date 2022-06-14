@@ -152,7 +152,6 @@ export function TablePacks({rows}: TablePropsType) {
                 }
             </UniverseModalWindow>
         </div>
-
     )
 }
 
