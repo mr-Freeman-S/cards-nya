@@ -17,6 +17,8 @@ import {
 } from "../../redux/reducers/packsCardReducer";
 import {useNavigate} from 'react-router-dom'
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
+import {DeleteModal} from "../Modals/DeleteModal";
+import {EditModal} from "../Modals/EditModal";
 
 
 const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
@@ -127,28 +129,21 @@ export function TablePacks({rows}: TablePropsType) {
             </TableContainer>
             <UniverseModalWindow isActive={activeModal} setActive={setActiveModal}>
                 {modalMod === "delete" &&
-                    <div style={{marginTop: 40}}>
-                        <div>
-                            {`Are you really want to delete "${title}" ?`}
-                        </div>
-                        <div style={{marginBottom: 40, marginTop: 40}}>
-                            <button onClick={() => onClickYesDeleteHandler(packId)}>Yes</button>
-                            <button style={{marginLeft: 40}} onClick={onClickNoDeleteHandler}>No</button>
-                        </div>
-                    </div>}
+                    <DeleteModal
+                        title={title}
+                        packId={packId}
+                        onClickYesHandler={onClickYesDeleteHandler}
+                        onClickNoHandler={onClickNoDeleteHandler}
+                    />
+                }
                 {modalMod === "edit" &&
-                    <div>
-                        <div>
-                            {`Edit new PackName`}
-                        </div>
-                        <input style={{marginTop: 40}} value={title} onChange={(e) => {
-                            setTitle(e.currentTarget.value)
-                        }}/>
-                        <div style={{marginBottom: 40, marginTop: 40}}>
-                            <button onClick={() => onClickSaveUpdateHandler(packId, title)}>Save</button>
-                            <button style={{marginLeft: 40}} onClick={onClickCancelUpdateHandler}>Cancel</button>
-                        </div>
-                    </div>
+                    <EditModal
+                        title={title}
+                        packId={packId}
+                        onClickSaveHandler={onClickSaveUpdateHandler}
+                        onClickCancelHandler={onClickCancelUpdateHandler}
+                        setTitle={setTitle}
+                    />
                 }
             </UniverseModalWindow>
         </div>
