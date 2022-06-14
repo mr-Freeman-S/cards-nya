@@ -32,11 +32,12 @@ export function TablePacks({rows}: TablePropsType) {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
-    const packs = useAppSelector<CardPacksType[]>(state => state.packsCard.cardPacks)
-   /* const [activeModal, setActiveModal] = useState<{activeModal: boolean}>({/!*name: packs.name, *!/false/!*, id:  *!/})*/
+    const [activeModal, setActiveModal] = useState<boolean>(false)
+    const [modalMod, setModalMod] = useState<"delete" | "edit">("delete")
+    const [title, setTitle] = useState<string>("")
+    const [packId, setPackId] = useState<string>("")
     const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
     const myId = useAppSelector<string>(state => state.auth._id)
-
 
 
     const changeSortHandler = () => {
@@ -48,91 +49,107 @@ export function TablePacks({rows}: TablePropsType) {
         navigate(`/cards/${id}`)
     }
 
-   /* const onClickDeleteHandler = () => {
-        setActiveDeleteModal(true)
+    const onClickDeleteHandler = (id: string, name: string) => {
+        setPackId(id)
+        setTitle(name)
+        setModalMod("delete")
+        setActiveModal(true)
     }
-    const onClickUpdateHandler = () => {
-        setActiveUpdateModal(true)
+
+    const onClickEditHandler = (id: string, name: string) => {
+        setPackId(id)
+        setTitle(name)
+        setModalMod("edit")
+        setActiveModal(true)
     }
 
     const onClickNoDeleteHandler = () => {
-        setActiveDeleteModal(false)
+        setActiveModal(false)
     }
 
     const onClickYesDeleteHandler = (id: string) => {
         dispatch(deleteCardPackTC(id))
-        setActiveDeleteModal(false)
+        setActiveModal(false)
     }
 
-    const onClickNoUpdateHandler = () => {
-        setActiveUpdateModal(false)
+    const onClickCancelUpdateHandler = () => {
+        setActiveModal(false)
     }
-    const onClickYesUpdateHandler = (id: string, name: string) => {
+    const onClickSaveUpdateHandler = (id: string, name: string) => {
         dispatch(updateCardPackTC(id, name))
-        setActiveUpdateModal(false)
-        setTitle("")
-    }*/
+        setActiveModal(false)
+    }
 
-
-    return (<div>
-
-
-        <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
-            <Table sx={{width: 850}} aria-label='simple table' >
-                <TableHead>
-                    <TableRow sx={{backgroundColor: '#ECECF9'}}>
-                        {
-                            colums && colums.map((el, i) => {
-                                return (el === 'Last Updated' ?
-                                    <TableCell className={style.click} key={`${el}_${i}`} onClick={changeSortHandler}
-                                               align={"center"}>
-                                        {el}<AiOutlineArrowUp
-                                        style={sortBy === 'asc' ? {transform: 'rotate(180deg)'} : {}}/>
-                                    </TableCell> : <TableCell key={`${el}_${i}`} align={"center"}>{el}</TableCell>)
-                            })
-                        }
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows && rows.map((row: CardPacksType) => (
-                        <TableRow
-                            key={row._id}
-                            sx={{
-                                '&:last-child td, &:last-child th': {border: ''},
-                                '&:nth-of-type(2)': {backgroundColor: '#F8F7FD'}
-                            }}
-                        >
-                            <TableCell align={"center"} component='th' scope='row'> {row.name}</TableCell>
-                            <TableCell align='center'>{row.cardsCount}</TableCell>
-                            <TableCell align='center'>{row.updated}</TableCell>
-                            <TableCell align='center'>{row.user_name}</TableCell>
-                            <TableCell align='center'>
-                                {myId === row.user_id &&
-                                    <button>Edit</button>}
-                                {myId === row.user_id &&
-                                    <button>Delete</button>}
-                                <button onClick={() => onClickLearnHandler(row._id)}>Learn</button>
-                            </TableCell>
+    return (
+        <div>
+            <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
+                <Table sx={{width: 850}} aria-label='simple table'>
+                    <TableHead>
+                        <TableRow sx={{backgroundColor: '#ECECF9'}} onClick={(e) => {
+                            console.log("row", e)
+                        }}>
+                            {
+                                colums && colums.map((el, i) => {
+                                    return (el === 'Last Updated' ?
+                                        <TableCell className={style.click} key={`${el}_${i}`} onClick={changeSortHandler}
+                                                   align={"center"}>
+                                            {el}<AiOutlineArrowUp
+                                            style={sortBy === 'asc' ? {transform: 'rotate(180deg)'} : {}}/>
+                                        </TableCell> : <TableCell key={`${el}_${i}`} align={"center"}>{el}</TableCell>)
+                                })
+                            }
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
-           {/* <UniverseModalWindow
-                isActive={activeModal}
-                setActive={setActiveModal}
-            >
-                <div style={{marginTop: 40}}>
-                    <div>
-                        {`Are you really want to delete "${props.name}" ?`}
+                    </TableHead>
+                    <TableBody>
+                        {rows && rows.map((row: CardPacksType) => (
+                            <TableRow
+                                key={row._id}
+                                sx={{
+                                    '&:last-child td, &:last-child th': {border: ''},
+                                    '&:nth-of-type(2)': {backgroundColor: '#F8F7FD'}
+                                }}
+                            >
+                                <TableCell align={"center"} component='th' scope='row'> {row.name}</TableCell>
+                                <TableCell align='center'>{row.cardsCount}</TableCell>
+                                <TableCell align='center'>{row.updated}</TableCell>
+                                <TableCell align='center'>{row.user_name}</TableCell>
+                                <TableCell align='center'>
+                                    {myId === row.user_id &&
+                                        <button onClick={() => onClickEditHandler(row._id, row.name)}>Edit</button>}
+                                    {myId === row.user_id &&
+                                        <button onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
+                                    <button onClick={() => onClickLearnHandler(row._id)}>Learn</button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <UniverseModalWindow isActive={activeModal} setActive={setActiveModal}>
+                {modalMod === "delete"
+                    ? <div style={{marginTop: 40}}>
+                        <div>
+                            {`Are you really want to delete "${title}" ?`}
+                        </div>
+                        <div style={{marginBottom: 40, marginTop: 40}}>
+                            <button onClick={() => onClickYesDeleteHandler(packId)}>Yes</button>
+                            <button style={{marginLeft: 40}} onClick={onClickNoDeleteHandler}>No</button>
+                        </div>
                     </div>
-                    <div style={{marginBottom: 40, marginTop: 40}}>
-                        <button onClick={() => {onClickYesDeleteHandler(props._id)}}>Yes</button>
-                        <button style={{marginLeft: 40}} onClick={onClickNoDeleteHandler}>No
-                        </button>
+                    : <div>
+                        <div>
+                            {`Edit new PackName`}
+                        </div>
+                        <input style={{marginTop: 40}} value={title} onChange={(e) => {
+                            setTitle(e.currentTarget.value)
+                        }}/>
+                        <div style={{marginBottom: 40, marginTop: 40}}>
+                            <button onClick={() => onClickSaveUpdateHandler(packId, title)}>Save</button>
+                            <button style={{marginLeft: 40}} onClick={onClickCancelUpdateHandler}>Cancel</button>
+                        </div>
                     </div>
-                </div>
-            </UniverseModalWindow>*/}
+                }
+            </UniverseModalWindow>
         </div>
 
     )
