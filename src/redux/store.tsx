@@ -45,3 +45,6 @@ export type AppActionsType =
     | RestorePasswordReducerActionTypes
     | CardsReducerActionType
 export type ThunkType = ThunkAction<void, AppStateType, unknown, AppActionsType>
+
+// @ts-ignore
+window.store = store // for dev

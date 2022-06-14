@@ -47,8 +47,8 @@ export function TablePacks({rows}: TablePropsType) {
         dispatch(changeSortPackCardsAC(sortByUpdatePacks === '0updated' ? '1updated' : '0updated'))
     }
 
-    const onClickLearnHandler = (id: string) => {
-        navigate(`/cards/${id}`)
+    const onClickLearnHandler = (id: string, name: string) => {
+        navigate(`/cards/${name}/${id}`)
     }
 
     const onClickDeleteHandler = (id: string, name: string) => {
@@ -81,6 +81,7 @@ export function TablePacks({rows}: TablePropsType) {
         dispatch(updateCardPackTC(id, name))
         setActiveModal(false)
     }
+
 
     return (
         <div>
@@ -120,8 +121,8 @@ export function TablePacks({rows}: TablePropsType) {
                                         <button onClick={() => onClickEditHandler(row._id, row.name)}>Edit</button>}
                                     {myId === row.user_id &&
                                         <button onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
-                                    <button onClick={() => onClickLearnHandler(row._id)}>Learn</button>
-                                </TableCell>
+                                    <button onClick={() => onClickLearnHandler(row._id, row.name)}>Learn</button>                                </TableCell>
+
                             </TableRow>
                         ))}
                     </TableBody>
@@ -146,6 +147,7 @@ export function TablePacks({rows}: TablePropsType) {
                     />
                 }
             </UniverseModalWindow>
+
         </div>
     )
 }
