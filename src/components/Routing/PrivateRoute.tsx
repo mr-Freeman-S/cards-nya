@@ -28,7 +28,7 @@ export const PrivateRoute = () => {
                 <Route path=':token' element={<ResetPasswordPage/>}/>
             </Route>
             <Route path={PATH.CARDS_LIST} element={<LearnCardContainer/>}>
-                <Route path=':id' element={<LearnCardContainer/>} />
+                <Route path={`${PATH.CARDS_LIST}/:name/:id`} element={<LearnCardContainer/>} />
             </Route>
             <Route path={PATH.REGISTRATION_PAGE} element={<RegistrationPage/>}/>
             <Route path={PATH.TEST} element={<Test/>}/>

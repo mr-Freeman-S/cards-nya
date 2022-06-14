@@ -6,11 +6,11 @@ import {CardsType} from "../../../redux/reducers/cardsReducer";
 
 type LearnPackQuestionPropsType = {
     callback: (isActive: boolean) => void
-    namePacks: string
+    namePack: string
     cardPack: CardsType
 }
 
-export const CardQuestion: React.FC<LearnPackQuestionPropsType> = ({callback, namePacks, cardPack}) => {
+export const CardQuestion: React.FC<LearnPackQuestionPropsType> = ({callback, namePack, cardPack}) => {
     const navigate = useNavigate()
 
     const returnToTable = () => {
@@ -23,7 +23,7 @@ export const CardQuestion: React.FC<LearnPackQuestionPropsType> = ({callback, na
     return (
         <div className={style.container}>
             <div className={style.text}>
-                <h2>{`Learn "${namePacks}"`}</h2>
+                <h2>{`Learn "${namePack}"`}</h2>
             </div>
             <div className={style.textQuestion}>
                 <span>Question:</span>

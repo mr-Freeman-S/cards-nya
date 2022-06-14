@@ -44,8 +44,8 @@ export function TablePacks({rows}: TablePropsType) {
         dispatch(changeSortPackCardsAC(sortByUpdatePacks === '0updated' ? '1updated' : '0updated'))
     }
 
-    const onClickLearnHandler = (id: string) => {
-        navigate(`/cards/${id}`)
+    const onClickLearnHandler = (id: string, name: string) => {
+        navigate(`/cards/${name}/${id}`)
     }
 
     const onClickDeleteHandler = () => {
@@ -141,7 +141,7 @@ export function TablePacks({rows}: TablePropsType) {
                                         </div>
                                     </div>
                                 </UniverseModalWindow>
-                                <button onClick={() => onClickLearnHandler(row._id)}>Learn</button>
+                                <button onClick={() => onClickLearnHandler(row._id, row.name)}>Learn</button>
                             </TableCell>
                         </TableRow>
                     ))}

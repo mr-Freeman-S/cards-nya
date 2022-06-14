@@ -8,11 +8,11 @@ import {useNavigate} from "react-router-dom";
 
 type LearnPackAnswerPropsType = {
     callback: (isActive: boolean, grade: number) => void
-    namePacks: string
+    namePack: string
     cardPack: CardsType
 }
 
-export const CardAnswer: React.FC<LearnPackAnswerPropsType> = ({cardPack, namePacks, callback}) => {
+export const CardAnswer: React.FC<LearnPackAnswerPropsType> = ({cardPack, namePack, callback}) => {
     const [value, setValue] = React.useState(5);
     const navigate = useNavigate()
 
@@ -28,7 +28,7 @@ export const CardAnswer: React.FC<LearnPackAnswerPropsType> = ({cardPack, namePa
     return (
         <div className={style.container}>
             <div>
-                <h2>Learn {`"${namePacks}"`}</h2>
+                <h2>Learn {`"${namePack}"`}</h2>
             </div>
             <div className={style.text}>
                 <div className={style.textQuestion}>
