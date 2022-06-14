@@ -93,6 +93,7 @@ export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStat
     const {packName, min, max, sortPacks, page, pageCount, user_id} = getState().packsCard
     packsAPI.getPacks({packName, min, max, sortPacks, page, pageCount, user_id})
         .then(res => {
+            console.log(res)
             dispatch(setCardPacksAC(res.data.cardPacks))
             dispatch(updateCardPacksTotalCountAC(res.data.cardPacksTotalCount))
             dispatch(fetchMinMaxCardCountAC(res.data.minCardsCount, res.data.maxCardsCount))
