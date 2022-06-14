@@ -12,6 +12,7 @@ import {CheckEmail} from '../../views/login/RecoverPasswordPages/CheckEmail'
 import {Page404} from "../../views/error/Page404";
 import {PackListContainer} from "../../views/packList/PackListContainer";
 import {TableCards} from "../TableCards/TableCards";
+import {LearnCardContainer} from "../LearnCard/LearnCardContainer";
 
 export const PrivateRoute = () => {
     return (
@@ -26,8 +27,8 @@ export const PrivateRoute = () => {
             <Route path={PATH.NEW_PASSWORD_PAGE} element={<ResetPasswordPage/>}>
                 <Route path=':token' element={<ResetPasswordPage/>}/>
             </Route>
-            <Route path={PATH.CARDS_LIST} element={<TableCards/>}>
-                <Route path=':id' element={<TableCards/>} />
+            <Route path={PATH.CARDS_LIST} element={<LearnCardContainer/>}>
+                <Route path={`${PATH.CARDS_LIST}/:name/:id`} element={<LearnCardContainer/>} />
             </Route>
             <Route path={PATH.REGISTRATION_PAGE} element={<RegistrationPage/>}/>
             <Route path={PATH.TEST} element={<Test/>}/>

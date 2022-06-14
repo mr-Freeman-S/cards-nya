@@ -13,6 +13,9 @@ const initialState = {
     page: 1,
     pageCount: 10,
     cardsTotalCount: 0,
+    randomNumber: 0,
+    showModuleCard: true,
+    cardsStatus: 'loading' as CardsStatusType
 }
 
 //Reducer
@@ -30,6 +33,22 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Car
             return {...state, sortCards: action.sortPacks}
         case "CARDS/SET-ID-PACKS":
             return {...state, cardsPack_id: action.id}
+        case "CARDS/UPDATE-GRADE-CARD":
+            return {
+                ...state,
+                cardPacks: state.cardPacks.map(el => el._id === action.id ? {
+                        ...el,
+                        grade: action.grade,
+                        shots: action.shots
+                    }
+                    : el)
+            }
+        case "CARDS/UPDATE-CARDS-STATUS":
+            return {...state, cardsStatus: action.status}
+        case "CARDS/UPDATE-RANDOM-NUMBER":
+            return {...state, randomNumber: action.randomNumber}
+        case "CARDS/UPDATE-SHOW-MODULE-CARD":
+            return {...state, showModuleCard: action.isActive}
         default:
             return state
     }
@@ -55,11 +74,23 @@ export const changeSortCardsAC = (sortPacks: string) => {
 export const setIdPacksAC = (id: string) => {
     return {type: 'CARDS/SET-ID-PACKS', id} as const
 }
+export const updatedGradeCardAC = (id: string, grade: number, shots: number) => {
+    return {type: 'CARDS/UPDATE-GRADE-CARD', id, grade, shots} as const
+}
+export const updatedCardsStatusAC = (status: CardsStatusType) => {
+    return {type: 'CARDS/UPDATE-CARDS-STATUS', status} as const
+}
+export const updatedRandomCardAC = (randomNumber: number) => {
+    return {type: 'CARDS/UPDATE-RANDOM-NUMBER', randomNumber} as const
+}
+export const updatedShowModuleCardAC = (isActive: boolean) => {
+    return {type: 'CARDS/UPDATE-SHOW-MODULE-CARD', isActive} as const
+}
 
 
 //Thunks
 export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
-    dispatch(updatePacksStatusAC("loading"))
+    dispatch(updatedCardsStatusAC("loading"))
     const {cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount} = getState().cards
     cardsAPI.getCards({cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount})
         .then(res => {
@@ -69,11 +100,11 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
 
         })
         .finally(() => {
-            dispatch(updatePacksStatusAC("idle"))
+            dispatch(updatedCardsStatusAC("idle"))
         })
 }
 
-export const createCardTC = ( newTitleQuestion: string, newTitleAnswer: string): ThunkType => (
+export const createCardTC = (newTitleQuestion: string, newTitleAnswer: string): ThunkType => (
     dispatch, getState: () => AppStateType) => {
     dispatch(updatePacksStatusAC("loading"))
     let cardsPack_id = getState().cards.cardsPack_id
@@ -86,6 +117,21 @@ export const createCardTC = ( newTitleQuestion: string, newTitleAnswer: string):
         })
         .finally(() => {
             dispatch(updatePacksStatusAC("idle"))
+        })
+}
+export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
+    dispatch) => {
+    dispatch(updatedCardsStatusAC("loading"))
+    cardsAPI.updateCardGrade(cardId, grade)
+        .then(res => {
+            dispatch(updatedGradeCardAC(res.data.updatedGrade.card_id, res.data.updatedGrade.grade, res.data.updatedGrade.shots))
+        })
+        .catch(e => {
+
+        })
+        .finally(() => {
+            dispatch(updatedCardsStatusAC("idle"))
+            dispatch(updatedShowModuleCardAC(true))
         })
 }
 
@@ -111,6 +157,10 @@ export type CardsReducerActionType =
     | ReturnType<typeof changeCardsPageCountAC>
     | ReturnType<typeof changeSortCardsAC>
     | ReturnType<typeof setIdPacksAC>
+    | ReturnType<typeof updatedGradeCardAC>
+    | ReturnType<typeof updatedCardsStatusAC>
+    | ReturnType<typeof updatedRandomCardAC>
+    | ReturnType<typeof updatedShowModuleCardAC>
 
 
-// export type CardsStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type CardsStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

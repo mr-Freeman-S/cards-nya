@@ -78,7 +78,6 @@ export const MultiRangeSlider = (({min, max,minVal,maxVal,setMinVal,setMaxVal, /
        // onChangeSlider({min: minVal, max: maxVal});
     }, [min, max,setMinVal,setMaxVal /*onChangeSlider*/]);
 
-    console.log(min,max)
     return (
         <div className={style.container}>
             <input
