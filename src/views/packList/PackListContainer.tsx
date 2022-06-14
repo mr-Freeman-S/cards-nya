@@ -29,7 +29,7 @@ export const PackListContainer = () => {
 
     const onMouseUpHandler = useCallback(() => {
         dispatch(setMinMaxSearchCardAC(minVal, maxVal))
-    },[minVal,maxVal])
+    },[minVal,maxVal,dispatch])
 
 
     useEffect(() => {

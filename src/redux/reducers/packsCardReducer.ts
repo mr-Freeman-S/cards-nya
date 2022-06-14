@@ -104,9 +104,9 @@ export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStat
         })
 }
 
-export const createCardPackTC = (name?: string, deckCover?: string): ThunkType => (dispatch) => {
+export const createCardPackTC = (name?: string, deckCover?: string,privatePack?:boolean): ThunkType => (dispatch) => {
     dispatch(updatePacksStatusAC("loading"))
-    packsAPI.createPack({name, deckCover, private: false})
+    packsAPI.createPack({name, deckCover, private: privatePack})
         .then(res => {
             dispatch(createPackAC(res.data.newCardsPack))
             dispatch(getCardPackTC())
