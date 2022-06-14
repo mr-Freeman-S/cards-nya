@@ -121,8 +121,11 @@ export function TablePacks({rows}: TablePropsType) {
                                         <button onClick={() => onClickEditHandler(row._id, row.name)}>Edit</button>}
                                     {myId === row.user_id &&
                                         <button onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
-                                    <button onClick={() => onClickLearnHandler(row._id, row.name)}>Learn</button>                                </TableCell>
-
+                                {
+                                    row.cardsCount === 0 ?
+                                        <button disabled>Learn</button>
+                                        : <button onClick={() => onClickLearnHandler(row._id, row.name)}>Learn</button>
+                                }
                             </TableRow>
                         ))}
                     </TableBody>
