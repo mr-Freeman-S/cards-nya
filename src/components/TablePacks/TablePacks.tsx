@@ -97,10 +97,15 @@ export function TablePacks({rows}: TablePropsType) {
                             key={row._id}
                             sx={{
                                 '&:last-child td, &:last-child th': {border: ''},
-                                '&:nth-of-type(1)': {backgroundColor: '#F8F7FD'}
+                                '&:nth-of-type(2n)': {backgroundColor: '#F8F7FD'}
                             }}
                         >
-                            <TableCell align={"center"} component='th' scope='row'> {row.name}</TableCell>
+                            <TableCell align={"center"}
+                                       component='th'
+                                       scope='row'
+                                       onClick={() => onClickLearnHandler(row._id)}
+                                       style={{cursor: 'pointer'}}
+                            > {row.name}</TableCell>
                             <TableCell align='center'>{row.cardsCount}</TableCell>
                             <TableCell align='center'>{row.updated}</TableCell>
                             <TableCell align='center'>{row.user_name}</TableCell>
@@ -118,7 +123,8 @@ export function TablePacks({rows}: TablePropsType) {
                                         <input style={{marginTop: 40}} value={title}
                                                onChange={(e) => setTitle(e.currentTarget.value)}/>
                                         <div style={{marginBottom: 40, marginTop: 40}}>
-                                            <button onClick={() => onClickYesUpdateHandler(row._id, title)}>Save</button>
+                                            <button onClick={() => onClickYesUpdateHandler(row._id, title)}>Save
+                                            </button>
                                             <button style={{marginLeft: 40}} onClick={onClickNoUpdateHandler}>Cancel
                                             </button>
                                         </div>
@@ -141,7 +147,11 @@ export function TablePacks({rows}: TablePropsType) {
                                         </div>
                                     </div>
                                 </UniverseModalWindow>
-                                <button onClick={() => onClickLearnHandler(row._id)}>Learn</button>
+                                {
+                                  row.cardsCount === 0 ?
+                                      <button disabled>Learn</button>
+                                      : <button onClick={() => alert('to be continued...')}>Learn</button>
+                                }
                             </TableCell>
                         </TableRow>
                     ))}
