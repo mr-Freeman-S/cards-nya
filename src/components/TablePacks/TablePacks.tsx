@@ -135,7 +135,7 @@ export function TablePacks({rows}: TablePropsType) {
                                     {myId === row.user_id &&
                                         <button className={style.deleteButton} onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
                                     <button
-                                        disabled={row.cardsCount === 0 ? true : false}
+                                        disabled={row.cardsCount === 0}
                                         className={`${row.cardsCount === 0 ? style.disableButtonEvent : style.enableButtonEvent}`}
                                         onClick={() => onClickLearnHandler(row._id, row.name)}
                                     >
