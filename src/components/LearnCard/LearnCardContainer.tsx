@@ -39,10 +39,11 @@ export const LearnCardContainer = () => {
             const max = Math.floor(rand.length)
             const randomNumber = Math.floor(Math.random() * (max - min)) + min
             dispatch(updatedRandomCardAC(rand[randomNumber]))
-            console.log(rand)
+        } else {
+            dispatch(updatedRandomCardAC(0))
         }
     }
-
+    console.log(randomNumber)
     useEffect(() => {
         dispatch(setIdPacksAC(id!))
         dispatch(getCardsTC())

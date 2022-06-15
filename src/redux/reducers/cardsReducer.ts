@@ -92,6 +92,7 @@ export const updatedShowModuleCardAC = (isActive: boolean) => {
 export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
     dispatch(updatedCardsStatusAC("loading"))
     const {cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount} = getState().cards
+    dispatch(updatedRandomCardAC(0))
     cardsAPI.getCards({cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount})
         .then(res => {
             dispatch(setCardsAC(res.data.cards))

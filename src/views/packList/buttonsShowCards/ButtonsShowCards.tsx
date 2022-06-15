@@ -1,6 +1,7 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {setMinMaxSearchCardAC, setUserIdPacksAC} from "../../../redux/reducers/packsCardReducer";
+import  style from './ButtonsShowCards.module.css';
 
 
 export const ButtonsShowCards = () => {
@@ -17,9 +18,9 @@ export const ButtonsShowCards = () => {
         dispatch(setMinMaxSearchCardAC(minCardsCount,maxCardsCount))
     }
     return (
-        <div>
-            <button onClick={showAllCards}>All</button>
-            <button onClick={showMyCards}>My</button>
+        <div className={style.container}>
+            <button className={style.allClick} onClick={showAllCards}>All</button>
+            <button className={style.myClick} onClick={showMyCards}>My</button>
         </div>
     );
 };
