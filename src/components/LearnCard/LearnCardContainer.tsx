@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Navigate, useParams} from "react-router-dom";
 import {
     CardsType,
-    getCardsTC,
+    getCardsTC, setCardsAC,
     setIdPacksAC,
     updatedRandomCardAC,
     updatedShowModuleCardAC,
@@ -43,12 +43,15 @@ export const LearnCardContainer = () => {
             dispatch(updatedRandomCardAC(0))
         }
     }
-    console.log(randomNumber)
+
     useEffect(() => {
         dispatch(setIdPacksAC(id!))
         dispatch(getCardsTC())
-        cleverRandom(cardPacks)
     }, []);
+
+    useEffect(()=> {
+        cleverRandom(cardPacks)
+    }, [cardPacks])
 
     const showAnswerCard = (isActive: boolean) => {
         dispatch(updatedShowModuleCardAC(isActive))

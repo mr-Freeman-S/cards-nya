@@ -1,9 +1,10 @@
 import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from '@mui/material';
 import React from 'react';
-import {CardsType} from "../../../redux/reducers/cardsReducer";
+import {CardsType, setCardsAC, updatedRandomCardAC} from "../../../redux/reducers/cardsReducer";
 import style from './CardAnswer.module.css'
 import {PATH} from "../../../utils/routingPath";
 import {useNavigate} from "react-router-dom";
+import {useAppDispatch} from "../../../redux/store";
 
 
 type LearnPackAnswerPropsType = {
@@ -15,6 +16,7 @@ type LearnPackAnswerPropsType = {
 export const CardAnswer: React.FC<LearnPackAnswerPropsType> = ({cardPack, namePack, callback}) => {
     const [value, setValue] = React.useState(5);
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setValue(Number((event.target as HTMLInputElement).value))
@@ -23,6 +25,9 @@ export const CardAnswer: React.FC<LearnPackAnswerPropsType> = ({cardPack, namePa
         callback(true, value)
     }
     const returnToTable = () => {
+        debugger
+        dispatch(setCardsAC([]))
+        dispatch(updatedRandomCardAC(0))
         navigate(PATH.PACK_LIST)
     }
     return (

@@ -9,7 +9,6 @@ export const ButtonsShowCards = () => {
     const packId = useAppSelector(state => state.packsCard.user_id)
     const dispatch = useAppDispatch()
     const {minCardsCount,maxCardsCount} = useAppSelector(state => state.packsCard)
-    console.log(user_id)
 
     const showMyCards = () => {
         dispatch(setUserIdPacksAC(user_id))
