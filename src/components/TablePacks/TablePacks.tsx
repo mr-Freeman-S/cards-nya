@@ -48,7 +48,7 @@ export function TablePacks({rows}: TablePropsType) {
     }
 
     const onClickLearnHandler = (id: string, name: string) => {
-        navigate(`/cards/${name}/${id}`)
+        navigate(`/cards/learn/${name}/${id}`)
     }
 
     const onClickDeleteHandler = (id: string, name: string) => {
@@ -82,6 +82,10 @@ export function TablePacks({rows}: TablePropsType) {
         setActiveModal(false)
     }
 
+    const onClickCardsHandler = (id: string) => {
+        navigate(`/cards/${id}`)
+    }
+
 
     return (
         <div>
@@ -104,31 +108,42 @@ export function TablePacks({rows}: TablePropsType) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows && rows.map((row: CardPacksType) => (
-                            <TableRow
+                        {rows && rows.map((row: CardPacksType) => {
+                            let date = new Date(row.updated).toLocaleDateString()
+                            return <TableRow
                                 key={row._id}
                                 sx={{
                                     '&:last-child td, &:last-child th': {border: ''},
-                                    '&:nth-of-type(2)': {backgroundColor: '#F8F7FD'}
+                                    '&:nth-of-type(2n)': {backgroundColor: '#F8F7FD'}
                                 }}
                             >
-                                <TableCell align={"center"} component='th' scope='row'> {row.name}</TableCell>
+                                <TableCell
+                                    className={`${row.cardsCount > 0 ? style.enableHoverName : style.disableHoverName} ${style.border}`}
+                                    align={"center"}
+                                    component='th'
+                                    scope='row'
+                                    onClick={() => onClickCardsHandler(row._id)}
+                                >
+                                    {row.name}
+                                </TableCell>
                                 <TableCell align='center'>{row.cardsCount}</TableCell>
-                                <TableCell align='center'>{row.updated}</TableCell>
+                                <TableCell align='center'>{date}</TableCell>
                                 <TableCell align='center'>{row.user_name}</TableCell>
                                 <TableCell align='center'>
                                     {myId === row.user_id &&
-                                        <button onClick={() => onClickEditHandler(row._id, row.name)}>Edit</button>}
+                                        <button className={style.enableButtonEvent} onClick={() => onClickEditHandler(row._id, row.name)}>Edit</button>}
                                     {myId === row.user_id &&
-                                        <button onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
-                                {
-                                    row.cardsCount === 0 ?
-                                        <button disabled>Learn</button>
-                                        : <button onClick={() => onClickLearnHandler(row._id, row.name)}>Learn</button>
-                                }
+                                        <button className={style.deleteButton} onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
+                                    <button
+                                        disabled={row.cardsCount === 0}
+                                        className={`${row.cardsCount === 0 ? style.disableButtonEvent : style.enableButtonEvent}`}
+                                        onClick={() => onClickLearnHandler(row._id, row.name)}
+                                    >
+                                        Learn
+                                    </button>
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>

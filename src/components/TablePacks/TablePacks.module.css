@@ -6,3 +6,48 @@
 .click:active {
     transform: translate(0px, 1.2px);
 }
+
+.enableHoverName {
+    cursor: pointer;
+}
+
+.disableHoverName {
+    cursor: default;
+}
+
+.border:hover {
+     background-color: rgba(233, 124, 211, 0.5);
+}
+
+.enableButtonEvent {
+    padding: 5px 10px;
+    color: #21268F;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #D7D8EF;
+    border-radius: 10px;
+    margin-right: 3px;
+    cursor: pointer;
+}
+
+.disableButtonEvent {
+    padding: 5px 10px;
+    color: rgba(4, 5, 45, 0.33);
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #D7D8EF;
+    border-radius: 10px;
+    opacity: 30;
+    margin-right: 3px;
+}
+
+.deleteButton {
+    padding: 5px 10px;
+    color: #21268F;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: #ec1616;
+    border-radius: 10px;
+    margin-right: 3px;
+    cursor: pointer;
+}
