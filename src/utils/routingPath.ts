@@ -10,4 +10,5 @@ export const PATH = {
     CHECK_EMAIL: "/check-email",
     PACK_LIST: "/pack-list",
     CARDS_LIST: "/cards",
+    CARDS_LIST_LEARN: '/cards/learn'
 }
