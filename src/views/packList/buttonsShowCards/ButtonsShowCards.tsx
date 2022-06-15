@@ -6,8 +6,10 @@ import  style from './ButtonsShowCards.module.css';
 
 export const ButtonsShowCards = () => {
     const user_id = useAppSelector(state => state.auth._id)
+    const packId = useAppSelector(state => state.packsCard.user_id)
     const dispatch = useAppDispatch()
     const {minCardsCount,maxCardsCount} = useAppSelector(state => state.packsCard)
+    console.log(user_id)
 
     const showMyCards = () => {
         dispatch(setUserIdPacksAC(user_id))
@@ -19,8 +21,8 @@ export const ButtonsShowCards = () => {
     }
     return (
         <div className={style.container}>
-            <button className={style.allClick} onClick={showAllCards}>All</button>
-            <button className={style.myClick} onClick={showMyCards}>My</button>
+            <button className={packId? style.button: `${style.button} ${style.active}`} onClick={showAllCards}>All</button>
+            <button className={!packId? style.button: `${style.button} ${style.active}`} onClick={showMyCards}>My</button>
         </div>
     );
 };
