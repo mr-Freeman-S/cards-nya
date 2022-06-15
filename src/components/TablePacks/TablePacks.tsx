@@ -126,6 +126,7 @@ export function TablePacks({rows}: TablePropsType) {
                                         <button disabled>Learn</button>
                                         : <button onClick={() => onClickLearnHandler(row._id, row.name)}>Learn</button>
                                 }
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
