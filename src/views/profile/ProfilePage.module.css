@@ -21,10 +21,11 @@
 
 .title {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 20px;
     font-weight: bold;
     font-size: 22px;
     line-height: 33px;
+    color: #850303;
 }
 
 .photoBlock {
