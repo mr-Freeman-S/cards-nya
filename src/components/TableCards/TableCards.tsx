@@ -10,7 +10,13 @@ import {AiOutlineArrowUp} from "react-icons/ai";
 import TableBody from "@mui/material/TableBody";
 import {sortType} from "../TablePacks/TablePacks";
 import {CardType} from "../../utils/types";
-import {changeSortCardsAC, deleteCardTC, getCardsTC, setIdPacksAC} from "../../redux/reducers/cardsReducer";
+import {
+    changeSortCardsAC,
+    deleteCardTC,
+    getCardsTC,
+    setIdPacksAC,
+    updateCardTC
+} from "../../redux/reducers/cardsReducer";
 import {Rating} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -85,7 +91,7 @@ export const TableCards = () => {
         setActiveModal(false)
     }
     const onClickSaveUpdateHandler = (id: string, question: string, answer: string) => {
-        /*dispatch(updateCardTC(id, question, answer))*/
+        dispatch(updateCardTC(id, question, answer))
         setActiveModal(false)
     }
 

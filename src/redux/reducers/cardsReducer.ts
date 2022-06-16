@@ -1,7 +1,6 @@
 import {AppStateType, ThunkType} from "../store";
-import {getCardPackTC, updatePacksStatusAC} from "./packsCardReducer";
+import {updatePacksStatusAC} from "./packsCardReducer";
 import {cardsAPI} from "../../api/cardsAPI";
-import {packsAPI} from "../../api/packsAPI";
 
 const initialState = {
     cardPacks: [] as Array<CardsType>,
@@ -87,6 +86,9 @@ export const updatedRandomCardAC = (randomNumber: number) => {
 export const updatedShowModuleCardAC = (isActive: boolean) => {
     return {type: 'CARDS/UPDATE-SHOW-MODULE-CARD', isActive} as const
 }
+export const editCardAC = (question: string, answer: string) => {
+    return {type: 'CARDS/EDIT-CARD', question, answer} as const
+}
 
 
 //Thunks
@@ -148,6 +150,18 @@ export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
             dispatch(updatePacksStatusAC("idle"))
         })
 }
+export const updateCardTC = (_id: string, question: string, answer: string): ThunkType => (dispatch) => {
+    dispatch(updatePacksStatusAC("loading"))
+    cardsAPI.updateCard({_id, question, answer})
+        .then(() => {
+            dispatch(getCardsTC())
+        })
+        .catch(e => {
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
+        })
+}
 
 //Types
 type InitialStateType = typeof initialState
@@ -175,6 +189,7 @@ export type CardsReducerActionType =
     | ReturnType<typeof updatedCardsStatusAC>
     | ReturnType<typeof updatedRandomCardAC>
     | ReturnType<typeof updatedShowModuleCardAC>
+    | ReturnType<typeof editCardAC>
 
 
 export type CardsStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

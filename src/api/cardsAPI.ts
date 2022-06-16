@@ -12,7 +12,7 @@ export const cardsAPI = {
         return instanceHeroku.post<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
     },
     updateCard(card: UpdateCardType) {
-        return instanceHeroku.put<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
+        return instanceHeroku.put<{ card: UpdateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
     },
     deleteCard(id: string) {
         return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/card/?id=${id}`) //не увер ен, что будет именно так,
@@ -58,8 +58,9 @@ type CreateCardType = {
 type UpdateCardType = {
     _id: string
     question: string
+    answer: string
     //... // не обязательно, надо добавить!
-    comments: string
+    comments?: string
 }
 
 type ResponseType<T = {}> = {
