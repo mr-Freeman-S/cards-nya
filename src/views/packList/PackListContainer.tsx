@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {getCardPackTC, setMinMaxSearchCardAC, updatePacksStatusAC} from "../../redux/reducers/packsCardReducer";
+import {getCardPackTC, setMinMaxSearchCardAC} from "../../redux/reducers/packsCardReducer";
 import {Preloader} from "../../components/Preloader/Preloader";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -18,8 +18,7 @@ export const PackListContainer = () => {
     const pageCount = useAppSelector(state => state.packsCard.pageCount)
     const packsStatus = useAppSelector(state => state.packsCard.packsStatus)
     const user_id = useAppSelector(state => state.packsCard.user_id)
-    const {min, max} = useAppSelector(state => state.packsCard)
-    const {minCardsCount, maxCardsCount} = useAppSelector(state => state.packsCard)
+    const {min, max, minCardsCount, maxCardsCount} = useAppSelector(state => state.packsCard)
     const sortByUpdatePacks = useAppSelector(state => state.packsCard.sortPacks)
     const isLogged = useAppSelector(state => state.login.isLogged)
     const dispatch = useAppDispatch()
@@ -29,7 +28,7 @@ export const PackListContainer = () => {
 
     const onMouseUpHandler = useCallback(() => {
         dispatch(setMinMaxSearchCardAC(minVal, maxVal))
-    },[minVal,maxVal,dispatch])
+    }, [minVal, maxVal, dispatch])
 
     useEffect(() => {
         dispatch(getCardPackTC())
