@@ -10,7 +10,7 @@ import {AiOutlineArrowUp} from "react-icons/ai";
 import TableBody from "@mui/material/TableBody";
 import {sortType} from "../TablePacks/TablePacks";
 import {CardType} from "../../utils/types";
-import {changeSortCardsAC, getCardsTC, setIdPacksAC} from "../../redux/reducers/cardsReducer";
+import {changeSortCardsAC, deleteCardTC, getCardsTC, setIdPacksAC} from "../../redux/reducers/cardsReducer";
 import {Rating} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -78,7 +78,7 @@ export const TableCards = () => {
     }
 
     const onClickYesDeleteHandler = (id: string) => {
-        /* dispatch(deleteCardTC(id))*/
+        dispatch(deleteCardTC(id))
         setActiveModal(false)
     }
     const onClickCancelUpdateHandler = () => {

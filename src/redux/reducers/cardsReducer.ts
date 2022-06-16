@@ -1,6 +1,7 @@
 import {AppStateType, ThunkType} from "../store";
-import {updatePacksStatusAC} from "./packsCardReducer";
+import {getCardPackTC, updatePacksStatusAC} from "./packsCardReducer";
 import {cardsAPI} from "../../api/cardsAPI";
+import {packsAPI} from "../../api/packsAPI";
 
 const initialState = {
     cardPacks: [] as Array<CardsType>,
@@ -133,6 +134,18 @@ export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
         .finally(() => {
             dispatch(updatedCardsStatusAC("idle"))
             dispatch(updatedShowModuleCardAC(true))
+        })
+}
+export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
+    dispatch(updatePacksStatusAC("loading"))
+    cardsAPI.deleteCard(_id)
+        .then(() => {
+            dispatch(getCardsTC())
+        })
+        .catch(e => {
+        })
+        .finally(() => {
+            dispatch(updatePacksStatusAC("idle"))
         })
 }
 
