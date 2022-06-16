@@ -16,7 +16,7 @@ const initialState = {
     cardsTotalCount: 0,
     randomNumber: 0,
     showModuleCard: true,
-    cardsStatus: 'idle' as CardsStatusType
+    cardsStatus: 'loading' as CardsStatusType
 }
 
 //Reducer
@@ -117,7 +117,7 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
 
 export const createCardTC = (newTitleQuestion: string, newTitleAnswer: string): ThunkType => (
     dispatch, getState: () => AppStateType) => {
-    dispatch(updatePacksStatusAC("loading"))
+    dispatch(updatedCardsStatusAC("loading"))
     let cardsPack_id = getState().cards.cardsPack_id
     cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 3})
         .then(() => {
@@ -145,10 +145,14 @@ export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
         })
         .catch((e) => {
         })
+        .finally(() => {
+            dispatch(updatedCardsStatusAC("idle"))
+            dispatch(updatedShowModuleCardAC(true))
+        })
 
 }
 export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
-    dispatch(updatePacksStatusAC("loading"))
+    dispatch(updatedCardsStatusAC("loading"))
     cardsAPI.deleteCard(_id)
         .then(() => {
             dispatch(getCardsTC())
@@ -166,7 +170,7 @@ export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
         })
 }
 export const updateCardTC = (_id: string, question: string, answer: string): ThunkType => (dispatch) => {
-    dispatch(updatePacksStatusAC("loading"))
+    dispatch(updatedCardsStatusAC("loading"))
     cardsAPI.updateCard({_id, question, answer})
         .then(() => {
             dispatch(getCardsTC())
