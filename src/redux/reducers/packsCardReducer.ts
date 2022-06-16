@@ -68,7 +68,6 @@ export const changePacksPageCountAC = (pageCount: number) => {
     return {type: 'PACKS/CHANGE-PACKS-PAGE-COUNT', pageCount} as const
 }
 export const setUserIdPacksAC = (user_id: string) => {
-    debugger
     return {type: 'PACKS/SET-USER-ID-PACKS', user_id} as const
 }
 export const changeSortPackCardsAC = (sortPacks: string) => {
