@@ -42,7 +42,7 @@ const colums = ['Question', 'Answer', 'Last Update', 'Grade']
 export const TableCards = () => {
     const {id} = useParams()
     const rows = useAppSelector(state => state.cards.cardPacks)
-    const packsStatus = useAppSelector(state => state.packsCard.packsStatus)
+    const cardStatus = useAppSelector(state => state.cards.cardsStatus)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
@@ -98,12 +98,12 @@ export const TableCards = () => {
     return (
         <div>
             <div className={style.back}>
-                {packsStatus !== 'loading'
+                {cardStatus !== 'loading'
                     ? <div className={style.back}>
                         <button onClick={() => navigate(PATH.PACK_LIST)}>Back</button>
                         <AddCard/>
                     </div>
-                    : <Preloader isActive={packsStatus === 'loading'}/>}
+                    : <Preloader isActive={cardStatus === 'loading'}/>}
             </div>
             <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
                 <Table sx={{width: 850}} aria-label='simple table'>

@@ -36,7 +36,12 @@ export const registerTC = (data: RegistrationParamsType, resetForm: () => void):
                 dispatch(setIsRegisteredAC(true))
             })
             .catch((error) => {
-                dispatch(setErrorAC(error.response.data.error));
+                if (error.response.data.error.length) {
+                    dispatch(setErrorAC(error.response.data.error))
+                } else {
+                    dispatch(setErrorAC('Some error occurred'))
+                }
+                dispatch(setLoadingAC(false))
             })
             .finally(() => {
                 dispatch(setLoadingAC(false))

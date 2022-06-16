@@ -1,6 +1,7 @@
 import {AppStateType, ThunkType} from "../store";
 import {updatePacksStatusAC} from "./packsCardReducer";
 import {cardsAPI} from "../../api/cardsAPI";
+import {setErrorMessageAC} from "./appReducer";
 
 const initialState = {
     cardPacks: [] as Array<CardsType>,
@@ -15,7 +16,7 @@ const initialState = {
     cardsTotalCount: 0,
     randomNumber: 0,
     showModuleCard: true,
-    cardsStatus: 'loading' as CardsStatusType
+    cardsStatus: 'idle' as CardsStatusType
 }
 
 //Reducer
@@ -99,9 +100,15 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
     cardsAPI.getCards({cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount})
         .then(res => {
             dispatch(setCardsAC(res.data.cards))
+            dispatch(updatedCardsStatusAC("succeeded"))
         })
-        .catch(e => {
-
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatedCardsStatusAC("idle"))
@@ -113,29 +120,29 @@ export const createCardTC = (newTitleQuestion: string, newTitleAnswer: string): 
     dispatch(updatePacksStatusAC("loading"))
     let cardsPack_id = getState().cards.cardsPack_id
     cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 3})
-        .then(res => {
+        .then(() => {
             dispatch(getCardsTC())
+            dispatch(updatedCardsStatusAC("succeeded"))
         })
-        .catch(e => {
-
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
-            dispatch(updatePacksStatusAC("idle"))
+            dispatch(updatedCardsStatusAC("idle"))
         })
 }
 export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
     dispatch) => {
-    dispatch(updatedCardsStatusAC("loading"))
     cardsAPI.updateCardGrade(cardId, grade)
         .then(res => {
             dispatch(updatedGradeCardAC(res.data.updatedGrade.card_id, res.data.updatedGrade.grade, res.data.updatedGrade.shots))
         })
-        .catch(e => {
-
-        })
-        .finally(() => {
-            dispatch(updatedCardsStatusAC("idle"))
-            dispatch(updatedShowModuleCardAC(true))
+        .catch((e) => {
         })
 }
 export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
@@ -144,10 +151,16 @@ export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
         .then(() => {
             dispatch(getCardsTC())
         })
-        .catch(e => {
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
-            dispatch(updatePacksStatusAC("idle"))
+            dispatch(updatedCardsStatusAC("idle"))
         })
 }
 export const updateCardTC = (_id: string, question: string, answer: string): ThunkType => (dispatch) => {
@@ -156,10 +169,16 @@ export const updateCardTC = (_id: string, question: string, answer: string): Thu
         .then(() => {
             dispatch(getCardsTC())
         })
-        .catch(e => {
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
-            dispatch(updatePacksStatusAC("idle"))
+            dispatch(updatedCardsStatusAC("idle"))
         })
 }
 
