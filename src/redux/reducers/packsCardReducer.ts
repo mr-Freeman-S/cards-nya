@@ -13,7 +13,8 @@ const initialState = {
     cardPacksTotalCount: 0,
     packsStatus: 'idle' as PacksStatusType,
     minCardsCount: 0,
-    maxCardsCount: 0
+    maxCardsCount: 0,
+    searchPackName:''
 }
 
 //Reducer
@@ -35,7 +36,7 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
         case "PACKS/CHANGE-SORT-PACKS-CARDS":
             return {...state, sortPacks: action.sortPacks}
         case "PACKS/SEARCH-PACKS":
-            return {...state, packName: action.packName}
+            return {...state, searchPackName: action.searchPackName}
         case "PACKS/CREATE-PACK":
             return {...state, ...action.cardPacks}
         case "PACKS/FETCH-MINMAX-COUNT-CARDS":
@@ -67,6 +68,7 @@ export const changePacksPageCountAC = (pageCount: number) => {
     return {type: 'PACKS/CHANGE-PACKS-PAGE-COUNT', pageCount} as const
 }
 export const setUserIdPacksAC = (user_id: string) => {
+    debugger
     return {type: 'PACKS/SET-USER-ID-PACKS', user_id} as const
 }
 export const changeSortPackCardsAC = (sortPacks: string) => {
@@ -78,8 +80,8 @@ export const fetchMinMaxCardCountAC = (minCardsCount: number, maxCardsCount: num
 export const setMinMaxSearchCardAC = (min: number, max: number) => {
     return {type: 'PACKS/SET-MINMAX-SEARCH-CARDS', min, max} as const
 }
-export const searchPackAC = (packName: string) => {
-    return {type: 'PACKS/SEARCH-PACKS', packName} as const
+export const searchPackAC = (searchPackName: string) => {
+    return {type: 'PACKS/SEARCH-PACKS', searchPackName} as const
 }
 export const createPackAC = (cardPacks: CreatePackType) => {
     return {type: "PACKS/CREATE-PACK", cardPacks} as const
