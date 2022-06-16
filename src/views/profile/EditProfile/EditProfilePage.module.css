@@ -39,7 +39,6 @@
 	width: 130px;
 	height: 130px;
 	border-radius: 100%;
-	opacity: 0.3;
 }
 
 .addPhoto {
@@ -53,6 +52,7 @@
 	position: absolute;
 	top: 94px;
 	left: 89px;
+	opacity: 1.5;
 }
 
 .addPhoto input[type='file'] {
