@@ -145,6 +145,7 @@ export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
         })
         .catch((e) => {
         })
+
 }
 export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
     dispatch(updatePacksStatusAC("loading"))
