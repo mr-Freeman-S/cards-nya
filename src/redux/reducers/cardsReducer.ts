@@ -138,6 +138,7 @@ export const createCardTC = (newTitleQuestion: string, newTitleAnswer: string): 
 }
 export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
     dispatch) => {
+    dispatch(updatedCardsStatusAC("loading"))
     cardsAPI.updateCardGrade(cardId, grade)
         .then(res => {
             dispatch(updatedGradeCardAC(res.data.updatedGrade.card_id, res.data.updatedGrade.grade, res.data.updatedGrade.shots))
