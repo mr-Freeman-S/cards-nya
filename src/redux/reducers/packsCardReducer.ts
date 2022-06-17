@@ -1,5 +1,6 @@
 import {AppStateType, ThunkType} from "../store";
 import {CreatePackType, packsAPI} from "../../api/packsAPI";
+import {setErrorMessageAC} from "./appReducer";
 
 const initialState = {
     cardPacks: [] as Array<CardPacksType>,
@@ -98,21 +99,33 @@ export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStat
             dispatch(updateCardPacksTotalCountAC(res.data.cardPacksTotalCount))
             dispatch(fetchMinMaxCardCountAC(res.data.minCardsCount, res.data.maxCardsCount))
         })
-        .catch(e => {
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatePacksStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatePacksStatusAC("idle"))
         })
 }
 
-export const createCardPackTC = (name?: string, deckCover?: string,privatePack?:boolean): ThunkType => (dispatch) => {
+export const createCardPackTC = (name?: string, deckCover?: string, privatePack?: boolean): ThunkType => (dispatch) => {
     dispatch(updatePacksStatusAC("loading"))
     packsAPI.createPack({name, deckCover, private: privatePack})
         .then(res => {
             dispatch(createPackAC(res.data.newCardsPack))
             dispatch(getCardPackTC())
         })
-        .catch(e => {
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatePacksStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatePacksStatusAC("idle"))
@@ -125,7 +138,13 @@ export const deleteCardPackTC = (_id: string): ThunkType => (dispatch) => {
         .then(() => {
             dispatch(getCardPackTC())
         })
-        .catch(e => {
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatePacksStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatePacksStatusAC("idle"))
@@ -134,12 +153,18 @@ export const deleteCardPackTC = (_id: string): ThunkType => (dispatch) => {
 
 export const updateCardPackTC = (_id: string, name: string): ThunkType => (dispatch) => {
     dispatch(updatePacksStatusAC("loading"))
-    packsAPI.updatePack({_id,name})
+    packsAPI.updatePack({_id, name})
         .then((res) => {
             dispatch(editPackNameAC(res.data.updatedCardsPack.name))
             dispatch(getCardPackTC())
         })
-        .catch(e => {
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatePacksStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatePacksStatusAC("idle"))

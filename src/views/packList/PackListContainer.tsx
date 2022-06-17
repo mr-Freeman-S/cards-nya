@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {getCardPackTC, setMinMaxSearchCardAC, updatePacksStatusAC} from "../../redux/reducers/packsCardReducer";
+import {getCardPackTC, setMinMaxSearchCardAC} from "../../redux/reducers/packsCardReducer";
 import {Preloader} from "../../components/Preloader/Preloader";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -29,7 +29,7 @@ export const PackListContainer = () => {
 
     const onMouseUpHandler = useCallback(() => {
         dispatch(setMinMaxSearchCardAC(minVal, maxVal))
-    },[minVal,maxVal,dispatch])
+    }, [minVal, maxVal, dispatch])
 
     useEffect(() => {
         dispatch(getCardPackTC())
