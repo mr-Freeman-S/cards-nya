@@ -45,8 +45,11 @@ export const LearnCardContainer = () => {
     }
 
     useEffect(() => {
-        dispatch(setIdPacksAC(id!))
-        dispatch(getCardsTC())
+        if(id){
+            dispatch(setIdPacksAC(id))
+            dispatch(getCardsTC())
+        }
+
     }, []);
 
     useEffect(()=> {
@@ -63,6 +66,10 @@ export const LearnCardContainer = () => {
 
     if (!isLogged) {
         return <Navigate to={PATH.LOGIN_PAGE}/>
+    }
+
+    if(cardPacks.length === 0) {
+        return <Preloader isActive={true}/>
     }
 
     return (
