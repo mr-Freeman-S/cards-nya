@@ -72,10 +72,6 @@ export const LearnCardContainer = () => {
         return <Preloader isActive={true}/>
     }
 
-    if(cardPacks.length === 0) {
-        return <Preloader isActive={true}/>
-    }
-
     return (
 
         <div>
