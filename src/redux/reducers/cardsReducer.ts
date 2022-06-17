@@ -118,7 +118,7 @@ export const createCardTC = (newTitleQuestion: string, newTitleAnswer: string): 
     dispatch, getState: () => AppStateType) => {
     dispatch(updatedCardsStatusAC("loading"))
     let cardsPack_id = getState().cards.cardsPack_id
-    cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 3})
+    cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 0})
         .then(() => {
             dispatch(getCardsTC())
             dispatch(updatedCardsStatusAC("succeeded"))
@@ -142,7 +142,13 @@ export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
         .then(res => {
             dispatch(updatedGradeCardAC(res.data.updatedGrade.card_id, res.data.updatedGrade.grade, res.data.updatedGrade.shots))
         })
-        .catch((e) => {
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatedCardsStatusAC("idle"))
