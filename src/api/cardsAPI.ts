@@ -56,22 +56,21 @@ type CreateCardType = {
 
 type UpdateCardType = {
     answer: string
-    answerImg:string
-    answerVideo:string
-    cardsPack_id: string
-    comments:string
-    created: string
-    grade: number
-    more_id: string
+    answerImg?:string
+    answerVideo?:string
+    cardsPack_id?: string
+    comments?: string
+    grade?: number
+    more_id?: string
     question: string
-    questionImg: string
-    questionVideo: string
-    rating: number
-    shots: number
-    type: string
-    updated: string
-    user_id: string
-    __v: number
+    questionImg?: string
+    questionVideo?: string
+    rating?: number
+    shots?: number
+    type?: string
+    updated?: string
+    user_id?: string
+    __v?: number
     _id: string
 }
 
