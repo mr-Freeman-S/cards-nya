@@ -1,5 +1,4 @@
 import {AppStateType, ThunkType} from "../store";
-import {updatePacksStatusAC} from "./packsCardReducer";
 import {cardsAPI} from "../../api/cardsAPI";
 import {setErrorMessageAC} from "./appReducer";
 
@@ -156,6 +155,7 @@ export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
     cardsAPI.deleteCard(_id)
         .then(() => {
             dispatch(getCardsTC())
+            dispatch(updatedCardsStatusAC("succeeded"))
         })
         .catch((error) => {
             if (error.response.data.error.length) {
@@ -174,6 +174,7 @@ export const updateCardTC = (_id: string, question: string, answer: string): Thu
     cardsAPI.updateCard({_id, question, answer})
         .then(() => {
             dispatch(getCardsTC())
+            dispatch(updatedCardsStatusAC("succeeded"))
         })
         .catch((error) => {
             if (error.response.data.error.length) {
