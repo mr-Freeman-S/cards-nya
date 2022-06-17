@@ -109,7 +109,7 @@ export const createCardTC = (newTitleQuestion: string, newTitleAnswer: string): 
     dispatch, getState: () => AppStateType) => {
     dispatch(updatePacksStatusAC("loading"))
     let cardsPack_id = getState().cards.cardsPack_id
-    cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 3})
+    cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 0})
         .then(res => {
             dispatch(getCardsTC())
         })

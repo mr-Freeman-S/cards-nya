@@ -25,7 +25,6 @@ export const CardAnswer: React.FC<LearnPackAnswerPropsType> = ({cardPack, namePa
         callback(true, value)
     }
     const returnToTable = () => {
-        debugger
         dispatch(setCardsAC([]))
         dispatch(updatedRandomCardAC(0))
         navigate(PATH.PACK_LIST)

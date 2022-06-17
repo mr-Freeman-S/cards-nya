@@ -6,10 +6,10 @@ import {getCardPackTC, searchPackAC} from "../../redux/reducers/packsCardReducer
 
 export const SearchPack = () => {
 
-    const packName = useAppSelector<string>(state => state.packsCard.packName)
+    const searchPackName = useAppSelector<string>(state => state.packsCard.searchPackName)
     const dispatch = useAppDispatch()
 
-    const [value, setValue] = useState<string>(packName)
+    const [value, setValue] = useState<string>(searchPackName)
 
     const searchPacksHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value)

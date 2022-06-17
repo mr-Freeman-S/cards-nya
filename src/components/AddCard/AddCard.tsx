@@ -1,20 +1,13 @@
-import React from "react"
-import {useAppDispatch} from "../../redux/store";
-import {createCardTC} from "../../redux/reducers/cardsReducer";
+import React, {useState} from "react"
+import {FormAddCard} from "./FormAddCard";
+import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 
 export const AddCard = () => {
-
-    const dispatch = useAppDispatch()
-    const question: string = "Question"
-    const answer: string = "Answer"
-
-    const onclickHandler = (question: string, answer: string) => {
-        dispatch(createCardTC(question, answer))
-    }
-
+    const [isActive,setIsActive] = useState<boolean>(false)
     return (
         <div>
-            <button onClick={() => {onclickHandler(question, answer)}}>Add Card</button>
+            <button onClick={()=>setIsActive(true)}>Add Pack</button>
+            <UniverseModalWindow isActive={isActive} setActive={setIsActive}><FormAddCard setIsActive={setIsActive}/></UniverseModalWindow>
         </div>
     )
 }
