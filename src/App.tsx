@@ -5,6 +5,7 @@ import {authMe} from "./redux/reducers/loginReducer";
 import {PrivateRoute} from "./components/Routing/PrivateRoute";
 import Header from "./components/Header/Header";
 import {Preloader} from "./components/Preloader/Preloader";
+import {ErrorSnackbar} from "./components/ErrorSnackBar/ErrorSnackBar";
 
 function App() {
     const isAuth = useAppSelector(state => state.login.isLogged)
@@ -14,11 +15,12 @@ function App() {
     useEffect(() => {
         dispatch(authMe())
     }, [dispatch])
+
     return (
         <div>
-            {/*<Navbar/>*/}
+            <ErrorSnackbar/>
             <Header isAuth={isAuth}/>
-            {!isInit ?  <Preloader isActive={!isInit}/> : <PrivateRoute/>}
+            {!isInit ? <Preloader isActive={!isInit}/> : <PrivateRoute/>}
         </div>
     )
 }

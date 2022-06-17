@@ -35,7 +35,7 @@ export const LoginPage = () => {
         dispatch(loginTC(values.email, values.password, values.rememberMe, resetForm))
     }
     useEffect(() => {
-        setTimeout(() => dispatch(setErrorMessageAC('')), 2000)
+        setTimeout(() => dispatch(setErrorMessageAC(null)), 2000)
     }, [dispatch, error])
 
     if (isLogged) {

@@ -10,7 +10,13 @@ import {AiOutlineArrowUp} from "react-icons/ai";
 import TableBody from "@mui/material/TableBody";
 import {sortType} from "../TablePacks/TablePacks";
 import {CardType} from "../../utils/types";
-import {changeSortCardsAC, getCardsTC, setIdPacksAC} from "../../redux/reducers/cardsReducer";
+import {
+    changeSortCardsAC,
+    deleteCardTC,
+    getCardsTC,
+    setIdPacksAC,
+    updateCardTC
+} from "../../redux/reducers/cardsReducer";
 import {Rating} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -36,7 +42,7 @@ const colums = ['Question', 'Answer', 'Last Update', 'Grade']
 export const TableCards = () => {
     const {id} = useParams()
     const rows = useAppSelector(state => state.cards.cardPacks)
-    const packsStatus = useAppSelector(state => state.packsCard.packsStatus)
+    const cardStatus = useAppSelector(state => state.cards.cardsStatus)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const [sortBy, setSortBy] = useState<sortType>('desc')
@@ -78,26 +84,26 @@ export const TableCards = () => {
     }
 
     const onClickYesDeleteHandler = (id: string) => {
-        /* dispatch(deleteCardTC(id))*/
+        dispatch(deleteCardTC(id))
         setActiveModal(false)
     }
     const onClickCancelUpdateHandler = () => {
         setActiveModal(false)
     }
     const onClickSaveUpdateHandler = (id: string, question: string, answer: string) => {
-        /*dispatch(updateCardTC(id, question, answer))*/
+        dispatch(updateCardTC(id, question, answer))
         setActiveModal(false)
     }
 
     return (
         <div>
             <div className={style.back}>
-                {packsStatus !== 'loading'
+                {cardStatus !== 'loading'
                     ? <div className={style.back}>
                         <button onClick={() => navigate(PATH.PACK_LIST)}>Back</button>
                         <AddCard/>
                     </div>
-                    : <Preloader isActive={packsStatus === 'loading'}/>}
+                    : <Preloader isActive={cardStatus === 'loading'}/>}
             </div>
             <TableContainer style={{width: 850, margin: '0 auto',}} component={Paper}>
                 <Table sx={{width: 850}} aria-label='simple table'>

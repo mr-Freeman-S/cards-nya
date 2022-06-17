@@ -94,7 +94,7 @@ export const RegistrationPage = () => {
                                 <ErrorMessage name="confirmPassword" component="div"/>
                             </div>
                         </div>
-                        {isLoading && "LOADING..."}
+                        {isLoading && "Loading. Please, wait."}
                         {error ? <div style={{color: "red"}}>{error}</div> : ''}
                         <div className={style.button}>
                             <p>

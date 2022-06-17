@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {Navigate, useParams} from "react-router-dom";
 import {
     CardsType,
-    getCardsTC, setCardsAC,
+    getCardsTC,
     setIdPacksAC,
     updatedRandomCardAC,
     updatedShowModuleCardAC,
@@ -52,7 +52,7 @@ export const LearnCardContainer = () => {
 
     }, []);
 
-    useEffect(()=> {
+    useEffect(() => {
         cleverRandom(cardPacks)
     }, [cardPacks])
 
@@ -66,6 +66,10 @@ export const LearnCardContainer = () => {
 
     if (!isLogged) {
         return <Navigate to={PATH.LOGIN_PAGE}/>
+    }
+
+    if (cardPacks.length === 0) {
+        return <Preloader isActive={true}/>
     }
 
     if(cardPacks.length === 0) {

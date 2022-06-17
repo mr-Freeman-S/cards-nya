@@ -14,9 +14,9 @@ export const EditModal = (props: EditModalPropsType) => {
     return (
         <div>
             <div>
-                {`Enter new PackName`}
+                {`Enter new Name`}
             </div>
-            <input style={{marginTop: 40}} value={props.title} onChange={(e) => {
+            <input style={{marginTop: 30}} value={props.title} onChange={(e) => {
                 props.setTitle(e.currentTarget.value)
             }}/>
             <div style={{marginBottom: 40, marginTop: 40}}>

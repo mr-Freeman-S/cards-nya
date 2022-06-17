@@ -12,11 +12,10 @@ export const cardsAPI = {
         return instanceHeroku.post<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
     },
     updateCard(card: UpdateCardType) {
-        return instanceHeroku.put<{ card: CreateCardType }, AxiosResponse<ResponseType>>("cards/card", {card})
+        return instanceHeroku.put<{ card: UpdateCardType }, AxiosResponse<ResponseUpdateCardType>>("cards/card", {card})
     },
     deleteCard(id: string) {
-        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/card/${id}`) //не увер ен, что будет именно так,
-        // надо будет еще перепроверить правильный ли путь
+        return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/card/?id=${id}`)
     },
     updateCardGrade(card_id: string, grade: number) {
         return instanceHeroku.put<{card_id: string, grade: number}, AxiosResponse<updateGradeCardType>>("/cards/grade",  {grade, card_id})
@@ -56,16 +55,35 @@ type CreateCardType = {
 }
 
 type UpdateCardType = {
-    _id: string
+    answer: string
+    answerImg?:string
+    answerVideo?:string
+    cardsPack_id?: string
+    comments?: string
+    grade?: number
+    more_id?: string
     question: string
-    //... // не обязательно, надо добавить!
-    comments: string
+    questionImg?: string
+    questionVideo?: string
+    rating?: number
+    shots?: number
+    type?: string
+    updated?: string
+    user_id?: string
+    __v?: number
+    _id: string
 }
 
 type ResponseType<T = {}> = {
     resultCode: number
     messages: string[]
     data: T
+}
+
+type ResponseUpdateCardType = {
+    updatedCardsPack: UpdateCardType[]
+    token: string
+    tokenDeathTime: number
 }
 
 type updateGradeCardType = {

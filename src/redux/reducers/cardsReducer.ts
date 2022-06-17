@@ -1,6 +1,6 @@
 import {AppStateType, ThunkType} from "../store";
-import {updatePacksStatusAC} from "./packsCardReducer";
 import {cardsAPI} from "../../api/cardsAPI";
+import {setErrorMessageAC} from "./appReducer";
 
 const initialState = {
     cardPacks: [] as Array<CardsType>,
@@ -86,6 +86,9 @@ export const updatedRandomCardAC = (randomNumber: number) => {
 export const updatedShowModuleCardAC = (isActive: boolean) => {
     return {type: 'CARDS/UPDATE-SHOW-MODULE-CARD', isActive} as const
 }
+export const editCardAC = (question: string, answer: string) => {
+    return {type: 'CARDS/EDIT-CARD', question, answer} as const
+}
 
 
 //Thunks
@@ -96,9 +99,15 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
     cardsAPI.getCards({cardAnswer, cardQuestion, cardsPack_id, min, max, sortCards, page, pageCount})
         .then(res => {
             dispatch(setCardsAC(res.data.cards))
+            dispatch(updatedCardsStatusAC("succeeded"))
         })
-        .catch(e => {
-
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatedCardsStatusAC("idle"))
@@ -107,17 +116,23 @@ export const getCardsTC = (): ThunkType => (dispatch, getState: () => AppStateTy
 
 export const createCardTC = (newTitleQuestion: string, newTitleAnswer: string): ThunkType => (
     dispatch, getState: () => AppStateType) => {
-    dispatch(updatePacksStatusAC("loading"))
+    dispatch(updatedCardsStatusAC("loading"))
     let cardsPack_id = getState().cards.cardsPack_id
     cardsAPI.createCard({cardsPack_id, question: newTitleQuestion, answer: newTitleAnswer, grade: 0})
-        .then(res => {
+        .then(() => {
             dispatch(getCardsTC())
+            dispatch(updatedCardsStatusAC("succeeded"))
         })
-        .catch(e => {
-
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
-            dispatch(updatePacksStatusAC("idle"))
+            dispatch(updatedCardsStatusAC("idle"))
         })
 }
 export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
@@ -127,12 +142,56 @@ export const updateGradeCardTC = (cardId: string, grade: number): ThunkType => (
         .then(res => {
             dispatch(updatedGradeCardAC(res.data.updatedGrade.card_id, res.data.updatedGrade.grade, res.data.updatedGrade.shots))
         })
-        .catch(e => {
-
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
         })
         .finally(() => {
             dispatch(updatedCardsStatusAC("idle"))
             dispatch(updatedShowModuleCardAC(true))
+        })
+
+}
+export const deleteCardTC = (_id: string): ThunkType => (dispatch) => {
+    dispatch(updatedCardsStatusAC("loading"))
+    cardsAPI.deleteCard(_id)
+        .then(() => {
+            dispatch(getCardsTC())
+            dispatch(updatedCardsStatusAC("succeeded"))
+        })
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
+        })
+        .finally(() => {
+            dispatch(updatedCardsStatusAC("idle"))
+        })
+}
+export const updateCardTC = (_id: string, question: string, answer: string): ThunkType => (dispatch) => {
+    dispatch(updatedCardsStatusAC("loading"))
+    cardsAPI.updateCard({_id, question, answer})
+        .then(() => {
+            dispatch(getCardsTC())
+            dispatch(updatedCardsStatusAC("succeeded"))
+        })
+        .catch((error) => {
+            if (error.response.data.error.length) {
+                dispatch(setErrorMessageAC(error.response.data.error))
+            } else {
+                dispatch(setErrorMessageAC('Some error occurred'))
+            }
+            dispatch(updatedCardsStatusAC("failed"))
+        })
+        .finally(() => {
+            dispatch(updatedCardsStatusAC("idle"))
         })
 }
 
@@ -162,6 +221,7 @@ export type CardsReducerActionType =
     | ReturnType<typeof updatedCardsStatusAC>
     | ReturnType<typeof updatedRandomCardAC>
     | ReturnType<typeof updatedShowModuleCardAC>
+    | ReturnType<typeof editCardAC>
 
 
 export type CardsStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'

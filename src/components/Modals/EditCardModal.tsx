@@ -17,13 +17,13 @@ export const EditCardModal = (props: EditModalPropsType) => {
             <div>
                 {`Edit Question`}
             </div>
-            <input style={{marginTop: 40}} value={props.question} onChange={(e) => {
+            <input style={{marginTop: 10}} value={props.question} onChange={(e) => {
                 props.setQuestion(e.currentTarget.value)
             }}/>
-            <div>
+            <div style={{marginTop: 30}}>
                 {`Edit Answer`}
             </div>
-            <input style={{marginTop: 40}} value={props.answer} onChange={(e) => {
+            <input style={{marginTop: 10}} value={props.answer} onChange={(e) => {
                 props.setAnswer(e.currentTarget.value)
             }}/>
             <div style={{marginBottom: 40, marginTop: 40}}>

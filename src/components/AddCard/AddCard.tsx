@@ -6,7 +6,7 @@ export const AddCard = () => {
     const [isActive,setIsActive] = useState<boolean>(false)
     return (
         <div>
-            <button onClick={()=>setIsActive(true)}>Add Pack</button>
+            <button onClick={()=>setIsActive(true)}>Add Card</button>
             <UniverseModalWindow isActive={isActive} setActive={setIsActive}><FormAddCard setIsActive={setIsActive}/></UniverseModalWindow>
         </div>
     )
