@@ -36,9 +36,9 @@ export const ProfilePage = () => {
                     <div className={style.inputEmail}>
                         <span>Email: {email}</span>
                     </div>
-                    <div className={style.packsCount}>
+                   {/* <div className={style.packsCount}>
                         <span>Your packs: {packsCount}</span>
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         </div>

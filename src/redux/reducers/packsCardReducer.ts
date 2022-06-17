@@ -38,8 +38,6 @@ export const packsCardReducer = (state: InitialStateType = initialState, action:
             return {...state, sortPacks: action.sortPacks}
         case "PACKS/SEARCH-PACKS":
             return {...state, searchPackName: action.searchPackName}
-       /* case "PACKS/CREATE-PACK":
-            return {...state, ...action.cardPacks}*/ //!!! fix
         case "PACKS/FETCH-MINMAX-COUNT-CARDS":
             return {...state, minCardsCount: action.minCardsCount, maxCardsCount: action.maxCardsCount}
         case 'PACKS/SET-MINMAX-SEARCH-CARDS':
@@ -83,9 +81,6 @@ export const setMinMaxSearchCardAC = (min: number, max: number) => {
 export const searchPackAC = (searchPackName: string) => {
     return {type: 'PACKS/SEARCH-PACKS', searchPackName} as const
 }
-/*export const createPackAC = (cardPacks: CreatePackType) => {
-    return {type: "PACKS/CREATE-PACK", cardPacks} as const
-}*/
 export const editPackNameAC = (packName: string) => {
     return {type: 'PACKS/EDIT-PACK-NAME', packName} as const
 }
@@ -116,8 +111,7 @@ export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStat
 export const createCardPackTC = (name?: string, deckCover?: string, privatePack?: boolean): ThunkType => (dispatch) => {
     dispatch(updatePacksStatusAC("loading"))
     packsAPI.createPack({name, deckCover, private: privatePack})
-        .then(res => {
-            //dispatch(createPackAC(res.data.newCardsPack))
+        .then(() => {
             dispatch(getCardPackTC())
         })
         .catch((error) => {
