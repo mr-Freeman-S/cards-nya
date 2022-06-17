@@ -92,8 +92,8 @@ export const editPackNameAC = (packName: string) => {
 //Thunks
 export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
     dispatch(updatePacksStatusAC("loading"))
-    const {packName, min, max, sortPacks, page, pageCount, user_id} = getState().packsCard
-    packsAPI.getPacks({packName, min, max, sortPacks, page, pageCount, user_id})
+    const {searchPackName, min, max, sortPacks, page, pageCount, user_id} = getState().packsCard
+    packsAPI.getPacks({packName:searchPackName, min, max, sortPacks, page, pageCount, user_id})
         .then(res => {
             dispatch(setCardPacksAC(res.data.cardPacks))
             dispatch(updateCardPacksTotalCountAC(res.data.cardPacksTotalCount))
