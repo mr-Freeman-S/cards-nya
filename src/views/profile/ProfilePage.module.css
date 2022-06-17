@@ -1,0 +1,106 @@
+.bcg {
+    background: linear-gradient(#e6d4de, #9890c7);
+    height: 800px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1240px;
+    margin: 0 auto;
+}
+
+.block {
+    width: 500px;
+    height: 660px;
+    background-color: white;
+    margin-top: 84px;
+    border-radius: 10px;
+}
+
+.title {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 33px;
+    color: #850303;
+}
+
+.photoBlock {
+    margin: 0 auto;
+    width: 130px;
+    height: 130px;
+    position: relative;
+}
+
+.photoBlock img {
+    width: 130px;
+    height: 130px;
+    border-radius: 20px;
+}
+
+.addPhoto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: #2d2e4669;
+    border-radius: 100%;
+    position: absolute;
+    top: 94px;
+    left: 89px;
+}
+
+.inputNickname {
+    margin: 38px 33px 24px 33px;
+}
+
+.inputNickname span {
+    display: block;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #24254a;
+}
+
+.inputNickname input {
+    border: none;
+    border-bottom: 2px solid #24254a79;
+    width: 430px;
+    height: 20px;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.inputEmail {
+    margin: 38px 33px 24px 33px;
+}
+
+.inputEmail span {
+    display: block;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #24254a;
+}
+
+.packsCount {
+    margin: 38px 33px 24px 33px;
+}
+
+.packsCount span {
+    display: block;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #24254a;
+}
+
+.block span {
+    font-size: 22px;
+    font-weight: 700;
+}
+
