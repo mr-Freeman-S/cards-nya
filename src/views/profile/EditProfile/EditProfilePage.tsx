@@ -5,8 +5,8 @@ import {AiOutlineCamera} from 'react-icons/ai'
 import {useNavigate} from 'react-router-dom'
 import SuperInputText from '../../../components/SuperInputText/SuperInputText'
 import {useAppDispatch, useAppSelector} from '../../../redux/store'
-import {editProfileTC} from '../../../redux/reducers/authReducer'
 import {PATH} from "../../../utils/routingPath";
+import {editProfileTC} from "../../../redux/reducers/authReducer/authThunkAction";
 
 export const EditProfilePage = () => {
     const {name, avatar, email} = useAppSelector(state => state.auth)

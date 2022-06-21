@@ -10,13 +10,6 @@ import {AiOutlineArrowUp} from "react-icons/ai";
 import TableBody from "@mui/material/TableBody";
 import {sortType} from "../TablePacks/TablePacks";
 import {CardType} from "../../utils/types";
-import {
-    changeSortCardsAC,
-    deleteCardTC,
-    getCardsTC,
-    setIdPacksAC,
-    updateCardTC
-} from "../../redux/reducers/cardsReducer";
 import {Rating} from "@mui/material";
 import {useNavigate, useParams} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -26,6 +19,12 @@ import {Preloader} from "../Preloader/Preloader";
 import {DeleteModal} from "../Modals/DeleteModal";
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 import {EditCardModal} from "../Modals/EditCardModal";
+import {
+    changeSortCardsAC,
+    deleteCardTC, getCardsTC,
+    setIdPacksAC,
+    updateCardTC
+} from "../../redux/reducers/cardsReducer/cardsThunkAction";
 
 
 const colums = ['Question', 'Answer', 'Last Update', 'Grade']

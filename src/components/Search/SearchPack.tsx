@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useState} from "react";
 import {DebounceInput} from "react-debounce-input";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {getCardPackTC, searchPackAC} from "../../redux/reducers/packsCardReducer";
+import {getCardPackTC, searchPackAC} from "../../redux/reducers/packCardReducer/packCardThunkAction";
 
 
 export const SearchPack = () => {

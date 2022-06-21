@@ -3,7 +3,6 @@ import {useAppDispatch, useAppSelector} from '../../redux/store'
 import style from './ProfilePage.module.css'
 import userNotFound from '../../assets/images/user-not-found.png'
 import {useEffect, useState} from "react";
-import {setUserIdPacksAC} from "../../redux/reducers/packsCardReducer";
 
 export const ProfilePage = () => {
     const {isLogged} = useAppSelector(state => state.login)

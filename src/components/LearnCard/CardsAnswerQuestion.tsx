@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 import {CardQuestion} from "./LearnPackQuestion/CardQuestion";
 import {CardAnswer} from "./CardAnswer/CardAnswer";
-import {CardsType} from "../../redux/reducers/cardsReducer";
+import {CardsType} from "../../redux/reducers/cardsReducer/cardsReducer";
 
 type CardsAnswerQuestionType = {
     namePack: string

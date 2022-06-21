@@ -1,10 +1,11 @@
 import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from '@mui/material';
 import React from 'react';
-import {CardsType, setCardsAC, updatedRandomCardAC} from "../../../redux/reducers/cardsReducer";
+import {CardsType} from "../../../redux/reducers/cardsReducer/cardsReducer";
 import style from './CardAnswer.module.css'
 import {PATH} from "../../../utils/routingPath";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../../redux/store";
+import {setCardsAC, updatedRandomCardAC} from "../../../redux/reducers/cardsReducer/cardsThunkAction";
 
 
 type LearnPackAnswerPropsType = {

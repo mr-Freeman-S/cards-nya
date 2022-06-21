@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import SuperInputText from "../SuperInputText/SuperInputText";
 import SuperButton from "../SuperButton/SuperButton";
 import style from "./FormAddPack.module.css"
-import {createCardPackTC} from "../../redux/reducers/packsCardReducer";
 import {useAppDispatch} from "../../redux/store";
 import SuperCheckbox from "../SuperCheckbox/SuperCheckbox";
+import {createCardPackTC} from "../../redux/reducers/packCardReducer/packCardThunkAction";
 
 type FormAddPackPropsType = {
     setIsActive: (isActive:boolean)=> void

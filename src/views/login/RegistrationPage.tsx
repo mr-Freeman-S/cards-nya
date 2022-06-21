@@ -3,11 +3,12 @@ import * as Yup from "yup";
 import {Navigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {AppStateType, useAppDispatch} from "../../redux/store";
-import {ErrorType, registerTC} from "../../redux/reducers/registrationReducer";
+import {ErrorType} from "../../redux/reducers/registrationReducer/registrationReducer";
 import SuperButton from "../../components/SuperButton/SuperButton";
 import style from "./RegistrationPage.module.css"
 import {PATH} from "../../utils/routingPath";
 import {ErrorMessage, Field, Form, Formik} from "formik";
+import {registerTC} from "../../redux/reducers/registrationReducer/registrationThunkAction";
 
 export type setSubmitting = (isSubmitting: boolean) => void
 export type ValuesRegistrationFormikType = {

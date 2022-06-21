@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {getCardPackTC, setMinMaxSearchCardAC} from "../../redux/reducers/packsCardReducer";
 import {Preloader} from "../../components/Preloader/Preloader";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -11,6 +10,7 @@ import {MultiRangeSlider} from "../../components/MultiRangeSlider/MultiRangeSlid
 import {SearchPack} from "../../components/Search/SearchPack";
 import {AddPack} from "../../components/AddPack/AddPack";
 import style from './PackListContainer.module.css'
+import {getCardPackTC, setMinMaxSearchCardAC} from "../../redux/reducers/packCardReducer/packCardThunkAction";
 
 export const PackListContainer = () => {
     const packs = useAppSelector(state => state.packsCard.cardPacks)

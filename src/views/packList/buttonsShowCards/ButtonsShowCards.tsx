@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
-import {setMinMaxSearchCardAC, setUserIdPacksAC} from "../../../redux/reducers/packsCardReducer";
 import  style from './ButtonsShowCards.module.css';
+import {setMinMaxSearchCardAC, setUserIdPacksAC} from "../../../redux/reducers/packCardReducer/packCardThunkAction";
 
 
 export const ButtonsShowCards = () => {

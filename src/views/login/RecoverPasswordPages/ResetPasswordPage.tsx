@@ -2,11 +2,15 @@ import React, {useEffect} from 'react';
 import * as Yup from 'yup'
 import {useNavigate, useParams} from "react-router-dom";
 import SuperButton from "../../../components/SuperButton/SuperButton";
-import {resetPassword, setErrorMessageRP, setStatusRP} from "../../../redux/reducers/restorePasswordReducer";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {PATH} from "../../../utils/routingPath";
 import {Field, Form, Formik} from "formik";
 import style from './RecoveryPassword.module.css'
+import {
+    resetPassword,
+    setErrorMessageRP,
+    setStatusRP
+} from "../../../redux/reducers/recoverPassword/restorePasswordThunkAction";
 
 type setSubmitting = (isSubmitting: boolean) => void
 type Value = {

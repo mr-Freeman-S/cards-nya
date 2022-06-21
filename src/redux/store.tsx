@@ -2,13 +2,13 @@ import {applyMiddleware, combineReducers, createStore} from 'redux'
 import thunk, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
 import {setCheckType, testReducer} from './reducers/testReducer'
-import {authReducer, GeneralType} from './reducers/authReducer'
-import {appReducer, AppReducerActionType} from "./reducers/appReducer";
-import {loginReducer, LoginReducerActionType} from "./reducers/loginReducer";
-import {registrationReducer} from "./reducers/registrationReducer";
-import {restorePasswordReducer, RestorePasswordReducerActionTypes} from "./reducers/restorePasswordReducer";
-import {packsCardReducer, PacksReducerActionType} from "./reducers/packsCardReducer";
-import {cardsReducer, CardsReducerActionType} from "./reducers/cardsReducer";
+import {authReducer, GeneralType} from './reducers/authReducer/authReducer'
+import {appReducer, AppReducerActionType} from "./reducers/appReducer/appReducer";
+import {loginReducer, LoginReducerActionType} from "./reducers/loginReducer/loginReducer";
+import {registrationReducer} from "./reducers/registrationReducer/registrationReducer";
+import {restorePasswordReducer, RestorePasswordReducerActionTypes} from "./reducers/recoverPassword/restorePasswordReducer";
+import {packsCardReducer, PacksReducerActionType} from "./reducers/packCardReducer/packsCardReducer";
+import {cardsReducer, CardsReducerActionType} from "./reducers/cardsReducer/cardsReducer";
 
 const rootReducer = combineReducers({
     test: testReducer,

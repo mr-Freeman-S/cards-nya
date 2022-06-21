@@ -9,16 +9,16 @@ import Paper from '@mui/material/Paper'
 import {AiOutlineArrowUp} from 'react-icons/ai'
 import style from './TablePacks.module.css'
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {
-    CardPacksType,
-    changeSortPackCardsAC,
-    deleteCardPackTC,
-    updateCardPackTC
-} from "../../redux/reducers/packsCardReducer";
 import {useNavigate} from 'react-router-dom'
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 import {DeleteModal} from "../Modals/DeleteModal";
 import {EditModal} from "../Modals/EditModal";
+import {CardPacksType} from "../../redux/reducers/packCardReducer/packsCardReducer";
+import {
+    changeSortPackCardsAC,
+    deleteCardPackTC,
+    updateCardPackTC
+} from "../../redux/reducers/packCardReducer/packCardThunkAction";
 
 
 const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']

@@ -1,11 +1,11 @@
 import './App.css'
 import {useAppDispatch, useAppSelector} from "./redux/store";
 import React, {useEffect} from "react";
-import {authMe} from "./redux/reducers/loginReducer";
 import {PrivateRoute} from "./components/Routing/PrivateRoute";
 import Header from "./components/Header/Header";
 import {Preloader} from "./components/Preloader/Preloader";
 import {ErrorSnackbar} from "./components/ErrorSnackBar/ErrorSnackBar";
+import {authMe} from "./redux/reducers/loginReducer/loginThunkAction";
 
 function App() {
     const isAuth = useAppSelector(state => state.login.isLogged)

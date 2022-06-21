@@ -3,10 +3,10 @@ import {NavLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup"
 import {PATH} from "../../../utils/routingPath";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
-import {sendMailRestorePassword, setStatusRP} from "../../../redux/reducers/restorePasswordReducer";
 import {Field, Form, Formik, FormikHelpers} from "formik";
 import SuperButton from "../../../components/SuperButton/SuperButton";
 import style from './RecoveryPassword.module.css'
+import {sendMailRestorePassword, setStatusRP} from "../../../redux/reducers/recoverPassword/restorePasswordThunkAction";
 
 
 type Values = {

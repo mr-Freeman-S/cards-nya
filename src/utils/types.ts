@@ -1,4 +1,4 @@
-import {CardsType} from "../redux/reducers/cardsReducer";
+import {CardsType} from "../redux/reducers/cardsReducer/cardsReducer";
 
 export type CardPacksType = {
     _id: string

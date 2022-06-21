@@ -1,3 +1,7 @@
+import {setErrorMessageAC, setInitializedAC} from "./appThunkAction";
+
+
+
 const initialState = {
     errorMessage: null as ErrorType,
     isInitialized: false
@@ -15,17 +19,10 @@ export const appReducer = (state: InitialStateType = initialState, action: AppRe
     }
 }
 
-//AC
-export const setErrorMessageAC = (errorMessage: ErrorType) => {
-    return {type: "APP/SET-ERROR-MESSAGE", errorMessage} as const
-}
-export const setInitializedAC = (isInitialized: boolean) => {
-    return {type: 'APP/SET-INITIALIZED', isInitialized} as const
-}
-
 
 //Types
-export type AppReducerActionType = ReturnType<typeof setErrorMessageAC>
+export type AppReducerActionType =
+    ReturnType<typeof setErrorMessageAC>
     | ReturnType<typeof setInitializedAC>
 type InitialStateType = typeof initialState
 export type ErrorType = string | null

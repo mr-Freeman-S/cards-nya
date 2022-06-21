@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
-import {changePacksPageCountAC, changePacksPageAC} from "../../../redux/reducers/packsCardReducer";
 import {useAppDispatch, useAppSelector} from "../../../redux/store";
 import {Pagination} from "@mui/material";
+import {changePacksPageAC, changePacksPageCountAC} from "../../../redux/reducers/packCardReducer/packCardThunkAction";
 
 export const PaginationCards = () => {
     const pageCount = useAppSelector(state => state.packsCard.pageCount)

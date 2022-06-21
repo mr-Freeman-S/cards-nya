@@ -3,10 +3,10 @@ import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {PATH} from "../../utils/routingPath";
-import {loginTC} from "../../redux/reducers/loginReducer";
 import style from "./LoginPage.module.css"
-import {setErrorMessageAC} from "../../redux/reducers/appReducer";
 import {Navigate, useNavigate} from 'react-router-dom';
+import {setErrorMessageAC} from "../../redux/reducers/appReducer/appThunkAction";
+import {loginTC} from "../../redux/reducers/loginReducer/loginThunkAction";
 
 export type setSubmitting = (isSubmitting: boolean) => void
 export type valuesFromFormikType = {
@@ -29,7 +29,7 @@ export const LoginPage = () => {
         email: Yup.string().required('Required').email('Invalid email format'),
         password: Yup.string().required('Required').min(7, 'Minimum 7 symbols'),
     })
-    const submit = (values: valuesFromFormikType, {setSubmitting, resetForm}: {
+    const submit = (values: valuesFromFormikType, {resetForm}: {
         setSubmitting: setSubmitting, resetForm: () => void
     }) => {
         dispatch(loginTC(values.email, values.password, values.rememberMe, resetForm))
@@ -87,8 +87,10 @@ export const LoginPage = () => {
                     <div className={style.error}>
                         {error}
                     </div>
-                    <div style={{ display: "flex",
-                        justifyContent: "center"}}>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
                         <span className={style.spanTextAcc}>Don't have an account?</span>
                     </div>
                     <div className={style.singUp}>
