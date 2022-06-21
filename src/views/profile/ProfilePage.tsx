@@ -14,9 +14,9 @@ export const ProfilePage = () => {
     const [packsCount, setPacksCount] = useState(packsCounts.length)
 
     useEffect(() => {
-        dispatch(setUserIdPacksAC(user_id))
+        //dispatch(setUserIdPacksAC(user_id))
         setPacksCount(packsCounts.length)
-    })
+    },[])
 
     if (!isLogged) {
         return <Navigate to={'/login'}/>
@@ -36,9 +36,9 @@ export const ProfilePage = () => {
                     <div className={style.inputEmail}>
                         <span>Email: {email}</span>
                     </div>
-                   {/* <div className={style.packsCount}>
+                    <div className={style.packsCount}>
                         <span>Your packs: {packsCount}</span>
-                    </div>*/}
+                    </div>
                 </div>
             </div>
         </div>
