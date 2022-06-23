@@ -3,6 +3,7 @@ import {Navigate, useParams} from "react-router-dom";
 import {
     CardsType,
     getCardsTC,
+    setCardsAC,
     setIdPacksAC,
     updatedRandomCardAC,
     updatedShowModuleCardAC,
@@ -19,7 +20,6 @@ import {CardAnswer} from "./CardAnswer/CardAnswer";
 export const LearnCardContainer = () => {
     const {cardsStatus, cardPacks, randomNumber, showModuleCard} = useAppSelector(state => state.cards)
     const isLogged = useAppSelector(state => state.login.isLogged)
-
     const dispatch = useAppDispatch()
 
     const {id, name} = useParams()
@@ -45,11 +45,15 @@ export const LearnCardContainer = () => {
     }
 
     useEffect(() => {
-        if(id){
+        if (id) {
             dispatch(setIdPacksAC(id))
             dispatch(getCardsTC())
         }
-
+        return function () {
+            dispatch(updatedRandomCardAC(0))
+            dispatch(setCardsAC([]))
+            dispatch(updatedShowModuleCardAC(true))
+        }
     }, []);
 
     useEffect(() => {
@@ -72,32 +76,27 @@ export const LearnCardContainer = () => {
         return <Preloader isActive={true}/>
     }
 
-    return (
+    return <div>
+        {cardsStatus === 'loading' ? <Preloader isActive={true}/>
+            : <>
+                <UniverseModalWindow isActive={showModuleCard} setActive={() => {
+                }}>
+                    <CardQuestion
+                        callback={showAnswerCard}
+                        cardPack={cardPack}
+                        namePack={namePack}
+                    />
+                </UniverseModalWindow>
 
-        <div>
-            {cardsStatus === 'loading' ? <Preloader isActive={true}/>
-                : <>
-                    <UniverseModalWindow isActive={showModuleCard} setActive={() => {
-                    }}>
-                        <CardQuestion
-                            callback={showAnswerCard}
-                            cardPack={cardPack}
-                            namePack={namePack}
-                        />
-                    </UniverseModalWindow>
-
-                    <UniverseModalWindow isActive={!showModuleCard} setActive={() => {
-                    }}>
-                        <CardAnswer
-                            callback={showQuestionCard}
-                            cardPack={cardPack}
-                            namePack={namePack}
-                        />
-                    </UniverseModalWindow>
-                </>
-            }
-
-
-        </div>
-    );
+                <UniverseModalWindow isActive={!showModuleCard} setActive={() => {
+                }}>
+                    <CardAnswer
+                        callback={showQuestionCard}
+                        cardPack={cardPack}
+                        namePack={namePack}
+                    />
+                </UniverseModalWindow>
+            </>
+        }
+    </div>
 }
