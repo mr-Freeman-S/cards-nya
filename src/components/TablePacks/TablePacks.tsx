@@ -48,6 +48,7 @@ export function TablePacks({rows}: TablePropsType) {
     }
 
     const onClickLearnHandler = (id: string, name: string) => {
+        name = name.replace(/[^a-zа-яё0-9\s]/gi, ' ');
         navigate(`/cards/learn/${name}/${id}`)
     }
 

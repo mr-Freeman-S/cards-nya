@@ -2,7 +2,7 @@ import React from 'react';
 import style from './CardQuestion.module.css'
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../../../utils/routingPath";
-import {CardsType} from "../../../redux/reducers/cardsReducer/cardsReducer";
+import {CardsType, setCardsAC} from "../../../redux/reducers/cardsReducer";
 
 type LearnPackQuestionPropsType = {
     callback: (isActive: boolean) => void
@@ -12,6 +12,7 @@ type LearnPackQuestionPropsType = {
 
 export const CardQuestion: React.FC<LearnPackQuestionPropsType> = ({callback, namePack, cardPack}) => {
     const navigate = useNavigate()
+
 
     const returnToTable = () => {
         navigate(PATH.PACK_LIST)
