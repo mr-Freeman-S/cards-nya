@@ -1,20 +1,18 @@
 import React, {useEffect} from 'react';
 import {Navigate, useParams} from "react-router-dom";
-import {
-    CardsType,
-    getCardsTC,
-    setCardsAC,
-    setIdPacksAC,
-    updatedRandomCardAC,
-    updatedShowModuleCardAC,
-    updateGradeCardTC
-} from "../../redux/reducers/cardsReducer";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {Preloader} from "../Preloader/Preloader";
 import {PATH} from "../../utils/routingPath";
 import {UniverseModalWindow} from '../UniverseModal/UniverseModalWindow';
 import {CardQuestion} from "./LearnPackQuestion/CardQuestion";
 import {CardAnswer} from "./CardAnswer/CardAnswer";
+import {CardsType} from "../../redux/reducers/cardsReducer/cardsReducer";
+import {
+    getCardsTC,
+    setCardsAC, setIdPacksAC,
+    updatedRandomCardAC,
+    updatedShowModuleCardAC, updateGradeCardTC
+} from "../../redux/reducers/cardsReducer/cardsThunkAction";
 
 
 export const LearnCardContainer = () => {

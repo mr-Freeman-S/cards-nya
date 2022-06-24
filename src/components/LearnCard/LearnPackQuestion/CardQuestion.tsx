@@ -2,7 +2,7 @@ import React from 'react';
 import style from './CardQuestion.module.css'
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../../../utils/routingPath";
-import {CardsType, setCardsAC} from "../../../redux/reducers/cardsReducer";
+import {CardsType} from "../../../redux/reducers/cardsReducer/cardsReducer";
 
 type LearnPackQuestionPropsType = {
     callback: (isActive: boolean) => void
