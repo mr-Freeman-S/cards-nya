@@ -1,19 +1,31 @@
 .parentEl {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 1000px;
+    display: grid;
+    max-width: 100%;
     align-items: center;
-    margin: 0 auto;
-    border: 1px solid;
+    background-color: rgba(254, 254, 255, 1);
     min-height: 100%;
-    margin-top: 20px;
+    margin: 24px 137px;
+    border-radius: 15px;
+    grid-template-columns: 1fr 3fr;
 }
 
-.search {
-    display: flex;
-    justify-content: space-between;
+.containerFilter {
+    display: grid;
+    align-content: start;
+    background-color: rgba(236, 236, 249, 1);
+    width: 100%;
+    height: 100%;
+    justify-self: start;
+    padding: 24px;
+    align-items: start;
+    border-radius: 15px 0 0 15px;
+
 }
+
+.containerTable {
+    padding: 15px;
+}
+
 
 .tablePacks {
     min-height: 250px;
@@ -24,4 +36,5 @@
 
 .pagination {
     flex: 1 1 auto;
+    margin-top: 5px;
 }

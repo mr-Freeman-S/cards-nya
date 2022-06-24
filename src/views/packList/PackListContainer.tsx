@@ -1,6 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {Preloader} from "../../components/Preloader/Preloader";
 import {Navigate} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
 import {PaginationCards} from "./pagination/Pagination";
@@ -11,6 +10,7 @@ import {SearchPack} from "../../components/Search/SearchPack";
 import {AddPack} from "../../components/AddPack/AddPack";
 import style from './PackListContainer.module.css'
 import {getCardPackTC, setMinMaxSearchCardAC} from "../../redux/reducers/packCardReducer/packCardThunkAction";
+import {Preloader} from "../../components/Preloader/Preloader";
 
 export const PackListContainer = () => {
     const packs = useAppSelector(state => state.packsCard.cardPacks)
@@ -39,28 +39,36 @@ export const PackListContainer = () => {
     }
     return (
         <div className={style.parentEl}>
-            <div>
-                {packsStatus !== 'loading' ? <div className={style.search}><SearchPack/> <AddPack/></div> :
-                    <Preloader isActive={packsStatus === 'loading'}/>}
+            {(packsStatus === 'loading') && <Preloader isActive={true}/>}
+            <div className={style.containerFilter}>
+                <h3>Show packs cards</h3>
+                <div className={style.toggleButtons}><ButtonsShowCards/></div>
+                <h3>Number of cards</h3>
+                <MultiRangeSlider
+                    min={minCardsCount}
+                    max={maxCardsCount}
+                    minVal={minVal}
+                    maxVal={maxVal}
+                    setMinVal={setMinVal}
+                    setMaxVal={setMaxVal}
+                    onMouseUp={onMouseUpHandler}
+                />
             </div>
-            <div className={style.tablePacks}>
-                {/*{packsStatus === 'loading' && <Preloader/>}*/}
-                {/*{packsStatus !== 'loading' && (<TablePacks rows={packs}/>)}*/}
-                <TablePacks rows={packs}/>
+            <div className={style.containerTable}>
+                <div className={style.headerTableContainer}>
+                    <SearchPack/> <AddPack/>
+                </div>
+                <div className={style.tablePacks}>
+                    {/*{packsStatus === 'loading' && <Preloader/>}*/}
+                    {/*{packsStatus !== 'loading' && (<TablePacks rows={packs}/>)}*/}
+                    <TablePacks rows={packs}/>
+                </div>
+                <div className={style.pagination}>
+                    <PaginationCards/>
+                </div>
             </div>
-            <MultiRangeSlider
-                min={minCardsCount}
-                max={maxCardsCount}
-                minVal={minVal}
-                maxVal={maxVal}
-                setMinVal={setMinVal}
-                setMaxVal={setMaxVal}
-                onMouseUp={onMouseUpHandler}
-            />
-            <ButtonsShowCards/>
-            <div className={style.pagination}>
-                <PaginationCards/>
-            </div>
+
+
         </div>
     );
 };
