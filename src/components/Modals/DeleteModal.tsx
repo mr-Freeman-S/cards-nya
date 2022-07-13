@@ -7,7 +7,7 @@ type DeleteModalPropsType = {
     onClickNoHandler: () => void
 }
 
-export const DeleteModal = (props: DeleteModalPropsType) => {
+export const DeleteModal:React.FC<DeleteModalPropsType> = (props) => {
     return (
         <div style={{marginTop: 40}}>
             <div>

@@ -9,7 +9,7 @@ type FormAddCardPropsType = {
     setIsActive: (isActive:boolean)=> void
 }
 
-export const FormAddCard = ({setIsActive}:FormAddCardPropsType) => {
+export const FormAddCard:React.FC<FormAddCardPropsType> = ({setIsActive}) => {
 
     const dispatch = useAppDispatch()
     const [question,setQuestion] = useState('')

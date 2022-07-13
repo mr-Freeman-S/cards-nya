@@ -10,7 +10,7 @@ type FormAddPackPropsType = {
     setIsActive: (isActive:boolean)=> void
 }
 
-export const FormAddPack = ({setIsActive}:FormAddPackPropsType) => {
+export const FormAddPack:React.FC<FormAddPackPropsType> = ({setIsActive}) => {
     const dispatch = useAppDispatch()
     const [isPrivate,setPrivate] = useState(false)
     const [packName,setPackName] = useState('')

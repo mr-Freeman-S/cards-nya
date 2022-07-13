@@ -5,16 +5,21 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 type MultiRangeSliderType = DefaultInputPropsType & {
     min: number
     max: number
-    minVal:number
-    maxVal:number
-    setMinVal: (n:number) => void
-    setMaxVal: (n:number) => void
-    //onChangeSlider: ({min, max}: { min: number, max: number }) => void
-
-
+    minVal: number
+    maxVal: number
+    setMinVal: (n: number) => void
+    setMaxVal: (n: number) => void
 }
 
-export const MultiRangeSlider = (({min, max,minVal,maxVal,setMinVal,setMaxVal, /*onChangeSlider*/ ...restProps}: MultiRangeSliderType) => {
+export const MultiRangeSlider: React.FC<MultiRangeSliderType> = (({
+                                                                      min,
+                                                                      max,
+                                                                      minVal,
+                                                                      maxVal,
+                                                                      setMinVal,
+                                                                      setMaxVal, /*onChangeSlider*/
+                                                                      ...restProps
+                                                                  }) => {
 
     const minValRef = useRef<HTMLInputElement>(null)
     const maxValRef = useRef<HTMLInputElement>(null)
@@ -58,7 +63,7 @@ export const MultiRangeSlider = (({min, max,minVal,maxVal,setMinVal,setMaxVal, /
         setMinVal(minVal)
         setMaxVal(maxVal)
         //onChangeSlider({min: minVal, max: maxVal});
-    }, [minVal, maxVal,setMinVal, setMaxVal/*onChangeSlider*/]);
+    }, [minVal, maxVal, setMinVal, setMaxVal/*onChangeSlider*/]);
 
 
     const minOnchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -75,8 +80,8 @@ export const MultiRangeSlider = (({min, max,minVal,maxVal,setMinVal,setMaxVal, /
     useEffect(() => {
         setMinVal(min)
         setMaxVal(max)
-       // onChangeSlider({min: minVal, max: maxVal});
-    }, [min, max,setMinVal,setMaxVal /*onChangeSlider*/]);
+        // onChangeSlider({min: minVal, max: maxVal});
+    }, [min, max, setMinVal, setMaxVal /*onChangeSlider*/]);
 
     return (
         <div className={style.container}>

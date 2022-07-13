@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import {useSelector} from "react-redux";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
@@ -20,7 +19,7 @@ import {logoutTC} from "../../redux/reducers/loginReducer";
 
 const pages = [{name: 'Pack list', path: PATH.PACK_LIST}, {name: 'Profile', path: PATH.PROFILE_PAGE}];
 const settings = ['Edit profile', 'Logout'];
-const Header = ({isAuth}: { isAuth: boolean }) => {
+const Header: React.FC<{ isAuth: boolean }> = ({isAuth}) => {
     const avatar = useAppSelector(state => state.auth.avatar)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()

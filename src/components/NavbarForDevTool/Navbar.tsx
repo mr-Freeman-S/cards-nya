@@ -1,17 +1,12 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../utils/routingPath";
+import style from "./Navbar.module.css"
 
-const Navbar = () => {
-    const style = {
-        display: 'grid',
-        justifyItems: 'center',
-        gridTemplateColumns: 'repeat(8,1fr)'
-
-    }
+export const Navbar = () => {
 
     return (
-        <div style={style}>
+        <div className={style.wrapper}>
             <span><NavLink to={PATH.PROFILE_PAGE}>
                 Profile
             </NavLink></span>
@@ -44,4 +39,3 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;

@@ -4,7 +4,6 @@ import {CardsType, setCardsAC, updatedRandomCardAC} from "../../../redux/reducer
 import style from './CardAnswer.module.css'
 import {PATH} from "../../../utils/routingPath";
 import {useNavigate} from "react-router-dom";
-import {useAppDispatch} from "../../../redux/store";
 
 
 type LearnPackAnswerPropsType = {

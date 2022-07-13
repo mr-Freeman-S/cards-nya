@@ -39,7 +39,7 @@ const colums = ['Question', 'Answer', 'Last Update', 'Grade']
 //     }
 // ]
 
-export const TableCards = () => {
+export const TableCards:React.FC = () => {
     const {id} = useParams()
     const rows = useAppSelector(state => state.cards.cardPacks)
     const cardStatus = useAppSelector(state => state.cards.cardsStatus)

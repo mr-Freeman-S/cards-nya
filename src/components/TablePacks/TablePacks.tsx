@@ -21,7 +21,7 @@ import {DeleteModal} from "../Modals/DeleteModal";
 import {EditModal} from "../Modals/EditModal";
 
 
-const colums = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
+const columns = ['Name', 'Cards', 'Last Updated', 'Created by', 'Actions']
 
 export type sortType = 'asc' | 'desc';
 type TablePropsType = {
@@ -29,7 +29,7 @@ type TablePropsType = {
 }
 
 
-export function TablePacks({rows}: TablePropsType) {
+export const TablePacks: React.FC<TablePropsType> = ({rows}) => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -97,7 +97,7 @@ export function TablePacks({rows}: TablePropsType) {
                             console.log("row", e)
                         }}>
                             {
-                                colums && colums.map((el, i) => {
+                                columns && columns.map((el, i) => {
                                     return (el === 'Last Updated' ?
                                         <TableCell className={style.click} key={`${el}_${i}`} onClick={changeSortHandler}
                                                    align={"center"}>
@@ -132,9 +132,11 @@ export function TablePacks({rows}: TablePropsType) {
                                 <TableCell align='center'>{row.user_name}</TableCell>
                                 <TableCell align='center'>
                                     {myId === row.user_id &&
-                                        <button className={style.enableButtonEvent} onClick={() => onClickEditHandler(row._id, row.name)}>Edit</button>}
+                                        <button className={style.enableButtonEvent}
+                                                onClick={() => onClickEditHandler(row._id, row.name)}>Edit</button>}
                                     {myId === row.user_id &&
-                                        <button className={style.deleteButton} onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
+                                        <button className={style.deleteButton}
+                                                onClick={() => onClickDeleteHandler(row._id, row.name)}>Delete</button>}
                                     <button
                                         disabled={row.cardsCount === 0}
                                         className={`${row.cardsCount === 0 ? style.disableButtonEvent : style.enableButtonEvent}`}

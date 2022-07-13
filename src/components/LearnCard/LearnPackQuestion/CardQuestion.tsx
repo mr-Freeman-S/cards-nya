@@ -13,7 +13,6 @@ type LearnPackQuestionPropsType = {
 export const CardQuestion: React.FC<LearnPackQuestionPropsType> = ({callback, namePack, cardPack}) => {
     const navigate = useNavigate()
 
-
     const returnToTable = () => {
         navigate(PATH.PACK_LIST)
     }

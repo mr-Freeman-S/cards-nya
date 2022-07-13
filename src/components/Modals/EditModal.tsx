@@ -9,7 +9,7 @@ type EditModalPropsType = {
 
 }
 
-export const EditModal = (props: EditModalPropsType) => {
+export const EditModal: React.FC<EditModalPropsType> = (props) => {
 
     return (
         <div>

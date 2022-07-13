@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import {FormAddPack} from "../FormAddPack/FormAddPack";
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 
-export const AddPack = () => {
+export const AddPack:React.FC = () => {
     const [isActive,setIsActive] = useState<boolean>(false)
     return (
         <div>

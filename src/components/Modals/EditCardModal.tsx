@@ -10,7 +10,7 @@ type EditModalPropsType = {
     setQuestion: (question: string) => void
 }
 
-export const EditCardModal = (props: EditModalPropsType) => {
+export const EditCardModal: React.FC<EditModalPropsType> = (props) => {
 
     return (
         <div>
@@ -27,7 +27,8 @@ export const EditCardModal = (props: EditModalPropsType) => {
                 props.setAnswer(e.currentTarget.value)
             }}/>
             <div style={{marginBottom: 40, marginTop: 40}}>
-                <button onClick={() => props.onClickSaveHandler(props.packId, props.question, props.answer)}>Save</button>
+                <button onClick={() => props.onClickSaveHandler(props.packId, props.question, props.answer)}>Save
+                </button>
                 <button style={{marginLeft: 40}} onClick={props.onClickCancelHandler}>Cancel</button>
             </div>
         </div>
