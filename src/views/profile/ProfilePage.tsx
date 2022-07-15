@@ -1,9 +1,11 @@
-import {Navigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import {useAppDispatch, useAppSelector} from '../../redux/store'
 import style from './ProfilePage.module.css'
 import userNotFound from '../../assets/images/user-not-found.png'
 import {useEffect, useState} from "react";
 import {setUserIdPacksAC} from "../../redux/reducers/packsCardReducer";
+import SuperButton from "../../components/SuperButton/SuperButton";
+import {PATH} from "../../utils/routingPath";
 
 export const ProfilePage = () => {
     const {isLogged} = useAppSelector(state => state.login)
@@ -12,6 +14,7 @@ export const ProfilePage = () => {
     const user_id = useAppSelector(state => state.auth._id)
     const dispatch = useAppDispatch()
     const [packsCount, setPacksCount] = useState(packsCounts.length)
+    const navigate = useNavigate()
 
     useEffect(() => {
         //dispatch(setUserIdPacksAC(user_id))
@@ -39,6 +42,7 @@ export const ProfilePage = () => {
                     <div className={style.packsCount}>
                         <span>Your packs: {packsCount}</span>
                     </div>
+                    <SuperButton onClick={()=>navigate(PATH.EDIT_PROFILE_PAGE)}>Edit Profile</SuperButton>
                 </div>
             </div>
         </div>
