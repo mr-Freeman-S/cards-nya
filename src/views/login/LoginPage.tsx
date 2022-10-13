@@ -52,6 +52,10 @@ export const LoginPage = () => {
             <Form>
                 <div className={style.loginBox}>
                     <h2>Login</h2>
+                    <p>
+                        test account: test@hiredme.com
+                        password: testtest
+                    </p>
                     <div className={style.userBox}>
                         <Field placeholder="Login" type="text" name="email"/>
                         <div className={style.error}>

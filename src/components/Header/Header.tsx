@@ -63,7 +63,7 @@ const Header: React.FC<{ isAuth: boolean }> = ({isAuth}) => {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="/"
+                        href="/cards-nya/"
                         sx={{
                             mr: 2,
                             display: {xs: 'none', md: 'flex'},
