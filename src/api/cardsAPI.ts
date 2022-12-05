@@ -18,10 +18,13 @@ export const cardsAPI = {
         return instanceHeroku.delete<{ id: string }, AxiosResponse<ResponseType>>(`cards/card/?id=${id}`)
     },
     updateCardGrade(card_id: string, grade: number) {
-        return instanceHeroku.put<{card_id: string, grade: number}, AxiosResponse<updateGradeCardType>>("/cards/grade",  {grade, card_id})
+        return instanceHeroku.put<{ card_id: string, grade: number }, AxiosResponse<updateGradeCardType>>("/cards/grade", {
+            grade,
+            card_id
+        })
     }
 }
-//<AxiosResponse<ResponseType>>
+
 //types
 export type GradeCardType = {
     _id: string
@@ -56,8 +59,8 @@ type CreateCardType = {
 
 type UpdateCardType = {
     answer: string
-    answerImg?:string
-    answerVideo?:string
+    answerImg?: string
+    answerVideo?: string
     cardsPack_id?: string
     comments?: string
     grade?: number

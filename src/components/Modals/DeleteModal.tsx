@@ -3,11 +3,11 @@ import React from 'react';
 type DeleteModalPropsType = {
     title?: string
     packId: string
-    onClickYesHandler: (id:string) => void
+    onClickYesHandler: (id: string) => void
     onClickNoHandler: () => void
 }
 
-export const DeleteModal:React.FC<DeleteModalPropsType> = (props) => {
+export const DeleteModal: React.FC<DeleteModalPropsType> = (props) => {
     return (
         <div style={{marginTop: 40}}>
             <div>

@@ -8,7 +8,7 @@ export const restorePasswordAPI = {
                 `<div style="background-color: lime; padding: 15px">
                     password recovery link: 
                     <a href='https://neko-back.herokuapp.com/2.0/#/new-password/$token$'>link</a>
-                </div>` //!!! need write reset-password new link
+                </div>`
         })
     },
     createNewPassword(password: string, resetPasswordToken: string) {

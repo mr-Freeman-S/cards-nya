@@ -1,5 +1,5 @@
 import {Navigate, useNavigate} from 'react-router-dom'
-import {useAppDispatch, useAppSelector} from '../../redux/store'
+import {useAppSelector} from '../../redux/store'
 import style from './ProfilePage.module.css'
 import userNotFound from '../../assets/images/user-not-found.png'
 import {useEffect, useState} from "react";
@@ -10,15 +10,12 @@ export const ProfilePage = () => {
     const {isLogged} = useAppSelector(state => state.login)
     const {avatar, name, email} = useAppSelector(state => state.auth)
     const packsCounts = useAppSelector(state => state.packsCard.cardPacks)
-    const user_id = useAppSelector(state => state.auth._id)
-    const dispatch = useAppDispatch()
     const [packsCount, setPacksCount] = useState(packsCounts.length)
     const navigate = useNavigate()
 
     useEffect(() => {
-        //dispatch(setUserIdPacksAC(user_id))
         setPacksCount(packsCounts.length)
-    },[])
+    }, [])
 
     if (!isLogged) {
         return <Navigate to={'/login'}/>
@@ -41,7 +38,7 @@ export const ProfilePage = () => {
                     <div className={style.packsCount}>
                         <span>Your packs: {packsCount}</span>
                     </div>
-                    <SuperButton onClick={()=>navigate(PATH.EDIT_PROFILE_PAGE)}>Edit Profile</SuperButton>
+                    <SuperButton onClick={() => navigate(PATH.EDIT_PROFILE_PAGE)}>Edit Profile</SuperButton>
                 </div>
             </div>
         </div>

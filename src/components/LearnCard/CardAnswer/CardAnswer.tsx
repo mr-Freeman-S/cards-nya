@@ -1,6 +1,6 @@
 import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from '@mui/material';
 import React from 'react';
-import {CardsType, setCardsAC, updatedRandomCardAC} from "../../../redux/reducers/cardsReducer";
+import {CardsType} from "../../../redux/reducers/cardsReducer";
 import style from './CardAnswer.module.css'
 import {PATH} from "../../../utils/routingPath";
 import {useNavigate} from "react-router-dom";
@@ -83,8 +83,8 @@ export const CardAnswer: React.FC<LearnPackAnswerPropsType> = ({cardPack, namePa
                 <span>{`Card has been shown ${cardPack.shots} times`}</span>
             </div>
             <div className={style.buttons}>
-                <button  className={style.buttonCancel} onClick={returnToTable}>Cancel</button>
-                <button  className={style.buttonNext} onClick={showNextCard}>Next</button>
+                <button className={style.buttonCancel} onClick={returnToTable}>Cancel</button>
+                <button className={style.buttonNext} onClick={showNextCard}>Next</button>
             </div>
         </div>
     );

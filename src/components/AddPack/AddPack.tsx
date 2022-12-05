@@ -2,12 +2,13 @@ import React, {useState} from "react"
 import {FormAddPack} from "../FormAddPack/FormAddPack";
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 
-export const AddPack:React.FC = () => {
-    const [isActive,setIsActive] = useState<boolean>(false)
+export const AddPack: React.FC = () => {
+    const [isActive, setIsActive] = useState<boolean>(false)
     return (
         <div>
-            <button onClick={()=>setIsActive(true)}>Add Pack</button>
-            <UniverseModalWindow isActive={isActive} setActive={setIsActive}><FormAddPack setIsActive={setIsActive}/></UniverseModalWindow>
+            <button onClick={() => setIsActive(true)}>Add Pack</button>
+            <UniverseModalWindow isActive={isActive} setActive={setIsActive}><FormAddPack
+                setIsActive={setIsActive}/></UniverseModalWindow>
         </div>
     )
 }

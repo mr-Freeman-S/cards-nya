@@ -2,14 +2,14 @@ import {AppStateType, ThunkType} from "../store";
 import {cardsAPI} from "../../api/cardsAPI";
 import {setErrorMessageAC} from "./appReducer";
 
-const initialStateCards:CardsType[] = [
+const initialStateCards: CardsType[] = [
     {
         answer: "",
         question: "",
         cardsPack_id: "",
         grade: 0,
         shots: 0,
-        user_id:"",
+        user_id: "",
         created: "",
         updated: "",
         _id: ""

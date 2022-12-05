@@ -6,36 +6,38 @@ import {createCardTC} from "../../redux/reducers/cardsReducer";
 import style from "./FormAddCard.module.css"
 
 type FormAddCardPropsType = {
-    setIsActive: (isActive:boolean)=> void
+    setIsActive: (isActive: boolean) => void
 }
 
-export const FormAddCard:React.FC<FormAddCardPropsType> = ({setIsActive}) => {
+export const FormAddCard: React.FC<FormAddCardPropsType> = ({setIsActive}) => {
 
     const dispatch = useAppDispatch()
-    const [question,setQuestion] = useState('')
-    const [answer,setAnswer] = useState('')
-    const [error,setError] = useState('')
+    const [question, setQuestion] = useState('')
+    const [answer, setAnswer] = useState('')
+    const [error, setError] = useState('')
     const cancelHandler = () => setIsActive(false)
-    const saveHandler = ()=> {
-        if (question && answer){
-            dispatch(createCardTC(question,answer))
+    const saveHandler = () => {
+        if (question && answer) {
+            dispatch(createCardTC(question, answer))
             setIsActive(false)
         } else {
             setError('Enter question and answer')
         }
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         setTimeout(() => setError(''), 2000)
-    },[error])
+    }, [error])
     return (
         <div className={style.container}>
             <h3 className={style.title}>Add card</h3>
-            <div className={style.questionField}><SuperInputText value={question} onChangeText={setQuestion} placeholder='Question'/></div>
-            <div className={style.answerField}><SuperInputText value={answer} onChangeText={setAnswer} placeholder='Answer'/></div>
+            <div className={style.questionField}><SuperInputText value={question} onChangeText={setQuestion}
+                                                                 placeholder='Question'/></div>
+            <div className={style.answerField}><SuperInputText value={answer} onChangeText={setAnswer}
+                                                               placeholder='Answer'/></div>
             <SuperButton onClick={cancelHandler} className={style.cancelBtn}>Cancel</SuperButton>
             <SuperButton onClick={saveHandler} className={style.saveBtn}>Save</SuperButton>
-            {error && <div className={style.error}>{error}</div> }
+            {error && <div className={style.error}>{error}</div>}
         </div>
     );
 };

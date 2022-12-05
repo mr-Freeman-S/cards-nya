@@ -4,10 +4,10 @@ export const loginAPI = {
     login({email, password, rememberMe}: LoginPayloadType) {
         return instanceHeroku.post("auth/login", {email, password, rememberMe})
     },
-    auth(){
-        return instanceHeroku.post("auth/me",{})
+    auth() {
+        return instanceHeroku.post("auth/me", {})
     },
-    logout(){
+    logout() {
         return instanceHeroku.delete("auth/me")
     }
 

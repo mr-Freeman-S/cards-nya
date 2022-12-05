@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../redux/store";
 import {getCardPackTC, searchPackAC} from "../../redux/reducers/packsCardReducer";
 
 
-export const SearchPack:React.FC = () => {
+export const SearchPack: React.FC = () => {
 
     const searchPackName = useAppSelector<string>(state => state.packsCard.searchPackName)
     const dispatch = useAppDispatch()

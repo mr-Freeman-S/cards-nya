@@ -91,8 +91,10 @@ export const LoginPage = () => {
                     <div className={style.error}>
                         {error}
                     </div>
-                    <div style={{ display: "flex",
-                        justifyContent: "center"}}>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
                         <span className={style.spanTextAcc}>Don't have an account?</span>
                     </div>
                     <div className={style.singUp}>

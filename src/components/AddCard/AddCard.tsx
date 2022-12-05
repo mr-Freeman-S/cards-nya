@@ -2,12 +2,13 @@ import React, {useState} from "react"
 import {FormAddCard} from "./FormAddCard";
 import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 
-export const AddCard:React.FC = () => {
-    const [isActive,setIsActive] = useState<boolean>(false)
+export const AddCard: React.FC = () => {
+    const [isActive, setIsActive] = useState<boolean>(false)
     return (
         <div>
-            <button onClick={()=>setIsActive(true)}>Add Card</button>
-            <UniverseModalWindow isActive={isActive} setActive={setIsActive}><FormAddCard setIsActive={setIsActive}/></UniverseModalWindow>
+            <button onClick={() => setIsActive(true)}>Add Card</button>
+            <UniverseModalWindow isActive={isActive} setActive={setIsActive}><FormAddCard
+                setIsActive={setIsActive}/></UniverseModalWindow>
         </div>
     )
 }

@@ -28,18 +28,9 @@ import {UniverseModalWindow} from "../UniverseModal/UniverseModalWindow";
 import {EditCardModal} from "../Modals/EditCardModal";
 
 
-const colums = ['Question', 'Answer', 'Last Update', 'Grade']
-// const rows = [
-//     {
-//         _id: '22323123234dfsdfdf23423',
-//         question: 'Value',
-//         answer: 'djfkjsdfkjskdf',
-//         updated: '121',
-//         grave: 3
-//     }
-// ]
+const columns = ['Question', 'Answer', 'Last Update', 'Grade']
 
-export const TableCards:React.FC = () => {
+export const TableCards: React.FC = () => {
     const {id} = useParams()
     const rows = useAppSelector(state => state.cards.cardPacks)
     const cardStatus = useAppSelector(state => state.cards.cardsStatus)
@@ -59,7 +50,7 @@ export const TableCards:React.FC = () => {
     useEffect(() => {
         dispatch(setIdPacksAC(id!))
         dispatch(getCardsTC())
-    }, [sortByUpdatePacks]);
+    }, [sortByUpdatePacks,dispatch,id]);
 
     const changeSortHandler = () => {
         sortBy === 'asc' ? setSortBy('desc') : setSortBy('asc')
@@ -110,7 +101,7 @@ export const TableCards:React.FC = () => {
                     <TableHead>
                         <TableRow sx={{backgroundColor: '#ECECF9'}}>
                             {
-                                colums && colums.map((el, i) => {
+                                columns && columns.map((el, i) => {
                                     return (el === 'Last Update' ?
                                         <TableCell className={style.click} key={`${el}_${i}`} onClick={changeSortHandler}
                                                    align={"center"}>

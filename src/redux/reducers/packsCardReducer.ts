@@ -1,5 +1,5 @@
 import {AppStateType, ThunkType} from "../store";
-import {CreatePackType, packsAPI} from "../../api/packsAPI";
+import {packsAPI} from "../../api/packsAPI";
 import {setErrorMessageAC} from "./appReducer";
 
 const initialState = {
@@ -15,7 +15,7 @@ const initialState = {
     packsStatus: 'idle' as PacksStatusType,
     minCardsCount: 0,
     maxCardsCount: 0,
-    searchPackName:''
+    searchPackName: ''
 }
 
 //Reducer
@@ -89,7 +89,7 @@ export const editPackNameAC = (packName: string) => {
 export const getCardPackTC = (): ThunkType => (dispatch, getState: () => AppStateType) => {
     dispatch(updatePacksStatusAC("loading"))
     const {searchPackName, min, max, sortPacks, page, pageCount, user_id} = getState().packsCard
-    packsAPI.getPacks({packName:searchPackName, min, max, sortPacks, page, pageCount, user_id})
+    packsAPI.getPacks({packName: searchPackName, min, max, sortPacks, page, pageCount, user_id})
         .then(res => {
             dispatch(setCardPacksAC(res.data.cardPacks))
             dispatch(updateCardPacksTotalCountAC(res.data.cardPacksTotalCount))

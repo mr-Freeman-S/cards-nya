@@ -1,4 +1,3 @@
-//  properties type for action creators
 import {AnyAction} from "redux";
 import {AppStateType} from "../store";
 import {restorePasswordAPI} from "../../api/restorePasswordAPI";
@@ -72,7 +71,7 @@ export const sendMailRestorePassword = (email: string): ThunkAction<void, AppSta
                 dispatch(setStatusRP("error"))
             });
     };
-export const resetPassword = (password: string, resetPasswordToken: string,resetForm:()=>void): ThunkAction<void, AppStateType, unknown, AnyAction> =>
+export const resetPassword = (password: string, resetPasswordToken: string, resetForm: () => void): ThunkAction<void, AppStateType, unknown, AnyAction> =>
     (dispatch) => {
         dispatch(setStatusRP("loading"))
         restorePasswordAPI.createNewPassword(password, resetPasswordToken)

@@ -25,18 +25,15 @@ export const MultiRangeSlider: React.FC<MultiRangeSliderType> = (({
     const maxValRef = useRef<HTMLInputElement>(null)
     const range = useRef<HTMLDivElement>(null)
 
-    // Convert to percentage
     const getPercent = useCallback(
         (value: number) => Math.round(((value - min) / (max - min)) * 100),
         [min, max]
     );
 
-    // Set width of the range to decrease from the left side
     useEffect(() => {
         if (maxValRef.current) {
             const minPercent = getPercent(minVal);
-            const maxPercent = getPercent(+maxValRef.current.value); // Precede with '+' to convert the value from type string to type number
-
+            const maxPercent = getPercent(+maxValRef.current.value);
             if (range.current) {
                 range.current.style.left = `${minPercent}%`;
                 range.current.style.width = `${maxPercent - minPercent}%`;
@@ -44,26 +41,21 @@ export const MultiRangeSlider: React.FC<MultiRangeSliderType> = (({
         }
     }, [minVal, getPercent]);
 
-    // Set width of the range to decrease from the right side
     useEffect(() => {
         if (minValRef.current) {
             const minPercent = getPercent(+minValRef.current.value);
             const maxPercent = getPercent(maxVal);
 
             if (range.current) {
-                // тут нужно подправить стиль
-
                 range.current.style.width = `${maxPercent - minPercent}%`
             }
         }
     }, [maxVal, getPercent]);
 
-    // Get min and max values when their state changes
     useEffect(() => {
         setMinVal(minVal)
         setMaxVal(maxVal)
-        //onChangeSlider({min: minVal, max: maxVal});
-    }, [minVal, maxVal, setMinVal, setMaxVal/*onChangeSlider*/]);
+    }, [minVal, maxVal, setMinVal, setMaxVal]);
 
 
     const minOnchangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -76,12 +68,12 @@ export const MultiRangeSlider: React.FC<MultiRangeSliderType> = (({
         setMaxVal(value)
         event.target.value = value.toString();
     }
-    // Get min and max values when their state changes
+
     useEffect(() => {
         setMinVal(min)
         setMaxVal(max)
-        // onChangeSlider({min: minVal, max: maxVal});
-    }, [min, max, setMinVal, setMaxVal /*onChangeSlider*/]);
+
+    }, [min, max, setMinVal, setMaxVal]);
 
     return (
         <div className={style.container}>

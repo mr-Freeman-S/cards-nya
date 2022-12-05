@@ -7,7 +7,7 @@ import {CardsType} from "../../redux/reducers/cardsReducer";
 type CardsAnswerQuestionType = {
     namePack: string
     cardPack: CardsType
-    updateGradeCard: (grade: number)=> void
+    updateGradeCard: (grade: number) => void
 }
 
 export const CardsAnswerQuestion: React.FC<CardsAnswerQuestionType> = ({cardPack, namePack, updateGradeCard}) => {
@@ -23,7 +23,7 @@ export const CardsAnswerQuestion: React.FC<CardsAnswerQuestionType> = ({cardPack
 
     return (
         <div>
-            <UniverseModalWindow  isActive={isActive} setActive={() => {
+            <UniverseModalWindow isActive={isActive} setActive={() => {
             }}>
                 <CardQuestion
                     callback={showAnswerCard}

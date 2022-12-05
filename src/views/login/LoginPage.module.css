@@ -16,6 +16,7 @@
     cursor: pointer;
     font-size: 20px;
 }
+
 .singUp {
     color: white;
     display: flex;
@@ -24,11 +25,13 @@
     margin-top: 10px;
     font-size: 20px;
 }
-.spanTextAcc{
+
+.spanTextAcc {
     color: white;
     font-size: 16px;
     opacity: .5;
 }
+
 .loginBox h2 {
     margin: 0 0 30px;
     padding: 0;
